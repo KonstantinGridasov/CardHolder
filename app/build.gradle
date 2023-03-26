@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+    kotlinOptions {
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
+    }
+
+
+    def ext = rootProject.extensions.ext
+    namespace ext.namespace
+    compileSdk ext.android.compileSdk
+
+    defaultConfig {
+        applicationId ext.application.id
+        minSdk ext.android.minSdk
+        targetSdk ext.android.targetSdk
+        versionCode ext.application.versionCode
+        versionName ext.application.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+}
+
+
+dependencies {
+    implementation presentationDependencies
+    testImplementation presentationTestImplimentation
+    androidTestImplementation presentationAndroidTestImplimentation
+
+}
