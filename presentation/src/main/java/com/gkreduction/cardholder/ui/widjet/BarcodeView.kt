@@ -14,7 +14,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 class BarcodeView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private val barcodeEncoder = BarcodeEncoder()
 
-    private var scanCode: ScanCode? = null
+    var scanCode: ScanCode = ScanCode()
     private val paint = Paint()
 
     init {
@@ -25,31 +25,25 @@ class BarcodeView(context: Context, attrs: AttributeSet?) : View(context, attrs)
         paint.textAlign = Paint.Align.CENTER
     }
 
-    fun setScanCode(scanCode: ScanCode) {
-        this.scanCode = scanCode
-    }
-
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (scanCode != null) {
-            try {
-                val barcodeBitmap =
-                    barcodeEncoder.encodeBitmap(
-                        scanCode!!.value,
-                        getBarcodeType(scanCode!!.type),
-                        width, height - 60
-                    )
-                canvas.drawBitmap(barcodeBitmap, 0f, 10f, null)
-            } catch (e: WriterException) {
-                e.printStackTrace()
-            }
-
-            scanCode!!.value.let {
-                canvas.drawText(
-                    it, width / 2f, height.toFloat() - 10, paint
+        try {
+            val barcodeBitmap =
+                barcodeEncoder.encodeBitmap(
+                    scanCode.value,
+                    getBarcodeType(scanCode.type),
+                    width, height - 60
                 )
-            }
+            canvas.drawBitmap(barcodeBitmap, 0f, 10f, null)
+        } catch (e: WriterException) {
+            e.printStackTrace()
+        }
+
+        scanCode.value.let {
+            canvas.drawText(
+                it, width / 2f, height.toFloat() - 10, paint
+            )
         }
 
     }

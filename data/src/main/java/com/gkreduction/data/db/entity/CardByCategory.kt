@@ -4,12 +4,11 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class CardByCategory(
-    @Embedded
-    var cat: CategoryDb,
+    @Embedded val cat: CategoryDb,
     @Relation(
         entity = CardDb::class,
         parentColumn = "catId",
-        entityColumn = "cardId",
+        entityColumn = "categoryId",
     )
     var cards: List<CardDb>
 )

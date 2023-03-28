@@ -12,7 +12,7 @@ interface CardDao {
     fun getCardByCategoryById(id: Long): CardByCategory
 
     @Transaction
-    @Query("SELECT * FROM category_db WHERE category_db.catId >= 0")
+    @Query("SELECT * FROM category_db")
     fun getALlCards(): List<CardByCategory>
 
     @Transaction
@@ -29,7 +29,10 @@ interface CardDao {
     @Transaction
     fun insert(cardByCategory: CardByCategory) {
         val categoryId = if (isExistCategory(cardByCategory.cat.catName))
-            findCategoryByName(cardByCategory.cat.catName).catId else 0L
+            findCategoryByName(cardByCategory.cat.catName).catId
+        else
+            insert(CategoryDb(catId = 0L, catName = cardByCategory.cat.catName))
+
         for (card in cardByCategory.cards) {
             card.categoryId = categoryId
             if (isExistCard(card.cardName))

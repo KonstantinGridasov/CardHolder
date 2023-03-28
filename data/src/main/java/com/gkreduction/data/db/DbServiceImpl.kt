@@ -13,29 +13,41 @@ class DbServiceImpl(
     private val dbMapper: DbMapper
 ) : DbService {
     override fun getAllCards(): Observable<List<Card>> {
-        return Observable.just(cardDao.getALlCards())
+        return Observable.just(true)
+            .flatMap {
+                Observable.just(cardDao.getALlCards())
+            }
             .map { dbMapper.mapCard(it) }
+
     }
 
     override fun getCardById(id: Long): Observable<Card?> {
-        return Observable
-            .just(cardDao.getCardByCategoryById(id))
-            .map { dbMapper.mapCard(it) }
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.getCardByCategoryById(id))
+                    .map { dbMapper.mapCard(it) }
+            }
     }
 
     override fun saveCard(card: Card?): Observable<Boolean> {
-        return if (card != null) {
-            cardDao.insert(dbMapper.mapCard(card))
-            Observable
-                .just(true)
-        } else
-            Observable
-                .just(false)
+        return Observable.just(true)
+            .flatMap {
+                if (card != null) {
+                    cardDao.insert(dbMapper.mapCard(card))
+                    Observable
+                        .just(true)
+                } else
+                    Observable
+                        .just(false)
+            }
+
     }
 
     override fun saveCategory(card: Category): Observable<Boolean> {
-        cardDao.insert(CategoryDb(catName = card.catName))
-        return Observable
-            .just(true)
+        return Observable.just(true)
+            .flatMap { Observable.just(cardDao.insert(CategoryDb(catName = card.catName))) }
+            .flatMap { Observable.just(true) }
+
     }
 }

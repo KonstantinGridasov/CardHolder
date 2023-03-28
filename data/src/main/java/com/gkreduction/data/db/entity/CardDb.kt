@@ -35,4 +35,8 @@ data class CardDb(
     var valueSecondary: String = ""
 
 
-)
+) {
+    override fun toString(): String {
+        return cardName + cardId + categoryId
+    }
+}

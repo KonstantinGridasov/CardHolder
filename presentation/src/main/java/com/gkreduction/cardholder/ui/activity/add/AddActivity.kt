@@ -3,7 +3,6 @@ package com.gkreduction.cardholder.ui.activity.add
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -14,11 +13,13 @@ import com.gkreduction.cardholder.databinding.ActivityAddBinding
 import com.gkreduction.cardholder.ui.activity.base.BaseActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.widjet.CVColorPicker
+import com.gkreduction.domain.entity.Card
+import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
 
 
 class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewModel::class.java) {
-
+    private var color: Int = 0
     private val startForResult =
         registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -55,9 +56,27 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
                     changeColor(color)
                 }
             }
+        (binding as ActivityAddBinding).save.setOnClickListener { saveCard() }
+
+
+    }
+
+    private fun saveCard() {
+        val card = Card(
+            category = Category(0L),
+            color = color,
+            cardName = (binding as ActivityAddBinding).editHeader.text.toString(),
+            primary = (binding as ActivityAddBinding).barcodeBase.scanCode,
+            secondary = (binding as ActivityAddBinding).barcodeSecond.scanCode,
+            existSecondary = (binding as ActivityAddBinding).checkbox.isChecked
+        )
+        viewModel.saveCard(card)
+        this.finish()
+
     }
 
     private fun changeColor(changeColor: Int) {
+        color = changeColor
         (binding as ActivityAddBinding).cardBase.setCardBackgroundColor(changeColor)
         (binding as ActivityAddBinding).cardCecondary.setCardBackgroundColor(changeColor)
 
@@ -66,12 +85,12 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     private fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
         when (type) {
             CameraActivity.TypeScan.BASE -> {
-                (binding as ActivityAddBinding).barcodeBase.setScanCode(scanCode)
+                (binding as ActivityAddBinding).barcodeBase.scanCode = (scanCode)
                 (binding as ActivityAddBinding).ivBarcode.visibility = View.GONE
                 (binding as ActivityAddBinding).barcodeBase.visibility = View.VISIBLE
             }
             CameraActivity.TypeScan.SECONDARY -> {
-                (binding as ActivityAddBinding).barcodeSecond.setScanCode(scanCode)
+                (binding as ActivityAddBinding).barcodeSecond.scanCode = (scanCode)
                 (binding as ActivityAddBinding).ivBarcodeSecond.visibility = View.GONE
                 (binding as ActivityAddBinding).barcodeSecond.visibility = View.VISIBLE
             }

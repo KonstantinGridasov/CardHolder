@@ -3,7 +3,7 @@ package com.gkreduction.domain.entity
 data class Card(
     var category: Category,
     var color: Int,
-    var cardId: Long,
+    var cardId: Long = 0L,
     var cardName: String = "",
     var cardBaseInfo: String = "",
     var cardSecondInfo: String = "",

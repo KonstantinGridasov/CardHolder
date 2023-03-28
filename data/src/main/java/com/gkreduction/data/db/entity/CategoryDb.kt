@@ -11,4 +11,8 @@ data class CategoryDb(
 
     @ColumnInfo
     var catName: String = ""
-)
+) {
+    override fun toString(): String {
+        return catName + catId
+    }
+}
