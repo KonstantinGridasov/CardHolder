@@ -15,17 +15,27 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.gkreduction.cardholder.R
+import com.gkreduction.cardholder.constant.SCAN_CODE
+import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityCameraBinding
 import com.gkreduction.cardholder.ui.activity.base.BaseActivity
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
 import com.gkreduction.domain.entity.ScanCode
 import com.google.mlkit.vision.barcode.common.Barcode
+import java.io.Serializable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
 class CameraActivity :
     BaseActivity<CameraViewModel>(R.layout.activity_camera, CameraViewModel::class.java) {
+    enum class TypeScan : Serializable {
+        BASE,
+        SECONDARY
+    }
+
+
+    var type: TypeScan = TypeScan.BASE
 
     companion object {
         private const val TAG = "CardHolder_Camera"
@@ -40,6 +50,9 @@ class CameraActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.extras != null) {
+            type = intent.extras!!.getSerializable(TYPE_SCAN) as TypeScan
+        }
 
         if (allPermissionsGranted()) {
             startCamera()
@@ -109,7 +122,8 @@ class CameraActivity :
 
     private fun test(scanCode: ScanCode) {
         val returnIntent = Intent()
-        returnIntent.putExtra("result", scanCode)
+        returnIntent.putExtra(SCAN_CODE, scanCode)
+        returnIntent.putExtra(TYPE_SCAN, type)
         setResult(RESULT_OK, returnIntent)
         finish()
 

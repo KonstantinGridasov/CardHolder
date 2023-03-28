@@ -6,6 +6,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isScheduleChecked"
+            type="java.lang.Boolean" />
     </data>
 
     <LinearLayout
@@ -16,9 +21,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20gkdp"
-            android:layout_marginStart="@dimen/_5gkdp"
-            android:layout_marginEnd="@dimen/_5gkdp"
+            android:layout_height="@dimen/_30gkdp"
+            android:layout_marginStart="@dimen/_3gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:layout_marginEnd="@dimen/_3gkdp"
             android:background="@color/overlay_dark_10"
             android:orientation="horizontal">
 
@@ -41,6 +47,7 @@
                 android:textSize="@dimen/_13gkdp" />
         </LinearLayout>
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/card_base"
             android:layout_width="match_parent"
@@ -50,9 +57,9 @@
             app:cardCornerRadius="@dimen/_10gkdp">
 
             <LinearLayout
-                android:layout_margin="@dimen/_10gkdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10gkdp"
                 android:orientation="vertical">
 
                 <EditText
@@ -73,8 +80,8 @@
                     android:layout_height="@dimen/_50gkdp"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:adjustViewBounds="true"
+                    android:onClick="onClickBarcode"
                     android:scaleType="centerInside"
-                    android:onClick="navigateToCameraActivity"
                     android:src="@drawable/ic_barcode" />
 
                 <com.gkreduction.cardholder.ui.widjet.BarcodeView
@@ -83,9 +90,66 @@
                     android:layout_height="@dimen/_50gkdp"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:background="@color/white"
+                    android:onClick="onClickBarcode"
                     android:padding="@dimen/_5gkdp"
                     android:visibility="gone"
-                    android:onClick="navigateToCameraActivity"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_20gkdp"
+            android:checked="@={isScheduleChecked}"
+            android:text="Second code"
+            android:textSize="@dimen/_10gkdp" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_cecondary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10gkdp"
+            android:background="@color/overlay_light_10"
+            android:visibility="@{isScheduleChecked ? View.VISIBLE : View.GONE, default = gone}"
+            app:cardCornerRadius="@dimen/_10gkdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10gkdp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edit_desc_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20gkdp"
+                    android:gravity="center" />
+
+                <ImageView
+                    android:id="@+id/iv_barcode_second"
+                    android:layout_width="@dimen/_50gkdp"
+                    android:layout_height="@dimen/_50gkdp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:adjustViewBounds="true"
+                    android:onClick="onClickBarcode"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_barcode" />
+
+                <com.gkreduction.cardholder.ui.widjet.BarcodeView
+                    android:id="@+id/barcode_second"
+                    android:layout_width="@dimen/_110gkdp"
+                    android:layout_height="@dimen/_50gkdp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@color/white"
+                    android:onClick="onClickBarcode"
+                    android:padding="@dimen/_5gkdp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -100,6 +164,8 @@
             android:layout_height="@dimen/_40gkdp"
             android:layout_marginStart="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_10gkdp" />
+
+
     </LinearLayout>
 
 
