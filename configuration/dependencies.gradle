@@ -74,6 +74,8 @@ ext {
 
             "com.google.dagger:dagger:${daggerVersion}",
             "com.google.dagger:dagger-android-support:${daggerVersion}",
+            "androidx.room:room-runtime:$room_version",
+
 
     ]
     presentationTestImplimentation = [

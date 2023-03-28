@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CardHolder"
+        android:theme="@style/Theme.Design.Light.NoActionBar"
         tools:targetApi="31">
 
         <activity
@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.camera.CameraActivity" />
+        <activity android:name=".ui.activity.add.AddActivity" />
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.gkreduction.cardholder.ui.activity.camera
 
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -18,8 +19,11 @@ import com.gkreduction.cardholder.databinding.ActivityCameraBinding
 import com.gkreduction.cardholder.ui.activity.base.BaseActivity
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
+import com.gkreduction.domain.entity.ScanCode
+import com.google.mlkit.vision.barcode.common.Barcode
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class CameraActivity :
     BaseActivity<CameraViewModel>(R.layout.activity_camera, CameraViewModel::class.java) {
@@ -75,7 +79,7 @@ class CameraActivity :
 
     private fun createBarCodeAnalyser(imageAnalysis: ImageAnalysis): BarcodeAnalyzer {
         return BarcodeAnalyzer(
-            { barcodeView?.setBarcode(it) },
+            { test(createScanCode(it)) },
             { if (it) imageAnalysis.clearAnalyzer() })
 
     }
@@ -106,6 +110,24 @@ class CameraActivity :
 
 
     }
+
+    private fun test(scanCode: ScanCode) {
+        val returnIntent = Intent()
+        returnIntent.putExtra("result", scanCode)
+        setResult(RESULT_OK, returnIntent)
+        finish()
+
+    }
+
+
+    private fun createScanCode(barcode: Barcode): ScanCode {
+        return ScanCode(
+            type = (barcode.format),
+            value = barcode.rawValue!!
+        )
+
+    }
+
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(

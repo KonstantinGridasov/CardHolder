@@ -13,6 +13,9 @@ data class CardDb(
     var categoryId: Long = 0L,
 
     @ColumnInfo
+    var color: Int,
+
+    @ColumnInfo
     var cardName: String = "",
     @ColumnInfo
     var cardBaseInfo: String = "",
@@ -22,20 +25,12 @@ data class CardDb(
     @ColumnInfo
     var typeBase: Int,
     @ColumnInfo
-    var widthBase: Int,
-    @ColumnInfo
-    var heightBase: Int,
-    @ColumnInfo
     var valueBase: String,
 
     @ColumnInfo
     var existSecondary: Boolean = false,
     @ColumnInfo
     var typeSecondary: Int = 0,
-    @ColumnInfo
-    var widthSecondary: Int = 0,
-    @ColumnInfo
-    var heightSecondary: Int = 0,
     @ColumnInfo
     var valueSecondary: String = ""
 

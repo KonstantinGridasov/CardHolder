@@ -1,7 +1,9 @@
 package com.gkreduction.cardholder.di.module
 
+import com.gkreduction.cardholder.di.scope.AddScope
 import com.gkreduction.cardholder.di.scope.CameraScope
 import com.gkreduction.cardholder.di.scope.MainScope
+import com.gkreduction.cardholder.ui.activity.add.AddActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import dagger.Module
@@ -17,4 +19,9 @@ abstract class ActivityModule {
     @CameraScope
     @ContributesAndroidInjector(modules = [CameraModule::class])
     abstract fun contributesCamera(): CameraActivity
+
+
+    @AddScope
+    @ContributesAndroidInjector(modules = [AddModule::class])
+    abstract fun contributesAdd(): AddActivity
 }
