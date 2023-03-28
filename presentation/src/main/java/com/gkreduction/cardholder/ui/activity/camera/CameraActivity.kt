@@ -17,7 +17,6 @@ import androidx.core.content.ContextCompat
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ActivityCameraBinding
 import com.gkreduction.cardholder.ui.activity.base.BaseActivity
-import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
 import com.gkreduction.domain.entity.ScanCode
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -27,7 +26,6 @@ import java.util.concurrent.Executors
 
 class CameraActivity :
     BaseActivity<CameraViewModel>(R.layout.activity_camera, CameraViewModel::class.java) {
-    private var barcodeView: BarcodeView? = null
 
     companion object {
         private const val TAG = "CardHolder_Camera"
@@ -51,8 +49,6 @@ class CameraActivity :
             )
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
-        barcodeView = (binding as ActivityCameraBinding).barcode
-        (binding as ActivityCameraBinding).rescan.setOnClickListener { startCamera() }
     }
 
 
@@ -78,7 +74,7 @@ class CameraActivity :
     }
 
     private fun createBarCodeAnalyser(imageAnalysis: ImageAnalysis): BarcodeAnalyzer {
-        return BarcodeAnalyzer(
+        return BarcodeAnalyzer((binding as ActivityCameraBinding).viewClamp.getClampRect(),
             { test(createScanCode(it)) },
             { if (it) imageAnalysis.clearAnalyzer() })
 
