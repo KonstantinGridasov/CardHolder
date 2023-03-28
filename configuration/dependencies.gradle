@@ -75,6 +75,7 @@ ext {
             "com.google.dagger:dagger:${daggerVersion}",
             "com.google.dagger:dagger-android-support:${daggerVersion}",
             "androidx.room:room-runtime:$room_version",
+            'com.github.sparrow007:carouselrecyclerview:1.2.6'
 
     ]
     presentationTestImplimentation = [

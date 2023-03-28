@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_item"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_160gkdp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10gkdp"
         android:background="@color/overlay_light_10"

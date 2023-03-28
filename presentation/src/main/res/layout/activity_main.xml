@@ -16,6 +16,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+            android:id="@+id/carouselRecyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:items_cards="@{viewModel.list}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Button
             android:id="@+id/toCamera"
             android:layout_width="wrap_content"
@@ -24,14 +35,5 @@
             android:layout_marginBottom="@dimen/_20gkdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_boxes_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:items_cards="@{viewModel.list}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_card" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
