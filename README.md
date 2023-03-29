@@ -7,10 +7,10 @@
 - MVVM
 - DataBinding
 - DI (Dagger Injection)
-- Room
+- androidx.room
 
 ## Libs
-
+- [Dagger][4]
 - [Carousel Recyclerview][1]
 - [ZXing Android Embedded][2]
 
@@ -19,6 +19,7 @@
 Licensed under the [Apache License 2.0][3]
 
 ```xml
+Copyright (C) 2012 The Dagger Authors
 Copyright (C) 2021 Sparrow007 (Ankit kumar)
 Copyright (C) 2012-2022 ZXing authors, Journey Mobile
 
@@ -39,3 +40,4 @@ limitations under the License.
 [1]: https://github.com/sparrow007/CarouselRecyclerview
 [2]: https://github.com/journeyapps/zxing-android-embedded
 [3]: http://www.apache.org/licenses/LICENSE-2.0
+[4]: https://github.com/google/dagger
