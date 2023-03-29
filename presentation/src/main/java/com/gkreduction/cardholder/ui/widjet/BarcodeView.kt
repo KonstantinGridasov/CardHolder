@@ -1,51 +1,64 @@
 package com.gkreduction.cardholder.ui.widjet
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
+import com.gkreduction.cardholder.R
 import com.gkreduction.domain.entity.ScanCode
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder
 
-class BarcodeView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
+
+class BarcodeView(context: Context, attrs: AttributeSet?) : AppCompatImageView(context, attrs) {
     private val barcodeEncoder = BarcodeEncoder()
+    private val paint = Paint()
 
     var scanCode: ScanCode = ScanCode()
-    private val paint = Paint()
+        set(value) {
+            field = value
+            requestLayout()
+        }
+
 
     init {
         paint.color = Color.BLACK
         paint.style = Paint.Style.FILL
-        paint.textSize = 30f
+        paint.textSize = resources.getDimension(R.dimen._10gkdp)
         paint.strokeWidth = 2f
         paint.textAlign = Paint.Align.CENTER
     }
 
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
+    private fun updateBitmap() {
+        setImageBitmap(createBarCode())
+
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        updateBitmap()
+    }
+
+    private fun createBarCode(): Bitmap {
+        val min = width.coerceAtLeast(height)
+        val max = width.coerceAtMost(height)
+        val empty = Bitmap.createBitmap(min, max, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(empty)
         try {
-            val barcodeBitmap =
-                barcodeEncoder.encodeBitmap(
-                    scanCode.value,
-                    getBarcodeType(scanCode.type),
-                    width, height - 60
-                )
-            canvas.drawBitmap(barcodeBitmap, 0f, 10f, null)
+            val barcodeBitmap = barcodeEncoder.encodeBitmap(
+                scanCode.value, getBarcodeType(scanCode.type), min, max - 80
+            )
+            canvas.drawBitmap(barcodeBitmap, 0f, 2f, null)
+            canvas.drawText(scanCode.value, min / (2f), max - paint.textSize + 25f, paint)
         } catch (e: WriterException) {
             e.printStackTrace()
         }
-
-        scanCode.value.let {
-            canvas.drawText(
-                it, width / 2f, height.toFloat() - 10, paint
-            )
-        }
-
+        return empty
     }
 
 

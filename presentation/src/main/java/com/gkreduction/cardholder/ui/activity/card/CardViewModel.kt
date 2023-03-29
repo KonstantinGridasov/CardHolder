@@ -1,0 +1,34 @@
+package com.gkreduction.cardholder.ui.activity.card
+
+import android.app.Application
+import android.content.Context
+import androidx.databinding.ObservableField
+import com.gkreduction.cardholder.ui.activity.base.BaseAndroidViewModel
+import com.gkreduction.domain.entity.Card
+import com.gkreduction.domain.usecase.GetCardByIdUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+
+class CardViewModel(context: Context, var getCardByIdUseCase: GetCardByIdUseCase) :
+    BaseAndroidViewModel(context.applicationContext as Application) {
+    private var getCardById: Disposable? = null
+
+    var card = ObservableField<Card>()
+
+    fun getCards(id: Long) {
+        if (getCardById != null)
+            removeDisposable(getCardById!!)
+
+        getCardById = getCardByIdUseCase
+            .execute(id)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                card.set(it)
+            }
+
+        addDisposable(getCardById!!)
+
+    }
+}

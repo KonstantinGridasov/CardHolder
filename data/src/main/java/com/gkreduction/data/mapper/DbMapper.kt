@@ -24,6 +24,10 @@ class DbMapper {
         return mapCard(cardDb.cards[0], cardDb.cat)
     }
 
+    fun mapCard(cardDb: CardDb): Card {
+        return mapCard(cardDb, CategoryDb())
+    }
+
 
     fun mapCard(card: Card): CardByCategory {
         val list = ArrayList<CardDb>()

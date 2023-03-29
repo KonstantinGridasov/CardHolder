@@ -9,19 +9,21 @@ object BindingCardAdapter {
     @JvmStatic
     @BindingAdapter(
         "items_cards",
+        "item_listener",
         requireAll = false
     )
     fun setListChatsAdapter(
         view: CarouselRecyclerview,
         items: List<Card>?,
+        listener: CardClickListener?
     ) {
         items?.let {
-            val adapter = AdapterCard()
+            val adapter = AdapterCard(listener)
             adapter.updateItems(it)
             view.adapter = adapter
             view.apply {
                 set3DItem(false)
-                setAlpha(true)
+                setAlpha(false)
                 setInfinite(true)
             }
         }

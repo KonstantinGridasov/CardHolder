@@ -10,7 +10,7 @@ import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemCardBinding
 import com.gkreduction.domain.entity.Card
 
-class AdapterCard :
+class AdapterCard(var listener: CardClickListener?) :
     RecyclerView.Adapter<AdapterCard.ViewHolder>() {
     private var items: List<Card> = ArrayList()
 
@@ -31,6 +31,10 @@ class AdapterCard :
         holder.binding.textDescription.text = items[position].cardBaseInfo
         holder.binding.cardItem.setCardBackgroundColor(items[position].color)
         holder.binding.barcode.scanCode = (items[position].primary)
+
+        holder.binding.cardItem.setOnClickListener {
+            listener?.onItemClick(items[position].cardId)
+        }
         holder.binding.executePendingBindings()
 
     }

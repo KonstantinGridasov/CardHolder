@@ -25,7 +25,7 @@ class DbServiceImpl(
         return Observable.just(true)
             .flatMap {
                 Observable
-                    .just(cardDao.getCardByCategoryById(id))
+                    .just(cardDao.getCardById(id))
                     .map { dbMapper.mapCard(it) }
             }
     }

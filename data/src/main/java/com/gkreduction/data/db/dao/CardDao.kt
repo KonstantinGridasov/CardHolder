@@ -7,9 +7,16 @@ import com.gkreduction.data.db.entity.CategoryDb
 
 @Dao
 interface CardDao {
+    //TODO
     @Transaction
-    @Query("SELECT * FROM category_db,card_db WHERE card_db.cardId = :id ")
+    @Query("SELECT * FROM category_db JOIN card_db ON category_db.catId = card_db.categoryId WHERE card_db.cardId =:id ")
     fun getCardByCategoryById(id: Long): CardByCategory
+
+
+    @Transaction
+    @Query("SELECT * FROM card_db  WHERE card_db.cardId =:id ")
+    fun getCardById(id: Long): CardDb
+
 
     @Transaction
     @Query("SELECT * FROM category_db")

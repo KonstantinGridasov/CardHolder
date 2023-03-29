@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".ui.activity.camera.CameraActivity" />
         <activity android:name=".ui.activity.add.AddActivity" />
+        <activity android:name=".ui.activity.card.CardActivity" />
     </application>
 
 </manifest>

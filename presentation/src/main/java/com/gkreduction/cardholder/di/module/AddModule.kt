@@ -16,9 +16,7 @@ abstract class AddModule {
     companion object {
         @Provides
         @AddScope
-        fun providesSaveCardUseCase(
-            service: DbServiceImpl,
-        ) = SaveCardUseCase(service)
+        fun providesSaveCardUseCase(service: DbServiceImpl) = SaveCardUseCase(service)
 
 
         @Provides
@@ -35,7 +33,7 @@ abstract class AddModule {
                     return when {
                         modelClass.isAssignableFrom(AddViewModel::class.java) ->
                             AddViewModel(
-                                app,saveCardUseCase
+                                app, saveCardUseCase
                             ) as T
 
                         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

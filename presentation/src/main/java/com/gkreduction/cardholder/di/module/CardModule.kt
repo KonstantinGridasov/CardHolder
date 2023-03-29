@@ -4,25 +4,25 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.gkreduction.cardholder.di.scope.MainScope
-import com.gkreduction.cardholder.ui.activity.main.MainViewModel
+import com.gkreduction.cardholder.di.scope.CameraScope
+import com.gkreduction.cardholder.di.scope.CardScope
+import com.gkreduction.cardholder.ui.activity.card.CardViewModel
 import com.gkreduction.data.db.DbServiceImpl
-import com.gkreduction.domain.usecase.GetAllCardsUseCase
+import com.gkreduction.domain.usecase.GetCardByIdUseCase
 import dagger.Module
 import dagger.Provides
 
 @Module
-abstract class MainModule {
+abstract class CardModule {
     companion object {
         @Provides
-        @MainScope
-        fun providesGetUserChatsDbUseCase(service: DbServiceImpl) = GetAllCardsUseCase(service)
-
+        @CardScope
+        fun providesGetCardByIdUseCase(service: DbServiceImpl) = GetCardByIdUseCase(service)
 
         @Provides
-        fun provideMainModule(
+        fun provideCardModule(
             app: Application,
-            getAllCardsUseCase: GetAllCardsUseCase
+            getCardByIdUseCase: GetCardByIdUseCase
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
@@ -31,9 +31,9 @@ abstract class MainModule {
                     extras: CreationExtras
                 ): T {
                     return when {
-                        modelClass.isAssignableFrom(MainViewModel::class.java) ->
-                            MainViewModel(
-                                app, getAllCardsUseCase
+                        modelClass.isAssignableFrom(CardViewModel::class.java) ->
+                            CardViewModel(
+                                app, getCardByIdUseCase
                             ) as T
 
                         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

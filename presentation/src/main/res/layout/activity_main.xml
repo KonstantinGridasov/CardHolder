@@ -8,6 +8,10 @@
     <data>
 
         <variable
+            name="itemListener"
+            type="com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener" />
+
+        <variable
             name="viewModel"
             type="com.gkreduction.cardholder.ui.activity.main.MainViewModel" />
     </data>
@@ -21,7 +25,9 @@
             android:id="@+id/carouselRecyclerview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:item_listener="@{itemListener}"
             app:items_cards="@{viewModel.list}"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
