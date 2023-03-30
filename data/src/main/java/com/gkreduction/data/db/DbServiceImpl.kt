@@ -17,7 +17,7 @@ class DbServiceImpl(
             .flatMap {
                 Observable.just(cardDao.getALlCards())
             }
-            .map { dbMapper.mapCard(it) }
+            .map { dbMapper.mapCardWithCategoryToListCard(it) }
 
     }
 
@@ -25,8 +25,11 @@ class DbServiceImpl(
         return Observable.just(true)
             .flatMap {
                 Observable
-                    .just(cardDao.getCardById(id))
-                    .map { dbMapper.mapCard(it) }
+                    .just(cardDao.updateCountCardByCardId(id))
+                    .flatMap {
+                        Observable.just(cardDao.getCardWithCategoryByCardId(id))
+                    }
+                    .map { dbMapper.mapDbToCard(it) }
             }
     }
 
@@ -34,7 +37,9 @@ class DbServiceImpl(
         return Observable.just(true)
             .flatMap {
                 if (card != null) {
-                    cardDao.insert(dbMapper.mapCard(card))
+                    cardDao.insert(
+                        dbMapper.mapCardToCardWithCategory(card)
+                    )
                     Observable
                         .just(true)
                 } else

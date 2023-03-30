@@ -24,7 +24,7 @@ object BindingCardAdapter {
             view.apply {
                 set3DItem(false)
                 setAlpha(false)
-                setInfinite(true)
+                setInfinite(it.size > 2)
             }
         }
 

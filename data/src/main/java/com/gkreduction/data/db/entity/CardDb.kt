@@ -16,6 +16,9 @@ data class CardDb(
     var color: Int,
 
     @ColumnInfo
+    var countOpen: Int = 0,
+
+    @ColumnInfo
     var cardName: String = "",
     @ColumnInfo
     var cardBaseInfo: String = "",

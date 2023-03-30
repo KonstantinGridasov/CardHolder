@@ -1,7 +1,6 @@
 package com.gkreduction.data.mapper
 
-import android.util.Log
-import com.gkreduction.data.db.entity.CardByCategory
+import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CardDb
 import com.gkreduction.data.db.entity.CategoryDb
 import com.gkreduction.domain.entity.Card
@@ -9,7 +8,7 @@ import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
 
 class DbMapper {
-    fun mapCard(list: List<CardByCategory>): List<Card> {
+    fun mapCardWithCategoryToListCard(list: List<CardWithCategory>): List<Card> {
         val result = ArrayList<Card>()
         for (i in list) {
             for (k in i.cards) {
@@ -17,26 +16,34 @@ class DbMapper {
                 result.add(card)
             }
         }
+        result.sortWith(compareBy { -it.countOpen })
         return result
     }
 
-    fun mapCard(cardDb: CardByCategory): Card {
-        return mapCard(cardDb.cards[0], cardDb.cat)
+
+    fun mapDbToCard(map: Map<CategoryDb, CardDb>): Card? {
+        var category: CategoryDb? = null
+        var card: CardDb? = null
+        for (k in map.keys) {
+            category = k
+            card = map[k]
+            break
+        }
+        return if (card != null && category != null)
+            mapCard(card, category)
+        else
+            null
     }
 
-    fun mapCard(cardDb: CardDb): Card {
-        return mapCard(cardDb, CategoryDb())
-    }
 
-
-    fun mapCard(card: Card): CardByCategory {
+    fun mapCardToCardWithCategory(card: Card): CardWithCategory {
         val list = ArrayList<CardDb>()
         list.add(getCardDb(card))
-        return CardByCategory(getCategoryDb(card.category.catName), list)
+        return CardWithCategory(getCategoryDb(card.category.catName), list)
     }
 
 
-    fun mapCard(card: CardDb, category: CategoryDb): Card {
+    private fun mapCard(card: CardDb, category: CategoryDb): Card {
         return Card(
             color = card.color,
             cardId = card.cardId,
@@ -46,7 +53,8 @@ class DbMapper {
             cardSecondInfo = card.cardSecondInfo,
             primary = getScanCode(true, card),
             secondary = getScanCode(false, card),
-            existSecondary = card.existSecondary
+            existSecondary = card.existSecondary,
+            countOpen = card.countOpen
         )
 
 

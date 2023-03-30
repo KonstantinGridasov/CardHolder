@@ -1,26 +1,23 @@
 package com.gkreduction.data.db.dao
 
 import androidx.room.*
-import com.gkreduction.data.db.entity.CardByCategory
+import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CardDb
 import com.gkreduction.data.db.entity.CategoryDb
 
 @Dao
 interface CardDao {
-    //TODO
-    @Transaction
-    @Query("SELECT * FROM category_db JOIN card_db ON category_db.catId = card_db.categoryId WHERE card_db.cardId =:id ")
-    fun getCardByCategoryById(id: Long): CardByCategory
 
+    @Query("UPDATE card_db SET countOpen = countOpen + 1 WHERE card_db.cardId =:cardId ")
+    fun updateCountCardByCardId(cardId: Long)
 
     @Transaction
-    @Query("SELECT * FROM card_db  WHERE card_db.cardId =:id ")
-    fun getCardById(id: Long): CardDb
-
+    @Query("SELECT * FROM category_db JOIN card_db ON category_db.catId = card_db.categoryId WHERE card_db.cardId =:id LIMIT 1")
+    fun getCardWithCategoryByCardId(id: Long): Map<CategoryDb, CardDb>
 
     @Transaction
     @Query("SELECT * FROM category_db")
-    fun getALlCards(): List<CardByCategory>
+    fun getALlCards(): List<CardWithCategory>
 
     @Transaction
     @Query("SELECT * FROM category_db WHERE category_db.catId >= 0")
@@ -28,13 +25,13 @@ interface CardDao {
 
     @Transaction
     @Query("SELECT * FROM category_db WHERE category_db.catName LIKE :category")
-    fun getAllCardByCategory(category: String): List<CardByCategory>
+    fun getAllCardByCategory(category: String): List<CardWithCategory>
 
     @Query("SELECT * FROM category_db WHERE category_db.catName LIKE :category LIMIT 1")
     fun findCategoryByName(category: String): CategoryDb
 
     @Transaction
-    fun insert(cardByCategory: CardByCategory) {
+    fun insert(cardByCategory: CardWithCategory) {
         val categoryId = if (isExistCategory(cardByCategory.cat.catName))
             findCategoryByName(cardByCategory.cat.catName).catId
         else
