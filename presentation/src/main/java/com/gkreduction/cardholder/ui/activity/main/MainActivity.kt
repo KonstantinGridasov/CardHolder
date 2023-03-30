@@ -8,7 +8,7 @@ import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityMainBinding
 import com.gkreduction.cardholder.ui.activity.add.AddActivity
-import com.gkreduction.cardholder.ui.activity.base.BaseActivity
+import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
 import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener

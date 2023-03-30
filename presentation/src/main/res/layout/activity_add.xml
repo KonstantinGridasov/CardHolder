@@ -35,6 +35,7 @@
             android:layout_marginStart="@dimen/_3gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_3gkdp"
+            android:onClick="showDialog"
             android:background="@color/overlay_dark_10"
             android:orientation="horizontal">
 

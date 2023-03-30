@@ -1,13 +1,11 @@
 package com.gkreduction.cardholder.di.module
 
-import com.gkreduction.cardholder.di.scope.AddScope
-import com.gkreduction.cardholder.di.scope.CameraScope
-import com.gkreduction.cardholder.di.scope.CardScope
-import com.gkreduction.cardholder.di.scope.MainScope
+import com.gkreduction.cardholder.di.scope.*
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
 import com.gkreduction.cardholder.ui.activity.add.AddActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
+import com.gkreduction.cardholder.ui.dialog.CategoryDialog
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -29,4 +27,9 @@ abstract class ActivityModule {
     @CardScope
     @ContributesAndroidInjector(modules = [CardModule::class])
     abstract fun contributesCard(): CardActivity
+
+    @DialogScope
+    @ContributesAndroidInjector(modules = [DialogModule::class])
+    abstract fun contributeCategoryDialog(): CategoryDialog
+
 }

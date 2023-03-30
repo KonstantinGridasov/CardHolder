@@ -49,10 +49,19 @@ class DbServiceImpl(
 
     }
 
-    override fun saveCategory(card: Category): Observable<Boolean> {
-        return Observable.just(true)
-            .flatMap { Observable.just(cardDao.insert(CategoryDb(catName = card.catName))) }
-            .flatMap { Observable.just(true) }
+    override fun getAllCategory(): Observable<List<Category>> {
+        return Observable.just(true).flatMap {
+            Observable.just(cardDao.getALlCategory())
+                .map { dbMapper.mapCategory(it) }
+        }
 
+    }
+
+    override fun saveCategory(catName: String?): Observable<Boolean> {
+        return if (catName != null)
+            Observable.just(true)
+                .flatMap { Observable.just(cardDao.insert(CategoryDb(catName = catName))) }
+                .flatMap { Observable.just(true) }
+        else Observable.just(false)
     }
 }

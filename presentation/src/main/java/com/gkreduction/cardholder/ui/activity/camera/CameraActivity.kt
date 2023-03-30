@@ -18,7 +18,7 @@ import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityCameraBinding
-import com.gkreduction.cardholder.ui.activity.base.BaseActivity
+import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
 import com.gkreduction.domain.entity.ScanCode
 import com.google.mlkit.vision.barcode.common.Barcode

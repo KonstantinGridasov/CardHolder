@@ -35,6 +35,12 @@ class DbMapper {
             null
     }
 
+    fun mapCategory(list: List<CategoryDb>): List<Category> {
+        val result = ArrayList<Category>()
+        for (i in list)
+            result.add(mapCategory(i))
+        return result
+    }
 
     fun mapCardToCardWithCategory(card: Card): CardWithCategory {
         val list = ArrayList<CardDb>()

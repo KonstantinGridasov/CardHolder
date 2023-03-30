@@ -1,9 +1,10 @@
-package com.gkreduction.cardholder.ui.activity.base
+package com.gkreduction.cardholder.ui.base
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import com.gkreduction.cardholder.tools.lazyThreadSafetyNone
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
@@ -16,8 +17,7 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
 
     lateinit var binding: ViewDataBinding
 
-    private fun <T> lazyThreadSafetyNone(initializer: () -> T): Lazy<T> =
-        lazy(LazyThreadSafetyMode.NONE, initializer)
+
 
     protected val viewModel by lazyThreadSafetyNone {
         ViewModelProvider(this, viewModelFactory)[modelClass]

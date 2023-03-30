@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.base
+package com.gkreduction.cardholder.ui.base
 
 import android.annotation.SuppressLint
 import android.app.Application

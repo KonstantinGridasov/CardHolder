@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.databinding.ObservableField
-import com.gkreduction.cardholder.ui.activity.base.BaseAndroidViewModel
+import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.usecase.GetAllCardsUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers

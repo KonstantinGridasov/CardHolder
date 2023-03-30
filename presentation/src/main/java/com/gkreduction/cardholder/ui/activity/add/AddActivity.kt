@@ -10,8 +10,9 @@ import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityAddBinding
-import com.gkreduction.cardholder.ui.activity.base.BaseActivity
+import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
+import com.gkreduction.cardholder.ui.dialog.CategoryDialog
 import com.gkreduction.cardholder.ui.widjet.CVColorPicker
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -48,6 +49,11 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
         }
     }
 
+
+    fun showDialog(view: View?) {
+        val dialog = CategoryDialog()
+        dialog.show(supportFragmentManager, "")
+    }
 
     private fun initListener() {
         (binding as ActivityAddBinding).cvColorPicker.listener =
