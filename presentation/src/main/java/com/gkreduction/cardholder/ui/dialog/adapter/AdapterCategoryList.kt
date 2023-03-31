@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.databinding.ItemCardBinding
 import com.gkreduction.cardholder.databinding.ItemListBinding
-import com.gkreduction.data.db.entity.CategoryDb
-import com.gkreduction.domain.entity.Card
+import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Category
 
 class AdapterCategoryList(val listener: CategoryClickListener?) :
@@ -31,7 +29,7 @@ class AdapterCategoryList(val listener: CategoryClickListener?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvCategoryName.text = items[position].catName
-        holder.binding.root.setOnClickListener {
+        holder.binding.tvCategoryName.setOnClickListener {
             if ((items[position].catName) == chooses) {
                 deactivate(holder)
                 listener?.onItemClick(null)
@@ -46,6 +44,9 @@ class AdapterCategoryList(val listener: CategoryClickListener?) :
         } else {
             deactivate(holder)
         }
+        holder.binding.isDefaultCat =
+            (items[position].catName == getDefaultCategoryName(holder.itemView.context))
+
         holder.binding.executePendingBindings()
 
     }

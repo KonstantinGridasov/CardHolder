@@ -1,7 +1,6 @@
 package com.gkreduction.cardholder.ui.activity.main.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -29,7 +28,7 @@ class AdapterCard(var listener: CardClickListener?) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textHeader.text = items[position].cardName
         holder.binding.textDescription.text = items[position].cardBaseInfo
-        holder.binding.cardItem.setCardBackgroundColor(items[position].color)
+        holder.binding.cardItem.changeColor(items[position].colorStart, items[position].colorEnd)
         holder.binding.barcode.scanCode = (items[position].primary)
 
         holder.binding.cardItem.setOnClickListener {

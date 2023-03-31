@@ -13,7 +13,9 @@ data class CardDb(
     var categoryId: Long = 0L,
 
     @ColumnInfo
-    var color: Int,
+    var colorStart: Int,
+    @ColumnInfo
+    var colorEnd: Int,
 
     @ColumnInfo
     var countOpen: Int = 0,

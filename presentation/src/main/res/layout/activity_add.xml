@@ -63,7 +63,7 @@
         </LinearLayout>
 
 
-        <androidx.cardview.widget.CardView
+        <com.gkreduction.cardholder.ui.widjet.MyCardView
             android:id="@+id/card_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.gkreduction.cardholder.ui.widjet.MyCardView>
 
         <CheckBox
             android:id="@+id/checkbox"
@@ -125,7 +125,7 @@
             android:textSize="@dimen/_10gkdp" />
 
 
-        <androidx.cardview.widget.CardView
+        <com.gkreduction.cardholder.ui.widjet.MyCardView
             android:id="@+id/card_cecondary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,15 +171,22 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.gkreduction.cardholder.ui.widjet.MyCardView>
 
         <com.gkreduction.cardholder.ui.widjet.CVColorPicker
-            android:id="@+id/cv_color_picker"
+            android:id="@+id/picker_first"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40gkdp"
             android:layout_marginStart="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_10gkdp" />
 
+        <com.gkreduction.cardholder.ui.widjet.CVColorPicker
+            android:id="@+id/picker_second"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40gkdp"
+            android:layout_marginStart="@dimen/_10gkdp"
+            android:layout_marginTop="@dimen/_2gkdp"
+            android:layout_marginEnd="@dimen/_10gkdp" />
 
     </LinearLayout>
 

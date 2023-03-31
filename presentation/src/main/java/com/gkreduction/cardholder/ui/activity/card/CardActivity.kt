@@ -20,8 +20,6 @@ class CardActivity :
 
         }
 
-        Log.d("CARDHOLDER_APP", "onCreate = ${id}")
-
         (binding as ActivityCardBinding).viewmodel = viewModel
         viewModel.getCards(id)
     }

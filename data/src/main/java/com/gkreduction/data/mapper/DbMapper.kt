@@ -58,7 +58,8 @@ class DbMapper {
 
     private fun mapCard(card: CardDb, category: CategoryDb): Card {
         return Card(
-            color = card.color,
+            colorStart = card.colorStart,
+            colorEnd = card.colorEnd,
             cardId = card.cardId,
             category = mapCategory(category)!!,
             cardName = card.cardName,
@@ -79,7 +80,8 @@ class DbMapper {
         return if (card.existSecondary) CardDb(
             cardId = card.cardId,
             categoryId = 0L,
-            color = card.color,
+            colorStart = card.colorStart,
+            colorEnd = card.colorEnd,
             cardName = card.cardName,
             cardBaseInfo = card.cardBaseInfo,
             cardSecondInfo = card.cardSecondInfo,
@@ -92,7 +94,8 @@ class DbMapper {
         else CardDb(
             cardId = card.cardId,
             categoryId = 0L,
-            color = card.color,
+            colorStart = card.colorStart,
+            colorEnd = card.colorEnd,
             cardName = card.cardName,
             cardBaseInfo = card.cardBaseInfo,
             cardSecondInfo = card.cardSecondInfo,

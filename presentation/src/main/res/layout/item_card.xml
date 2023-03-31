@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.activity.main.MainActivity">
 
@@ -9,7 +8,7 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.gkreduction.cardholder.ui.widjet.MyCardView
         android:id="@+id/card_item"
         android:layout_width="@dimen/_160gkdp"
         android:layout_height="wrap_content"
@@ -48,5 +47,5 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.gkreduction.cardholder.ui.widjet.MyCardView>
 </layout>

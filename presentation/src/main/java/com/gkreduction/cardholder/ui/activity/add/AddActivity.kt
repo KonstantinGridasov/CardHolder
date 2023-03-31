@@ -21,7 +21,6 @@ import com.gkreduction.domain.entity.ScanCode
 
 
 class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewModel::class.java) {
-    private var color: Int = 0
     private val startForResult =
         registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -30,6 +29,9 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
                 setBarcode(scan, type)
             }
         }
+
+    private var colorStart: Int = 0
+    private var colorEnd: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,16 +61,29 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     }
 
     private fun initListener() {
-        (binding as ActivityAddBinding).cvColorPicker.listener =
+        (binding as ActivityAddBinding).pickerFirst.listener =
             object : CVColorPicker.OnChangeColorListener {
                 override fun onChangeColor(color: Int) {
-                    changeColor(color)
+                    colorStart = color
+                    changeColor()
+                }
+            }
+        (binding as ActivityAddBinding).pickerSecond.listener =
+            object : CVColorPicker.OnChangeColorListener {
+                override fun onChangeColor(color: Int) {
+                    colorEnd = color
+                    changeColor()
                 }
             }
         (binding as ActivityAddBinding).save.setOnClickListener { saveCard() }
 
-
     }
+
+    fun changeColor() {
+        (binding as ActivityAddBinding).cardBase.changeColor(colorStart, colorEnd)
+        (binding as ActivityAddBinding).cardCecondary.changeColor(colorStart, colorEnd)
+    }
+
 
     private fun saveCard() {
         val category: Category = viewModel.categoryChoose.get() ?: Category(
@@ -78,7 +93,8 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
 
         val card = Card(
             category = category,
-            color = color,
+            colorStart = colorStart,
+            colorEnd = colorEnd,
             cardName = (binding as ActivityAddBinding).editHeader.text.toString(),
             primary = (binding as ActivityAddBinding).barcodeBase.scanCode,
             secondary = (binding as ActivityAddBinding).barcodeSecond.scanCode,
@@ -89,12 +105,6 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
 
     }
 
-    private fun changeColor(changeColor: Int) {
-        color = changeColor
-        (binding as ActivityAddBinding).cardBase.setCardBackgroundColor(changeColor)
-        (binding as ActivityAddBinding).cardCecondary.setCardBackgroundColor(changeColor)
-
-    }
 
     private fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
         when (type) {
