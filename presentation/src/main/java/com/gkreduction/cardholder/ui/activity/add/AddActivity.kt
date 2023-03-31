@@ -7,7 +7,6 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.constant.DEFAULT_NAME_CATEGORY
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityAddBinding
@@ -15,6 +14,7 @@ import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.ui.dialog.CategoryDialog
 import com.gkreduction.cardholder.ui.widjet.CVColorPicker
+import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
@@ -30,7 +30,6 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
                 setBarcode(scan, type)
             }
         }
-    private var category: Category? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +54,7 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
 
     fun showDialog(view: View?) {
         val dialog = CategoryDialog()
-        dialog.setListener { category = it }
+        dialog.setListener { viewModel.updateCategory(it) }
         dialog.show(supportFragmentManager, "")
     }
 
@@ -72,8 +71,13 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     }
 
     private fun saveCard() {
+        val category: Category = viewModel.categoryChoose.get() ?: Category(
+            0L,
+            getDefaultCategoryName(this)
+        )
+
         val card = Card(
-            category = category ?: Category(catId = 0L, catName = DEFAULT_NAME_CATEGORY),
+            category = category,
             color = color,
             cardName = (binding as ActivityAddBinding).editHeader.text.toString(),
             primary = (binding as ActivityAddBinding).barcodeBase.scanCode,

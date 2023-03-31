@@ -3,8 +3,8 @@ package com.gkreduction.cardholder.ui.activity.add
 import android.app.Application
 import android.content.Context
 import androidx.databinding.ObservableField
-import com.gkreduction.cardholder.constant.DEFAULT_NAME_CATEGORY
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
+import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.usecase.GetCategoryByNameUseCase
@@ -44,8 +44,14 @@ class AddViewModel(
 
     }
 
+    fun updateCategory(category: Category?) {
+        if (category != null)
+            categoryChoose.set(category)
+
+    }
+
     fun getCategoryByName() {
-        val catName: String = categoryName.get() ?: DEFAULT_NAME_CATEGORY
+        val catName: String = categoryName.get() ?: getDefaultCategoryName(context)
         if (categoryByNameDis != null)
             removeDisposable(categoryByNameDis!!)
         categoryByNameDis = getCategoryByNameUseCase
@@ -71,7 +77,7 @@ class AddViewModel(
             removeDisposable(saveCategoryDis!!)
 
         saveCategoryDis = saveCategoryUseCase
-            .execute(DEFAULT_NAME_CATEGORY)
+            .execute(getDefaultCategoryName(context))
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {

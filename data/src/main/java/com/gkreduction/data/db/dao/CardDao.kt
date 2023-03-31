@@ -58,7 +58,7 @@ interface CardDao {
     @Query("SELECT EXISTS(SELECT * FROM category_db WHERE category_db.catName LIKE :category)")
     fun isExistCategory(category: String): Boolean
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(category: CategoryDb): Long
 
     @Update(onConflict = OnConflictStrategy.REPLACE)

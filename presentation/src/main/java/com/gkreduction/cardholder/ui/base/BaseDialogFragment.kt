@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.tools.lazyThreadSafetyNone
+import com.gkreduction.cardholder.utils.lazyThreadSafetyNone
 import dagger.android.support.DaggerDialogFragment
 import javax.inject.Inject
 
