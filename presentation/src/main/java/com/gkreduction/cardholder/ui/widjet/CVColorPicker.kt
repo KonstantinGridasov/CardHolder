@@ -55,7 +55,7 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
 
     private fun initShader() {
         val shader = LinearGradient(
-            width.toFloat(), 0f, 0f, 0f,
+          0f, 0f,0f, height.toFloat(),
             colors, null, Shader.TileMode.CLAMP
         )
         mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
