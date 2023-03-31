@@ -13,7 +13,6 @@ import com.gkreduction.cardholder.databinding.ActivityAddBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.ui.dialog.CategoryDialog
-import com.gkreduction.cardholder.ui.widjet.CVColorPicker
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -61,25 +60,12 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     }
 
     private fun initListener() {
-        (binding as ActivityAddBinding).pickerFirst.listener =
-            object : CVColorPicker.OnChangeColorListener {
-                override fun onChangeColor(color: Int) {
-                    colorStart = color
-                    changeColor()
-                }
-            }
-        (binding as ActivityAddBinding).pickerSecond.listener =
-            object : CVColorPicker.OnChangeColorListener {
-                override fun onChangeColor(color: Int) {
-                    colorEnd = color
-                    changeColor()
-                }
-            }
+        (binding as ActivityAddBinding).pickerFirst.listener = { colorStart = it; changeColor() }
+        (binding as ActivityAddBinding).pickerSecond.listener = { colorEnd = it; changeColor() }
         (binding as ActivityAddBinding).save.setOnClickListener { saveCard() }
-
     }
 
-    fun changeColor() {
+    private fun changeColor() {
         (binding as ActivityAddBinding).cardBase.changeColor(colorStart, colorEnd)
         (binding as ActivityAddBinding).cardCecondary.changeColor(colorStart, colorEnd)
     }

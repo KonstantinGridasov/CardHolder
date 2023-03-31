@@ -9,7 +9,8 @@ import android.view.View
 
 class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attrs) {
     private var mBitmap: Bitmap? = null
-    var listener: OnChangeColorListener? = null
+    var listener: ((Int) -> Unit)? = null
+
 
     private val colors = intArrayOf(
         Color.MAGENTA,
@@ -20,10 +21,6 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
         Color.GRAY,
         Color.BLACK,
     )
-
-    interface OnChangeColorListener {
-        fun onChangeColor(color: Int)
-    }
 
 
     override fun onDraw(canvas: Canvas) {
@@ -75,7 +72,7 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
     private fun touchMove(mX: Float, mY: Float) {
         if (mX > 0 && mX < mBitmap!!.width && mY > 0 && mY < mBitmap!!.height) {
             val color = mBitmap!!.getPixel(mX.toInt(), mY.toInt())
-            listener?.onChangeColor(color)
+            listener?.invoke(color)
 
             invalidate()
         }
@@ -84,7 +81,7 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
     private fun touchStart(mX: Float, mY: Float) {
         if (mX > 0 && mX < mBitmap!!.width && mY > 0 && mY < mBitmap!!.height) {
             val color = mBitmap!!.getPixel(mX.toInt(), mY.toInt())
-            listener?.onChangeColor(color)
+            listener?.invoke(color)
             invalidate()
         }
     }
