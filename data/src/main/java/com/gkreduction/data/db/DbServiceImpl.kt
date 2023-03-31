@@ -57,11 +57,27 @@ class DbServiceImpl(
 
     }
 
-    override fun saveCategory(catName: String?): Observable<Boolean> {
+    override fun saveCategory(catName: String?): Observable<Category> {
         return if (catName != null)
             Observable.just(true)
                 .flatMap { Observable.just(cardDao.insert(CategoryDb(catName = catName))) }
-                .flatMap { Observable.just(true) }
-        else Observable.just(false)
+                .flatMap { Observable.just(cardDao.findCategoryByName(catName)) }
+                .map { dbMapper.mapCategory(it) }
+        else Observable.empty()
     }
+
+    override fun getCategoryByName(categoryName: String): Observable<Category?> {
+        return Observable.just(true)
+            .flatMap { Observable.just(cardDao.isExistCategory(categoryName)) }
+            .flatMap { exist ->
+                if (exist)
+                    return@flatMap Observable
+                        .just(cardDao.findCategoryByName(categoryName))
+                        .map { dbMapper.mapCategory(it) }
+                else
+                    return@flatMap Observable.empty()
+            }
+
+    }
+
 }

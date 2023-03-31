@@ -19,9 +19,6 @@ abstract class DialogModule {
         @DialogScope
         fun providesGetAllCategoryUseCase(service: DbServiceImpl) = GetAllCategoryUseCase(service)
 
-        @Provides
-        @DialogScope
-        fun providesSaveCategoryUseCase(service: DbServiceImpl) = SaveCategoryUseCase(service)
 
         @Provides
         fun provideCardModule(

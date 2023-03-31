@@ -1,8 +1,8 @@
 package com.gkreduction.data.db.dao
 
 import androidx.room.*
-import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CardDb
+import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CategoryDb
 
 @Dao

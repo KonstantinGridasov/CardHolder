@@ -11,6 +11,10 @@
         <variable
             name="isScheduleChecked"
             type="java.lang.Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.gkreduction.cardholder.ui.activity.add.AddViewModel" />
     </data>
 
     <LinearLayout
@@ -35,8 +39,8 @@
             android:layout_marginStart="@dimen/_3gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_3gkdp"
-            android:onClick="showDialog"
             android:background="@color/overlay_dark_10"
+            android:onClick="showDialog"
             android:orientation="horizontal">
 
             <TextView
@@ -54,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_20gkdp"
                 android:gravity="center"
-                android:text="Категория"
+                android:text="@{viewModel.categoryName}"
                 android:textSize="@dimen/_13gkdp" />
         </LinearLayout>
 

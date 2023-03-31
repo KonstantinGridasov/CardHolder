@@ -58,17 +58,16 @@ class CategoryDialogViewModel(
     fun addCategory(string: String) {
         visibleAdd.set(false)
         if (saveCategoryDis != null)
-            removeDisposable(getAllCategoryDis!!)
+            removeDisposable(saveCategoryDis!!)
 
-        getAllCategoryDis = saveCategoryUseCase
+        saveCategoryDis = saveCategoryUseCase
             .execute(string)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                if (it)
-                    getAllCategories()
+                getAllCategories()
             }
 
-        addDisposable(getAllCategoryDis!!)
+        addDisposable(saveCategoryDis!!)
     }
 }

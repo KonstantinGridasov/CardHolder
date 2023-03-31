@@ -1,7 +1,7 @@
 package com.gkreduction.data.mapper
 
-import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CardDb
+import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CategoryDb
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -38,7 +38,7 @@ class DbMapper {
     fun mapCategory(list: List<CategoryDb>): List<Category> {
         val result = ArrayList<Category>()
         for (i in list)
-            result.add(mapCategory(i))
+            result.add(mapCategory(i)!!)
         return result
     }
 
@@ -48,12 +48,19 @@ class DbMapper {
         return CardWithCategory(getCategoryDb(card.category.catName), list)
     }
 
+    fun mapCategory(category: CategoryDb?): Category? {
+        return if (category != null)
+            Category(catId = category.catId, catName = category.catName)
+        else
+            null
+    }
+
 
     private fun mapCard(card: CardDb, category: CategoryDb): Card {
         return Card(
             color = card.color,
             cardId = card.cardId,
-            category = mapCategory(category),
+            category = mapCategory(category)!!,
             cardName = card.cardName,
             cardBaseInfo = card.cardBaseInfo,
             cardSecondInfo = card.cardSecondInfo,
@@ -94,10 +101,6 @@ class DbMapper {
             existSecondary = card.existSecondary
         )
     }
-
-
-    private fun mapCategory(category: CategoryDb) =
-        Category(catId = category.catId, catName = category.catName)
 
 
     private fun getScanCode(base: Boolean, cardDb: CardDb): ScanCode {

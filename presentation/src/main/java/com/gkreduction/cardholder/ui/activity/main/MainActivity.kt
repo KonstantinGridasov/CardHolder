@@ -43,7 +43,6 @@ class MainActivity :
     }
 
     override fun onItemClick(id: Long) {
-        Log.d("CARDHOLDER_APP", "Itemclick =${id}")
         val intent = Intent(this, CardActivity::class.java)
         intent.putExtra(CARD_ID, id)
         startActivity(intent)

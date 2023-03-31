@@ -10,6 +10,10 @@
         <variable
             name="viewModel"
             type="com.gkreduction.cardholder.ui.dialog.CategoryDialogViewModel" />
+
+        <variable
+            name="listenerClick"
+            type="com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener" />
     </data>
 
     <LinearLayout
@@ -40,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_toolbar"
             app:list_items="@{viewModel.list}"
-            app:list_items_click="@{(it)->viewModel.updateCategory(it)}"
+            app:list_items_click="@{listenerClick}"
             tools:listitem="@layout/item_list" />
 
         <LinearLayout

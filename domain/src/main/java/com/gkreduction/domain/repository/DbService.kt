@@ -10,6 +10,7 @@ interface DbService {
     fun saveCard(card: Card?): Observable<Boolean>
 
     fun getAllCategory(): Observable<List<Category>>
-    fun saveCategory(catName: String?): Observable<Boolean>
+    fun saveCategory(catName: String?): Observable<Category>
+    fun getCategoryByName(categoryName: String): Observable<Category?>
 
 }
