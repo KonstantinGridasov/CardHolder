@@ -25,7 +25,7 @@
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
             android:id="@+id/carouselRecyclerview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_200gkdp"
             app:item_listener="@{itemListener}"
             app:items_cards="@{viewModel.list}"
 

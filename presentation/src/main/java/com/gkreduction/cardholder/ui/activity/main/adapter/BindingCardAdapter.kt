@@ -24,7 +24,9 @@ object BindingCardAdapter {
             view.apply {
                 set3DItem(false)
                 setAlpha(false)
+                setIntervalRatio(0.8f)
                 setInfinite(it.size > 2)
+                setOrientation(RecyclerView.VERTICAL)
             }
         }
 

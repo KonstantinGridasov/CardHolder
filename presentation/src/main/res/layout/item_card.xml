@@ -10,9 +10,8 @@
 
     <com.gkreduction.cardholder.ui.widjet.MyCardView
         android:id="@+id/card_item"
-        android:layout_width="@dimen/_160gkdp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10gkdp"
+        android:layout_width="@dimen/_200gkdp"
+        android:layout_height="@dimen/_120gkdp"
         android:background="@color/overlay_light_10"
         app:cardCornerRadius="@dimen/_10gkdp">
 
