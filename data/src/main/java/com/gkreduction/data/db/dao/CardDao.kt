@@ -31,6 +31,11 @@ interface CardDao {
     fun findCategoryByName(category: String): CategoryDb
 
     @Transaction
+    @Query("SELECT * FROM category_db WHERE category_db.catId =:categoryId")
+    fun getCardsByCategoryId(categoryId: Long): List<CardWithCategory>
+
+
+    @Transaction
     fun insert(cardByCategory: CardWithCategory) {
         val categoryId = if (isExistCategory(cardByCategory.cat.catName))
             findCategoryByName(cardByCategory.cat.catName).catId

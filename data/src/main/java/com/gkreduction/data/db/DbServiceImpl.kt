@@ -80,4 +80,14 @@ class DbServiceImpl(
 
     }
 
+    override fun getCardByCategoryId(params: Long): Observable<List<Card>> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.getCardsByCategoryId(params))
+                    .map { dbMapper.mapCardWithCategoryToListCard(it) }
+            }
+
+    }
+
 }

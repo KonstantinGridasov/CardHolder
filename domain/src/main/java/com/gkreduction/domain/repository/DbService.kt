@@ -12,5 +12,6 @@ interface DbService {
     fun getAllCategory(): Observable<List<Category>>
     fun saveCategory(catName: String?): Observable<Category>
     fun getCategoryByName(categoryName: String): Observable<Category?>
+    fun getCardByCategoryId(params: Long):  Observable<List<Card>>
 
 }

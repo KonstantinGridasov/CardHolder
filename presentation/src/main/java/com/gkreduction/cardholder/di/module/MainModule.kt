@@ -7,10 +7,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.gkreduction.cardholder.di.scope.MainScope
 import com.gkreduction.cardholder.ui.activity.main.MainViewModel
 import com.gkreduction.data.db.DbServiceImpl
-import com.gkreduction.domain.usecase.GetAllCardsUseCase
-import com.gkreduction.domain.usecase.GetAllCategoryUseCase
-import com.gkreduction.domain.usecase.GetCategoryByNameUseCase
-import com.gkreduction.domain.usecase.SaveCategoryUseCase
+import com.gkreduction.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 
@@ -21,6 +18,10 @@ abstract class MainModule {
         @MainScope
         fun providesGetUserChatsDbUseCase(service: DbServiceImpl) = GetAllCardsUseCase(service)
 
+        @Provides
+        @MainScope
+        fun providesGetCardByCategoryIdUseCase(service: DbServiceImpl) = GetCardByCategoryIdUseCase(service)
+
 
         @Provides
         fun provideMainModule(
@@ -28,6 +29,7 @@ abstract class MainModule {
             getAllCardsUseCase: GetAllCardsUseCase,
             getAllCategoryUseCase: GetAllCategoryUseCase,
             saveCategoryUseCase: SaveCategoryUseCase,
+            getCardByCategoryIdUseCase: GetCardByCategoryIdUseCase
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
@@ -39,7 +41,7 @@ abstract class MainModule {
                         modelClass.isAssignableFrom(MainViewModel::class.java) ->
                             MainViewModel(
                                 app, getAllCardsUseCase,getAllCategoryUseCase,
-                                saveCategoryUseCase
+                                saveCategoryUseCase,getCardByCategoryIdUseCase
                             ) as T
 
                         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

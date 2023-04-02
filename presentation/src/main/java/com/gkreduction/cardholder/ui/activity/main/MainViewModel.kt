@@ -9,6 +9,7 @@ import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.usecase.GetAllCardsUseCase
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
+import com.gkreduction.domain.usecase.GetCardByCategoryIdUseCase
 import com.gkreduction.domain.usecase.SaveCategoryUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -19,6 +20,7 @@ class MainViewModel(
     private var getAllCardsUseCase: GetAllCardsUseCase,
     private var getAllCategoryUseCase: GetAllCategoryUseCase,
     private var saveCategoryUseCase: SaveCategoryUseCase,
+    private var getCardByCategoryIdUseCase: GetCardByCategoryIdUseCase,
 ) :
     BaseAndroidViewModel(context.applicationContext as Application) {
 
@@ -28,7 +30,7 @@ class MainViewModel(
     private var getCardByCategoryDis: Disposable? = null
 
 
-    private var allCategories: List<Category> = ArrayList<Category>()
+    private var allCategories: List<Category> = ArrayList()
     private var showAllCategories = false
 
     var listCards = ObservableField<List<Card>>()
@@ -47,7 +49,7 @@ class MainViewModel(
     fun sortListByCategory(category: Category?) {
         choosesCategory.set(category)
         allCategories.forEach {
-            if (it.catName == category!!.catName)
+            if (it.catName == category?.catName)
                 it.position = -1L
             else
                 it.position = it.catId
@@ -56,7 +58,7 @@ class MainViewModel(
         allCategories = list
         showAllCategories = false
         changeShowCategories()
-        updateCardsByCategoryName(category?.catName ?: getDefaultCategoryName(context))
+        updateCardByCategory(category)
     }
 
 
@@ -73,7 +75,7 @@ class MainViewModel(
                     allCategories = it
                     choosesCategory.set(allCategories[0])
                     changeShowCategories()
-                    updateCards()
+                    getAllCards()
 
                 } else
                     createDefaultCategory()
@@ -93,17 +95,35 @@ class MainViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 choosesCategory.set(it)
-                updateCards()
+                updateCardByCategory(it)
             }
 
         addDisposable(saveCategoryDis!!)
     }
 
-    private fun updateCardsByCategoryName(s: String) {
+    private fun updateCardByCategory(category: Category?) {
+        if (category != null && category.catName != getDefaultCategoryName(context))
+            getCardByCategoryId(category.catId)
+        else
+            getAllCards()
+    }
+
+    private fun getCardByCategoryId(id: Long) {
+        if (getCardByCategoryDis != null)
+            removeDisposable(getCardByCategoryDis!!)
+
+        getCardByCategoryDis = getCardByCategoryIdUseCase
+            .execute(id)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                listCards.set(it)
+            }
+
     }
 
 
-    private fun updateCards() {
+    private fun getAllCards() {
         if (getAllCards != null)
             removeDisposable(getAllCards!!)
 
