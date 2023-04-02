@@ -1,6 +1,8 @@
 package com.gkreduction.cardholder.ui.base
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +29,11 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, viewId)
+        window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR)
+
+        window.statusBarColor = Color.TRANSPARENT
+        window.navigationBarColor = Color.TRANSPARENT
 
     }
 

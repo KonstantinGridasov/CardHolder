@@ -38,7 +38,6 @@
                 android:layout_width="@dimen/_110gkdp"
                 android:layout_height="@dimen/_50gkdp"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:background="@color/white"
                 android:padding="@dimen/_5gkdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

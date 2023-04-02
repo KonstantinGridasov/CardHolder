@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+
+            <size
+                android:width="@dimen/_20gkdp"
+                android:height="@dimen/_20gkdp" />
+            <gradient
+                android:angle="270"
+                android:endColor="#004E5B"
+                android:startColor="#441503"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <item
+        android:drawable="@drawable/ic_add_card"
+        android:gravity="center" />
+
+
+</layer-list>

@@ -61,9 +61,9 @@
                     android:id="@+id/category_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5gkdp"
+                    android:layout_marginStart="@dimen/_2gkdp"
                     android:layout_marginTop="@dimen/_3gkdp"
-                    android:layout_marginEnd="@dimen/_5gkdp"
+                    android:layout_marginEnd="@dimen/_2gkdp"
                     android:background="@android:color/transparent"
                     android:scrollbars="vertical"
                     app:category_choose="@{categoryChoose}"
@@ -96,8 +96,9 @@
 
         <Button
             android:id="@+id/toCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/fub_add"
+            android:layout_width="@dimen/_30gkdp"
+            android:layout_height="@dimen/_30gkdp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_gravity="end"

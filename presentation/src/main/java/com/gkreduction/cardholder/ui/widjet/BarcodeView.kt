@@ -47,13 +47,14 @@ class BarcodeView(context: Context, attrs: AttributeSet?) : AppCompatImageView(c
     private fun createBarCode(): Bitmap {
         val min = width.coerceAtLeast(height)
         val max = width.coerceAtMost(height)
-        val empty = Bitmap.createBitmap(min, max, Bitmap.Config.ARGB_8888)
+        val empty = Bitmap.createBitmap(min + 10, max + 10, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(empty)
+        canvas.drawColor(Color.WHITE)
         try {
             val barcodeBitmap = barcodeEncoder.encodeBitmap(
                 scanCode.value, getBarcodeType(scanCode.type), min, max - 80
             )
-            canvas.drawBitmap(barcodeBitmap, 0f, 2f, null)
+            canvas.drawBitmap(barcodeBitmap, 10f, 10f, null)
             canvas.drawText(scanCode.value, min / (2f), max - paint.textSize + 25f, paint)
         } catch (e: WriterException) {
             e.printStackTrace()
