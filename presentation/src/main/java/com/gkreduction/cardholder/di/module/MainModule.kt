@@ -9,6 +9,8 @@ import com.gkreduction.cardholder.ui.activity.main.MainViewModel
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.GetAllCardsUseCase
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
+import com.gkreduction.domain.usecase.GetCategoryByNameUseCase
+import com.gkreduction.domain.usecase.SaveCategoryUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -24,7 +26,8 @@ abstract class MainModule {
         fun provideMainModule(
             app: Application,
             getAllCardsUseCase: GetAllCardsUseCase,
-            getAllCategoryUseCase: GetAllCategoryUseCase
+            getAllCategoryUseCase: GetAllCategoryUseCase,
+            saveCategoryUseCase: SaveCategoryUseCase,
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
@@ -35,7 +38,8 @@ abstract class MainModule {
                     return when {
                         modelClass.isAssignableFrom(MainViewModel::class.java) ->
                             MainViewModel(
-                                app, getAllCardsUseCase,getAllCategoryUseCase
+                                app, getAllCardsUseCase,getAllCategoryUseCase,
+                                saveCategoryUseCase
                             ) as T
 
                         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

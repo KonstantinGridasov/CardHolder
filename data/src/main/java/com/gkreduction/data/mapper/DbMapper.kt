@@ -39,6 +39,8 @@ class DbMapper {
         val result = ArrayList<Category>()
         for (i in list)
             result.add(mapCategory(i)!!)
+
+        result.sortWith(compareBy { it.position })
         return result
     }
 
@@ -50,7 +52,7 @@ class DbMapper {
 
     fun mapCategory(category: CategoryDb?): Category? {
         return if (category != null)
-            Category(catId = category.catId, catName = category.catName)
+            Category(catId = category.catId, catName = category.catName, position = category.catId)
         else
             null
     }

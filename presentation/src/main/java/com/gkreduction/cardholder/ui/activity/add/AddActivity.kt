@@ -74,7 +74,8 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     private fun saveCard() {
         val category: Category = viewModel.categoryChoose.get() ?: Category(
             0L,
-            getDefaultCategoryName(this)
+            getDefaultCategoryName(this),
+            position = 0L
         )
 
         val card = Card(

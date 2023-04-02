@@ -1,14 +1,14 @@
 package com.gkreduction.cardholder.ui.activity.main.adapter
 
-import android.view.KeyEvent
-import android.view.View
-import android.widget.EditText
+import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener
-import com.gkreduction.cardholder.ui.dialog.adapter.EditTextListener
 import com.gkreduction.domain.entity.Category
-import com.google.android.flexbox.*
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 
 
 object BindingCategoryMain {
@@ -41,7 +41,6 @@ object BindingCategoryMain {
         }
 
     }
-
 
 
 }

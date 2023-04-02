@@ -20,11 +20,6 @@ abstract class AddModule {
         @AddScope
         fun providesSaveCardUseCase(service: DbServiceImpl) = SaveCardUseCase(service)
 
-        @Provides
-        @AddScope
-        fun providesGetCategoryByNameUseCase(service: DbServiceImpl) =
-            GetCategoryByNameUseCase(service)
-
 
         @Provides
         fun provideAddModule(

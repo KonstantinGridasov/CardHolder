@@ -4,10 +4,12 @@ import android.app.Application
 import android.content.Context
 import androidx.databinding.ObservableField
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
+import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.usecase.GetAllCardsUseCase
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
+import com.gkreduction.domain.usecase.SaveCategoryUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -15,16 +17,47 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel(
     context: Context,
     private var getAllCardsUseCase: GetAllCardsUseCase,
-    private var getAllCategoryUseCase: GetAllCategoryUseCase
+    private var getAllCategoryUseCase: GetAllCategoryUseCase,
+    private var saveCategoryUseCase: SaveCategoryUseCase,
 ) :
     BaseAndroidViewModel(context.applicationContext as Application) {
 
     private var getAllCards: Disposable? = null
     private var getAllCategoryDis: Disposable? = null
+    private var saveCategoryDis: Disposable? = null
+    private var getCardByCategoryDis: Disposable? = null
 
-    var list = ObservableField<List<Card>>()
-    var categories = ObservableField<List<Category>>()
+
+    private var allCategories: List<Category> = ArrayList<Category>()
+    private var showAllCategories = false
+
+    var listCards = ObservableField<List<Card>>()
+    var listCategories = ObservableField<List<Category>>()
     var choosesCategory = ObservableField<Category>()
+
+    fun changeShowCategories() {
+        if (showAllCategories || (allCategories.size < 5)) {
+            listCategories.set(allCategories)
+        } else {
+            listCategories.set(allCategories.subList(0, 5))
+        }
+        showAllCategories = !showAllCategories
+    }
+
+    fun sortListByCategory(category: Category?) {
+        choosesCategory.set(category)
+        allCategories.forEach {
+            if (it.catName == category!!.catName)
+                it.position = -1L
+            else
+                it.position = it.catId
+        }
+        val list = allCategories.sortedWith(compareBy { it.position })
+        allCategories = list
+        showAllCategories = false
+        changeShowCategories()
+        updateCardsByCategoryName(category?.catName ?: getDefaultCategoryName(context))
+    }
 
 
     fun getAllCategories() {
@@ -36,13 +69,39 @@ class MainViewModel(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                categories.set(it)
-                updateCards()
+                if (it.isNotEmpty()) {
+                    allCategories = it
+                    choosesCategory.set(allCategories[0])
+                    changeShowCategories()
+                    updateCards()
+
+                } else
+                    createDefaultCategory()
             }
 
         addDisposable(getAllCategoryDis!!)
 
     }
+
+    private fun createDefaultCategory() {
+        if (saveCategoryDis != null)
+            removeDisposable(saveCategoryDis!!)
+
+        saveCategoryDis = saveCategoryUseCase
+            .execute(getDefaultCategoryName(context))
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                choosesCategory.set(it)
+                updateCards()
+            }
+
+        addDisposable(saveCategoryDis!!)
+    }
+
+    private fun updateCardsByCategoryName(s: String) {
+    }
+
 
     private fun updateCards() {
         if (getAllCards != null)
@@ -53,7 +112,7 @@ class MainViewModel(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                list.set(it)
+                listCards.set(it)
             }
 
         addDisposable(getAllCards!!)

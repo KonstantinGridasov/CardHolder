@@ -11,16 +11,17 @@
     </data>
 
     <TextView
-        android:id="@+id/tv_category_name"
+        android:id="@+id/main_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_5gkdp"
         android:layout_marginEnd="@dimen/_5gkdp"
         android:layout_marginBottom="@dimen/_5gkdp"
+        android:background="@drawable/category_active"
         android:gravity="start|center_vertical"
         android:maxLines="1"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:padding="@dimen/_4gkdp"
+        android:textColor="@color/white"
         android:textSize="@dimen/_10gkdp"
         android:textStyle="bold" />
 </layout>

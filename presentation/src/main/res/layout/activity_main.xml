@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:coverflow="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.activity.main.MainActivity">
 
@@ -22,50 +21,64 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@drawable/background"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list_search"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5gkdp"
-            android:layout_marginTop="@dimen/_3gkdp"
-            android:layout_marginEnd="@dimen/_5gkdp"
-            android:background="@android:color/transparent"
-            app:item_categories_main="@{viewModel.choosesCategory}"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/carouselRecyclerview"
-            app:list_categories_main="@{viewModel.categories}"
-            app:category_choose="@{categoryChoose}"
-            tools:listitem="@layout/item_category"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent"
+            android:background="@drawable/image_background">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
-            android:id="@+id/carouselRecyclerview"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_200gkdp"
-            app:item_listener="@{itemListener}"
-            app:items_cards="@{viewModel.list}"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/category_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5gkdp"
+                    android:layout_marginTop="@dimen/_3gkdp"
+                    android:layout_marginEnd="@dimen/_5gkdp"
+                    android:background="@android:color/transparent"
+                    android:scrollbars="vertical"
+                    app:category_choose="@{categoryChoose}"
+                    app:item_categories_main="@{viewModel.choosesCategory}"
+                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                    app:list_categories_main="@{viewModel.listCategories}"
+                    tools:listitem="@layout/item_category" />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <Button
+                    android:id="@+id/showAllCategory"
+                    android:layout_width="@dimen/_20gkdp"
+                    android:layout_height="@dimen/_20gkdp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/_20gkdp"
+                    android:layout_marginBottom="@dimen/_20gkdp"
+                    android:background="@drawable/category_not_active"
+                    android:text="..." />
+
+                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                    android:id="@+id/carouselRecyclerview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_200gkdp"
+                    app:item_listener="@{itemListener}"
+                    app:items_cards="@{viewModel.listCards}" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/toCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end"
             android:layout_marginEnd="@dimen/_20gkdp"
-            android:layout_marginBottom="@dimen/_20gkdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginBottom="@dimen/_20gkdp" />
+    </RelativeLayout>
 </layout>
