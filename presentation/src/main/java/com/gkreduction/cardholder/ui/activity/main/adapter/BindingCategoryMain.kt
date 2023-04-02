@@ -1,6 +1,5 @@
 package com.gkreduction.cardholder.ui.activity.main.adapter
 
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener

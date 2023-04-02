@@ -45,8 +45,11 @@ class AddViewModel(
     }
 
     fun updateCategory(category: Category?) {
-        if (category != null)
+        if (category != null) {
             categoryChoose.set(category)
+            categoryName.set(category.catName)
+        } else
+            categoryName.set(getDefaultCategoryName(context))
 
     }
 

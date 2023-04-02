@@ -85,7 +85,9 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
             cardName = (binding as ActivityAddBinding).editHeader.text.toString(),
             primary = (binding as ActivityAddBinding).barcodeBase.scanCode,
             secondary = (binding as ActivityAddBinding).barcodeSecond.scanCode,
-            existSecondary = (binding as ActivityAddBinding).checkbox.isChecked
+            existSecondary = (binding as ActivityAddBinding).checkbox.isChecked,
+            cardBaseInfo = (binding as ActivityAddBinding).editDescBase.text.toString(),
+            cardSecondInfo = (binding as ActivityAddBinding).editDescSecond.text.toString()
         )
         viewModel.saveCard(card)
         this.finish()

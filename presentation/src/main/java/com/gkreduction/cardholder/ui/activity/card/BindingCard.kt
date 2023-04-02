@@ -9,14 +9,21 @@ object BindingCard {
     @JvmStatic
     @BindingAdapter(
         "set_card",
+        "set_status_revert",
         requireAll = false
     )
     fun setListChatsAdapter(
         view: BarcodeView,
         card: Card?,
+        status_revert: Boolean?
     ) {
         card?.let {
-            view.scanCode = card.primary
+            if (status_revert != null && status_revert && it.existSecondary) {
+                view.scanCode = card.secondary
+            } else
+                view.scanCode = card.primary
+
+
         }
     }
 

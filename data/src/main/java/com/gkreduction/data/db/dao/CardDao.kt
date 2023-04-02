@@ -69,4 +69,5 @@ interface CardDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(category: CategoryDb)
 
+    //UPDATE card_db  SET cardSecondInfo="Скидка" WHERE cardId = 1
 }
