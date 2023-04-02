@@ -14,12 +14,37 @@
         <variable
             name="viewModel"
             type="com.gkreduction.cardholder.ui.activity.main.MainViewModel" />
+
+
+        <variable
+            name="categoryChoose"
+            type="com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@drawable/background"
         android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5gkdp"
+            android:layout_marginTop="@dimen/_3gkdp"
+            android:layout_marginEnd="@dimen/_5gkdp"
+            android:background="@android:color/transparent"
+            app:item_categories_main="@{viewModel.choosesCategory}"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/carouselRecyclerview"
+            app:list_categories_main="@{viewModel.categories}"
+            app:category_choose="@{categoryChoose}"
+            tools:listitem="@layout/item_category"
+            android:scrollbars="vertical" />
 
 
         <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview

@@ -7,6 +7,7 @@ import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.dialog.CategoryDialog
 import com.gkreduction.data.db.DbServiceImpl
+import com.gkreduction.domain.usecase.GetAllCategoryUseCase
 import com.gkreduction.domain.usecase.SaveCategoryUseCase
 import dagger.Module
 import dagger.Provides
@@ -38,5 +39,10 @@ abstract class ActivityModule {
     companion object{
         @Provides
         fun providesSaveCategoryUseCase(service: DbServiceImpl) = SaveCategoryUseCase(service)
+
+        @Provides
+        fun providesGetAllCategoryUseCase(service: DbServiceImpl) = GetAllCategoryUseCase(service)
+
+
     }
 }

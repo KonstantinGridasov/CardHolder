@@ -15,10 +15,6 @@ import dagger.Provides
 @Module
 abstract class DialogModule {
     companion object {
-        @Provides
-        @DialogScope
-        fun providesGetAllCategoryUseCase(service: DbServiceImpl) = GetAllCategoryUseCase(service)
-
 
         @Provides
         fun provideCardModule(

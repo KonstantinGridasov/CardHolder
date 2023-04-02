@@ -28,7 +28,7 @@ class MainActivity :
 
     override fun onResume() {
         super.onResume()
-        viewModel.updateCards()
+        viewModel.getAllCategories()
     }
 
 
