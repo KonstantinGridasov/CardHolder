@@ -32,8 +32,8 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
         window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR)
 
-        window.statusBarColor = Color.TRANSPARENT
-        window.navigationBarColor = Color.TRANSPARENT
+        window.statusBarColor = Color.parseColor("#EBECF1")
+        window.navigationBarColor =Color.parseColor("#EBECF1")
 
     }
 
