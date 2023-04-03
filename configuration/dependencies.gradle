@@ -19,64 +19,73 @@ ext {
             testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
     ]
 
-    // Presentation
-    camerax_version = '1.3.0-alpha05'
+    core_ktx='1.7.0'
+    lifecycle='2.5.1'
     kotlin_stdlib_jdk8 = '1.8.0'
+
+    /*RX*/
     rxKotlinVersion = '2.4.0'
-    room_version = '2.5.0'
-
-    app_compat_version = '1.6.0'
-    recycler_version = '1.2.1'
-    constraintLayoutVersion = '2.1.4'
-
-    multidexVersion = '2.0.1'
-    daggerVersion = '2.45'
-    supportLibraryVersion = '27.1.1'
     rxAndroidVersion = '2.1.1'
     rxJavaVersion = '2.2.21'
-    retrofitVersion = '2.9.0'
-    okHttpVersion = '4.10.0'
-    lifecycleVersion = '1.1.0'
-    androidKtxVersion = '0.1'
+
+    /*Dagger */
+    daggerVersion = '2.45'
+
+    /*Room*/
+    room_version = '2.5.0'
+
+    /*Design */
+    constraintLayoutVersion = '2.1.4'
+
+    /*Image loader*/
     glideVersion = '4.14.2'
-    gson_version = '2.8.5'
-    navigationVersion = '2.5.3'
     picassoVersion = '2.8'
 
+    /*Network*/
+    gson_version = '2.8.5'
+    retrofitVersion = '2.9.0'
+    okHttpVersion = '4.10.0'
+
+    // Presentation
+
     presentationKaptDependencies = [
+            /*Dagger */
             "com.google.dagger:dagger-compiler:${daggerVersion}",
             "com.google.dagger:dagger-android-processor:${daggerVersion}"
     ]
 
     presentationDependencies = [
-            'androidx.core:core-ktx:1.7.0',
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_stdlib_jdk8}",
-            'androidx.appcompat:appcompat:1.6.1',
-            'com.google.android.material:material:1.6.0',
-            'androidx.constraintlayout:constraintlayout:2.1.4',
-            "com.google.zxing:core:3.5.1",
-            'com.journeyapps:zxing-android-embedded:4.3.0',
-            'com.google.mlkit:barcode-scanning:17.0.3',
-            'com.google.android.gms:play-services-mlkit-barcode-scanning:18.1.0',
-            "androidx.camera:camera-core:${camerax_version}",
-            "androidx.camera:camera-camera2:${camerax_version}",
-            "androidx.camera:camera-lifecycle:${camerax_version}",
-            "androidx.camera:camera-view:${camerax_version}",
+            "androidx.core:core-ktx:$core_ktx",
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_jdk8",
+            "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle",
 
-            "androidx.core:core-ktx:${androidKtxVersion}",
-            "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            /*RX*/
+            "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
             "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
 
+            /*Dagger */
+            "com.google.dagger:dagger:${daggerVersion}",
+            "com.google.dagger:dagger-android-support:${daggerVersion}",
+
+            /*Room */
+            "androidx.room:room-runtime:$room_version",
+
+            /*Image Loader*/
             "com.github.bumptech.glide:glide:${glideVersion}",
             "com.squareup.picasso:picasso:${picassoVersion}",
 
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1",
-
-            "com.google.dagger:dagger:${daggerVersion}",
-            "com.google.dagger:dagger-android-support:${daggerVersion}",
-            "androidx.room:room-runtime:$room_version",
+            /*Design */
+            'androidx.appcompat:appcompat:1.6.1',
+            'com.google.android.material:material:1.6.0',
+            "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
             'com.github.sparrow007:carouselrecyclerview:1.2.6',
-            'com.google.android.flexbox:flexbox:3.0.0'
+            'com.google.android.flexbox:flexbox:3.0.0',
+
+
+            /*Bar Code scanner */
+            "com.google.zxing:core:3.5.1",
+            'com.journeyapps:zxing-android-embedded:4.3.0',
+            'com.google.android.gms:play-services-code-scanner:16.0.0',
 
     ]
     presentationTestImplimentation = [
@@ -93,9 +102,14 @@ ext {
 
     domainDependencies = [
             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_jdk8",
+
+            /*Dagger */
+            "javax.inject:javax.inject:1",
+
+            /*RX*/
             "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
             "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
-            "javax.inject:javax.inject:1"
+
     ]
 
     domainTestDependencies = [
@@ -104,15 +118,21 @@ ext {
 
     // Data
     dataKaptDependencies = [
+            /* Room */
             "androidx.room:room-compiler:$room_version"
     ]
 
     dataDependencies = [
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_jdk8",
+
+            /*Room*/
             "androidx.room:room-runtime:$room_version",
             "androidx.room:room-rxjava2:$room_version",
 
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_jdk8",
+            /*RX*/
             "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
+
+           /*Network*/
             "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
             "com.google.code.gson:gson:$gson_version",
             "com.squareup.retrofit2:retrofit:$retrofitVersion",
@@ -124,6 +144,7 @@ ext {
     ]
 
     dataAnnotationProcessor = [
+            /* Room */
             "androidx.room:room-compiler:$room_version"
     ]
 }

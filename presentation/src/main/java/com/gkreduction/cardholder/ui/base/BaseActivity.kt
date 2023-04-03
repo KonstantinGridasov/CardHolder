@@ -1,8 +1,12 @@
 package com.gkreduction.cardholder.ui.base
 
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +24,6 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
     lateinit var binding: ViewDataBinding
 
 
-
     protected val viewModel by lazyThreadSafetyNone {
         ViewModelProvider(this, viewModelFactory)[modelClass]
     }
@@ -29,11 +32,13 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, viewId)
-        window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR)
 
-        window.statusBarColor = Color.parseColor("#EBECF1")
-        window.navigationBarColor =Color.parseColor("#EBECF1")
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        WindowInsetsControllerCompat(window, binding.root).let { controller ->
+            controller.show(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
 
     }
 

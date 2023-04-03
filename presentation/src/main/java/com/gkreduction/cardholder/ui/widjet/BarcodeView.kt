@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import com.gkreduction.cardholder.R
 import com.gkreduction.domain.entity.ScanCode
+
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.journeyapps.barcodescanner.BarcodeEncoder

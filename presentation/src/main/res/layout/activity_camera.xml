@@ -7,21 +7,9 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.camera.view.PreviewView
-            android:id="@+id/cameraPreview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-        <com.gkreduction.cardholder.ui.widjet.ViewWithWindow
-            android:id="@+id/view_clamp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>
