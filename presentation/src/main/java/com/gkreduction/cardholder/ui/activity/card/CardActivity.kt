@@ -1,9 +1,10 @@
 package com.gkreduction.cardholder.ui.activity.card
 
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.databinding.ActivityCardBinding
@@ -34,18 +35,20 @@ class CardActivity :
     }
 
     private fun animation(view: View) {
-        val animatorRotate = ObjectAnimator.ofFloat(view, View.ROTATION_Y, 0f, 180f, 360f)
-            .setDuration(1000)
-        val animatorAlpha = ObjectAnimator.ofFloat(view, View.ALPHA, 1f, 0f, 1f)
-            .setDuration(1000)
+        val rotate = (binding as ActivityCardBinding).cardRotate
+        val animatorRotate = ObjectAnimator.ofFloat(rotate, View.ROTATION_Y, 0f, 180f)
+            .setDuration(500)
 
-        val animationSet = AnimatorSet()
-        animationSet.playTogether(animatorRotate)
-        animationSet.playTogether(animatorAlpha)
-        animationSet.start()
-
-
-
-
+        animatorRotate.apply {
+            doOnStart {
+                view.visibility = View.INVISIBLE
+                rotate.visibility = View.VISIBLE
+            }
+            doOnEnd {
+                rotate.visibility = View.GONE
+                view.visibility = View.VISIBLE
+            }
+        }
+        animatorRotate.start()
     }
 }
