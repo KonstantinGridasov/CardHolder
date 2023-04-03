@@ -3,7 +3,6 @@ package com.gkreduction.cardholder.ui.dialog.adapter
 import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.domain.entity.Category

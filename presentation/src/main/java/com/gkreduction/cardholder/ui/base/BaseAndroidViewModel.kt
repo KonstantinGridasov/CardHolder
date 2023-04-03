@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.gkreduction.domain.entity.Category
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
@@ -32,7 +31,6 @@ abstract class BaseAndroidViewModel : AndroidViewModel {
     fun removeDisposable(disposable: Disposable) {
         disposables.remove(disposable)
     }
-
 
 
 }

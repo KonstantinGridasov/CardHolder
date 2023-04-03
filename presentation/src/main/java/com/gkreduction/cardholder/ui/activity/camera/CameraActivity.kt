@@ -36,7 +36,7 @@ class CameraActivity :
             .addOnCanceledListener {
                 finish()
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 finish()
             }
     }

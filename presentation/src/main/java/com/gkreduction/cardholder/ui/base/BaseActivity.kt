@@ -1,9 +1,6 @@
 package com.gkreduction.cardholder.ui.base
 
-import android.content.pm.ActivityInfo
-import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -16,7 +13,10 @@ import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 
-open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClass: Class<T>) :
+open class BaseActivity<T : BaseAndroidViewModel>(
+    private var viewId: Int,
+    private var modelClass: Class<T>
+) :
     DaggerAppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -36,7 +36,8 @@ open class BaseActivity<T : BaseAndroidViewModel>(var viewId: Int, var modelClas
         WindowCompat.setDecorFitsSystemWindows(window, true)
         WindowInsetsControllerCompat(window, binding.root).let { controller ->
             controller.show(WindowInsetsCompat.Type.systemBars())
-            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
 
 

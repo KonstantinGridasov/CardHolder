@@ -15,7 +15,6 @@ class AdapterCategoryMain(val listener: CategoryClickListener?) :
     RecyclerView.Adapter<AdapterCategoryMain.ViewHolder>() {
     private var items: List<Category> = ArrayList()
     private var chooses: Category? = null
-    private var position: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

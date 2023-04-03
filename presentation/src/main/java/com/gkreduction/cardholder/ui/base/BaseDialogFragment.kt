@@ -14,8 +14,8 @@ import dagger.android.support.DaggerDialogFragment
 import javax.inject.Inject
 
 open class BaseDialogFragment<T : BaseAndroidViewModel>(
-    var viewId: Int,
-    var modelClass: Class<T>
+    private var viewId: Int,
+    private var modelClass: Class<T>
 ) :
     DaggerDialogFragment() {
 
