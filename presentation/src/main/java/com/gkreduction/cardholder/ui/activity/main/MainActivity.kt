@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.databinding.ActivityMainBinding
-import com.gkreduction.cardholder.ui.activity.add.AddActivity
+import com.gkreduction.cardholder.ui.activity.edit_card.EditCardActivity
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
 import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
 import com.gkreduction.cardholder.ui.base.BaseActivity
@@ -44,7 +44,7 @@ class MainActivity :
 
 
     private fun navigateToCameraActivity() {
-        startActivity(Intent(this, AddActivity::class.java))
+        startActivity(Intent(this, EditCardActivity::class.java))
     }
 
     override fun onItemClick(id: Long) {

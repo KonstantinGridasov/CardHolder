@@ -116,4 +116,17 @@ class DbServiceImpl(
             }
     }
 
+    override fun updateCard(card: Card): Observable<Boolean> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.update(dbMapper.getCardDb(card)))
+                    .flatMap {
+                        Observable.just(true)
+                    }
+
+
+            }
+    }
+
 }

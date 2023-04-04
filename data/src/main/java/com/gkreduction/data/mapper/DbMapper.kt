@@ -62,31 +62,10 @@ class DbMapper {
 
     }
 
-
-    private fun mapCard(card: CardDb, category: CategoryDb): Card {
-        return Card(
-            colorStart = card.colorStart,
-            colorEnd = card.colorEnd,
-            cardId = card.cardId,
-            category = mapCategory(category)!!,
-            cardName = card.cardName,
-            cardBaseInfo = card.cardBaseInfo,
-            cardSecondInfo = card.cardSecondInfo,
-            primary = getScanCode(true, card),
-            secondary = getScanCode(false, card),
-            existSecondary = card.existSecondary,
-            countOpen = card.countOpen
-        )
-
-
-    }
-
-    private fun getCategoryDb(catName: String) = CategoryDb(catName = catName)
-
-    private fun getCardDb(card: Card): CardDb {
+    fun getCardDb(card: Card): CardDb {
         return if (card.existSecondary) CardDb(
             cardId = card.cardId,
-            categoryId = 0L,
+            categoryId = card.category.catId,
             colorStart = card.colorStart,
             colorEnd = card.colorEnd,
             cardName = card.cardName,
@@ -113,6 +92,27 @@ class DbMapper {
     }
 
 
+    private fun mapCard(card: CardDb, category: CategoryDb): Card {
+        return Card(
+            colorStart = card.colorStart,
+            colorEnd = card.colorEnd,
+            cardId = card.cardId,
+            category = mapCategory(category)!!,
+            cardName = card.cardName,
+            cardBaseInfo = card.cardBaseInfo,
+            cardSecondInfo = card.cardSecondInfo,
+            primary = getScanCode(true, card),
+            secondary = getScanCode(false, card),
+            existSecondary = card.existSecondary,
+            countOpen = card.countOpen
+        )
+
+
+    }
+
+    private fun getCategoryDb(catName: String) = CategoryDb(catName = catName)
+
+
     private fun getScanCode(base: Boolean, cardDb: CardDb): ScanCode {
         return if (base) ScanCode(
             type = cardDb.typeBase, value = cardDb.valueBase
@@ -121,5 +121,6 @@ class DbMapper {
             type = cardDb.typeSecondary, value = cardDb.valueSecondary
         )
     }
+
 
 }

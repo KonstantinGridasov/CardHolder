@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.add
+package com.gkreduction.cardholder.ui.activity.edit_card
 
 import android.app.Activity
 import android.content.Intent
@@ -7,20 +7,21 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.gkreduction.cardholder.R
+import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.constant.CATEGORY
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
-import com.gkreduction.cardholder.databinding.ActivityAddBinding
+import com.gkreduction.cardholder.databinding.ActivityEditBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.category.CategoryActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
-import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
 
 
-class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewModel::class.java) {
+class EditCardActivity :
+    BaseActivity<EditCardViewModel>(R.layout.activity_edit, EditCardViewModel::class.java) {
     private val startCameraForResult =
         registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -42,62 +43,61 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     private var colorStart: Int = 0
     private var colorEnd: Int = 0
 
+    private enum class ModeEdit {
+        CREATE,
+        UPDATE
+    }
+
+    private var mode: ModeEdit = ModeEdit.CREATE
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initListener()
-        (binding as ActivityAddBinding).viewModel = viewModel
-        viewModel.getCategoryByName()
+        (binding as ActivityEditBinding).viewModel = viewModel
 
+        if (intent.extras != null) {
+            val cardId = intent.extras!!.getLong(CARD_ID)
+            mode = ModeEdit.UPDATE
+            if (cardId != 0L)
+                viewModel.getCardById(cardId)
+        } else
+            viewModel.getCategoryByName(getDefaultCategoryName(this))
     }
 
 
     fun onClickBarcode(view: View?) {
         when (view?.id) {
-            (binding as ActivityAddBinding).barcodeBase.id, (binding as ActivityAddBinding).ivBarcode.id ->
+            (binding as ActivityEditBinding).barcodeBase.id, (binding as ActivityEditBinding).ivBarcode.id ->
                 navigateToCameraActivity(CameraActivity.TypeScan.BASE)
 
-            (binding as ActivityAddBinding).barcodeSecond.id, (binding as ActivityAddBinding).ivBarcodeSecond.id ->
+            (binding as ActivityEditBinding).barcodeSecond.id, (binding as ActivityEditBinding).ivBarcodeSecond.id ->
                 navigateToCameraActivity(CameraActivity.TypeScan.SECONDARY)
 
         }
     }
 
 
-    fun showDialog(view: View?) {
-        navigateToCategory()
-    }
-
     private fun initListener() {
-        (binding as ActivityAddBinding).pickerFirst.listener = { colorStart = it; changeColor() }
-        (binding as ActivityAddBinding).pickerSecond.listener = { colorEnd = it; changeColor() }
-        (binding as ActivityAddBinding).save.setOnClickListener { saveCard() }
+        (binding as ActivityEditBinding).pickerFirst.listener = { colorStart = it; changeColor() }
+        (binding as ActivityEditBinding).pickerSecond.listener = { colorEnd = it; changeColor() }
+        (binding as ActivityEditBinding).save.setOnClickListener { saveCard() }
+        (binding as ActivityEditBinding).llGroupCategory.setOnClickListener { navigateToCategory() }
     }
 
     private fun changeColor() {
-        (binding as ActivityAddBinding).cardBase.changeColor(colorStart, colorEnd)
-        (binding as ActivityAddBinding).cardCecondary.changeColor(colorStart, colorEnd)
+        (binding as ActivityEditBinding).cardBase.changeColor(colorStart, colorEnd)
+        (binding as ActivityEditBinding).cardCecondary.changeColor(colorStart, colorEnd)
     }
 
 
     private fun saveCard() {
-        val category: Category = viewModel.categoryChoose.get() ?: Category(
-            0L,
-            getDefaultCategoryName(this),
-            position = 0L
-        )
-
-        val card = Card(
-            category = category,
-            colorStart = colorStart,
-            colorEnd = colorEnd,
-            cardName = (binding as ActivityAddBinding).editHeader.text.toString(),
-            primary = (binding as ActivityAddBinding).barcodeBase.scanCode,
-            secondary = (binding as ActivityAddBinding).barcodeSecond.scanCode,
-            existSecondary = (binding as ActivityAddBinding).checkbox.isChecked,
-            cardBaseInfo = (binding as ActivityAddBinding).editDescBase.text.toString(),
-            cardSecondInfo = (binding as ActivityAddBinding).editDescSecond.text.toString()
-        )
-        viewModel.saveCard(card)
+        val header = (binding as ActivityEditBinding).editHeader.text.toString()
+        val cardBaseInfo = (binding as ActivityEditBinding).editDescBase.text.toString()
+        val cardSecondInfo = (binding as ActivityEditBinding).editDescSecond.text.toString()
+        val card = viewModel.createCard(header, cardBaseInfo, cardSecondInfo, colorStart, colorEnd)
+        when (mode) {
+            ModeEdit.CREATE -> viewModel.saveCard(card)
+            ModeEdit.UPDATE -> viewModel.updateCard(card)
+        }
         this.finish()
 
     }
@@ -106,14 +106,10 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     private fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
         when (type) {
             CameraActivity.TypeScan.BASE -> {
-                (binding as ActivityAddBinding).barcodeBase.scanCode = (scanCode)
-                (binding as ActivityAddBinding).ivBarcode.visibility = View.GONE
-                (binding as ActivityAddBinding).barcodeBase.visibility = View.VISIBLE
+                viewModel.primary.set(scanCode)
             }
             CameraActivity.TypeScan.SECONDARY -> {
-                (binding as ActivityAddBinding).barcodeSecond.scanCode = (scanCode)
-                (binding as ActivityAddBinding).ivBarcodeSecond.visibility = View.GONE
-                (binding as ActivityAddBinding).barcodeSecond.visibility = View.VISIBLE
+                viewModel.secondary.set(scanCode)
             }
         }
 

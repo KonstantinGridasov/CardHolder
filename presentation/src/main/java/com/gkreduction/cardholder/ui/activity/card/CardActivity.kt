@@ -1,6 +1,7 @@
 package com.gkreduction.cardholder.ui.activity.card
 
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.animation.doOnEnd
@@ -8,14 +9,17 @@ import androidx.core.animation.doOnStart
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.databinding.ActivityCardBinding
+import com.gkreduction.cardholder.ui.activity.edit_card.EditCardActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
 
 class CardActivity :
     BaseActivity<CardViewModel>(R.layout.activity_card, CardViewModel::class.java) {
     private var isRevert = false
+    var id = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var id = 0L
+
         if (intent.extras != null) {
             id = intent.extras!!.getLong(CARD_ID)
 
@@ -31,7 +35,17 @@ class CardActivity :
             isRevert = !isRevert
         }
 
+        (binding as ActivityCardBinding).cardItem.setOnClickListener {
+            //TODO to menu
+            navigateToEdit()
+        }
 
+    }
+
+    private fun navigateToEdit() {
+        val intent = Intent(this, EditCardActivity::class.java)
+        intent.putExtra(CARD_ID, id)
+        startActivity(intent)
     }
 
     private fun animation(view: View) {

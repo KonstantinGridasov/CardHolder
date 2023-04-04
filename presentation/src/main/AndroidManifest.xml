@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -18,7 +19,7 @@
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="barcode_ui"/>
+            android:value="barcode_ui" />
 
 
         <activity
@@ -32,7 +33,7 @@
         </activity>
 
         <activity android:name=".ui.activity.camera.CameraActivity" />
-        <activity android:name=".ui.activity.add.AddActivity" />
+        <activity android:name=".ui.activity.edit_card.EditCardActivity" />
         <activity android:name=".ui.activity.card.CardActivity" />
         <activity android:name=".ui.activity.category.CategoryActivity" />
     </application>

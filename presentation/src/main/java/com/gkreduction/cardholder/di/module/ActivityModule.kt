@@ -1,14 +1,15 @@
 package com.gkreduction.cardholder.di.module
 
 import com.gkreduction.cardholder.di.scope.*
-import com.gkreduction.cardholder.ui.activity.add.AddActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
 import com.gkreduction.cardholder.ui.activity.category.CategoryActivity
+import com.gkreduction.cardholder.ui.activity.edit_card.EditCardActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
+import com.gkreduction.domain.usecase.GetCardByIdUseCase
 import com.gkreduction.domain.usecase.GetCategoryByNameUseCase
 import com.gkreduction.domain.usecase.SaveCategoryUseCase
 import dagger.Module
@@ -26,9 +27,9 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [CameraModule::class])
     abstract fun contributesCamera(): CameraActivity
 
-    @AddScope
-    @ContributesAndroidInjector(modules = [AddModule::class])
-    abstract fun contributesAdd(): AddActivity
+    @EditScope
+    @ContributesAndroidInjector(modules = [EditModule::class])
+    abstract fun contributesEditCard(): EditCardActivity
 
     @CardScope
     @ContributesAndroidInjector(modules = [CardModule::class])
@@ -53,6 +54,9 @@ abstract class ActivityModule {
         @Provides
         fun providesGetCategoryByNameUseCase(service: DbServiceImpl) =
             GetCategoryByNameUseCase(service)
+
+        @Provides
+        fun providesGetCardByIdUseCase(service: DbServiceImpl) = GetCardByIdUseCase(service)
 
     }
 }

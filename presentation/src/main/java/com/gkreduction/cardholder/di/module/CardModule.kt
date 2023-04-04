@@ -15,9 +15,7 @@ import dagger.Provides
 @Module
 abstract class CardModule {
     companion object {
-        @Provides
-        @CardScope
-        fun providesGetCardByIdUseCase(service: DbServiceImpl) = GetCardByIdUseCase(service)
+
 
         @Provides
         fun provideCardModule(

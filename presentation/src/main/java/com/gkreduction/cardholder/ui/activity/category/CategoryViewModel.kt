@@ -33,7 +33,7 @@ class CategoryViewModel(
 
 
     fun addNewCategory() {
-        allCategories.add(Category(0L, catName = "", position = 0L))
+        allCategories.add(Category())
         list.set(allCategories)
         list.notifyChange()
     }

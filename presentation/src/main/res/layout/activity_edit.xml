@@ -2,19 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activity.add.AddActivity">
+    tools:context=".ui.activity.edit_card.EditCardActivity">
 
     <data>
 
         <import type="android.view.View" />
 
-        <variable
-            name="isScheduleChecked"
-            type="java.lang.Boolean" />
+        <!--        <variable-->
+        <!--            name="isScheduleChecked"-->
+        <!--            type="java.lang.Boolean" />-->
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.activity.add.AddViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.edit_card.EditCardViewModel" />
     </data>
 
     <LinearLayout
@@ -34,13 +34,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/ll_group_category"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30gkdp"
             android:layout_marginStart="@dimen/_3gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_3gkdp"
-            android:background="@color/white"
-            android:onClick="showDialog"
+            android:background="@drawable/background_default"
             android:orientation="horizontal">
 
             <TextView
@@ -57,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_20gkdp"
+                android:background="@drawable/category_active"
                 android:gravity="center"
                 android:text="@{viewModel.categoryName}"
                 android:textSize="@dimen/_13gkdp" />
@@ -86,8 +87,8 @@
                     android:id="@+id/card_base"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/overlay_light_10"
-                    app:cardCornerRadius="@dimen/_10gkdp">
+                    app:cardCornerRadius="@dimen/_10gkdp"
+                    app:set_color_gradient="@{viewModel.card}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -115,7 +116,8 @@
                             android:adjustViewBounds="true"
                             android:onClick="onClickBarcode"
                             android:scaleType="centerInside"
-                            android:src="@drawable/ic_barcode" />
+                            android:src="@drawable/ic_barcode"
+                            android:visibility="@{viewModel.primary==null ? View.VISIBLE : View.GONE }" />
 
                         <com.gkreduction.cardholder.ui.widjet.BarcodeView
                             android:id="@+id/barcode_base"
@@ -125,10 +127,11 @@
                             android:background="@color/white"
                             android:onClick="onClickBarcode"
                             android:padding="@dimen/_5gkdp"
-                            android:visibility="gone"
+                            android:visibility="@{viewModel.primary!=null ? View.VISIBLE : View.GONE }"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:set_barcode="@{viewModel.primary}" />
 
                     </LinearLayout>
 
@@ -139,9 +142,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10gkdp"
-                    android:background="@color/overlay_light_10"
-                    android:visibility="@{isScheduleChecked ? View.VISIBLE : View.GONE, default = gone}"
-                    app:cardCornerRadius="@dimen/_10gkdp">
+                    android:visibility="@{viewModel.existSecondary ? View.VISIBLE : View.GONE, default = gone}"
+                    app:cardCornerRadius="@dimen/_10gkdp"
+                    app:set_color_gradient="@{viewModel.card}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,7 +166,8 @@
                             android:adjustViewBounds="true"
                             android:onClick="onClickBarcode"
                             android:scaleType="centerInside"
-                            android:src="@drawable/ic_barcode" />
+                            android:src="@drawable/ic_barcode"
+                            android:visibility="@{viewModel.secondary==null ? View.VISIBLE : View.GONE }" />
 
                         <com.gkreduction.cardholder.ui.widjet.BarcodeView
                             android:id="@+id/barcode_second"
@@ -173,10 +177,11 @@
                             android:background="@color/white"
                             android:onClick="onClickBarcode"
                             android:padding="@dimen/_5gkdp"
-                            android:visibility="gone"
+                            android:visibility="@{viewModel.secondary!=null ? View.VISIBLE : View.GONE }"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:set_barcode="@{viewModel.secondary}" />
 
                     </LinearLayout>
 
@@ -200,7 +205,7 @@
             android:layout_height="@dimen/_20gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:background="@color/white"
-            android:checked="@={isScheduleChecked}"
+            android:checked="@={viewModel.existSecondary}"
             android:text="Second code"
             android:textSize="@dimen/_10gkdp" />
 
