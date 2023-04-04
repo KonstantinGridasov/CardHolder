@@ -90,4 +90,30 @@ class DbServiceImpl(
 
     }
 
+    override fun updateCategory(category: Category?): Observable<Boolean> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.update(dbMapper.mapCategory(category!!)))
+                    .flatMap {
+                        Observable.just(true)
+                    }
+
+
+            }
+    }
+
+    override fun deleteCategoryById(categoryId: Long): Observable<Boolean> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.updateCardDeleteCategory(categoryId))
+                    .flatMap {
+                        Observable.just(true)
+                    }
+
+
+            }
+    }
+
 }

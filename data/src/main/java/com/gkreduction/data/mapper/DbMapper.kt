@@ -57,6 +57,11 @@ class DbMapper {
             null
     }
 
+    fun mapCategory(category: Category): CategoryDb {
+        return CategoryDb(catId = category.catId, catName = category.catName)
+
+    }
+
 
     private fun mapCard(card: CardDb, category: CategoryDb): Card {
         return Card(

@@ -19,8 +19,8 @@ ext {
             testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
     ]
 
-    core_ktx='1.7.0'
-    lifecycle='2.5.1'
+    core_ktx = '1.7.0'
+    lifecycle = '2.5.1'
     kotlin_stdlib_jdk8 = '1.8.0'
 
     /*RX*/
@@ -45,6 +45,8 @@ ext {
     gson_version = '2.8.5'
     retrofitVersion = '2.9.0'
     okHttpVersion = '4.10.0'
+
+    camerax_version = '1.3.0-alpha05'
 
     // Presentation
 
@@ -83,9 +85,15 @@ ext {
 
 
             /*Bar Code scanner */
+            'com.google.mlkit:barcode-scanning:17.0.3',
             "com.google.zxing:core:3.5.1",
             'com.journeyapps:zxing-android-embedded:4.3.0',
             'com.google.android.gms:play-services-code-scanner:16.0.0',
+            "androidx.camera:camera-core:${camerax_version}",
+            "androidx.camera:camera-camera2:${camerax_version}",
+            "androidx.camera:camera-lifecycle:${camerax_version}",
+            "androidx.camera:camera-view:${camerax_version}",
+
 
     ]
     presentationTestImplimentation = [
@@ -132,7 +140,7 @@ ext {
             /*RX*/
             "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
 
-           /*Network*/
+            /*Network*/
             "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
             "com.google.code.gson:gson:$gson_version",
             "com.squareup.retrofit2:retrofit:$retrofitVersion",

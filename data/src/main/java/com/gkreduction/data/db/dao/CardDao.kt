@@ -66,8 +66,21 @@ interface CardDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(category: CategoryDb): Long
 
+    @Query("UPDATE card_db SET categoryId = 1 WHERE categoryId LIKE :oldId ")
+    fun updateCardToDefaultCategoryId(oldId: Long)
+
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(category: CategoryDb)
 
-    //UPDATE card_db  SET cardSecondInfo="Скидка" WHERE cardId = 1
+    @Transaction
+    fun updateCardDeleteCategory(categoryId: Long) {
+        updateCardToDefaultCategoryId(categoryId)
+        deleteCategoryById(categoryId)
+    }
+
+    @Query("DELETE FROM category_db WHERE catId = :id")
+    fun deleteCategoryById(id: Long)
+
+
 }

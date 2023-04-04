@@ -1,3 +1,5 @@
 package com.gkreduction.domain.entity
 
-data class Category(var catId: Long, var catName: String, var position: Long)
+import java.io.Serializable
+
+data class Category(var catId: Long, var catName: String, var position: Long) : Serializable

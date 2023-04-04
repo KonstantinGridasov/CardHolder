@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,15 +11,32 @@
         <import type="android.view.View" />
     </data>
 
-    <LinearLayout
-        android:id="@+id/chooser_root"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_20gkdp"
-        android:layout_marginStart="@dimen/_5gkdp"
-        android:layout_marginTop="@dimen/_3gkdp"
-        android:layout_marginEnd="@dimen/_5gkdp"
-        android:orientation="horizontal">
+        android:layout_height="@dimen/_25gkdp"
+        android:layout_marginTop="@dimen/_3gkdp">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical10"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical80"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical90"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
 
         <ImageView
             android:id="@+id/iv_chooser"
@@ -26,51 +44,71 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_3gkdp"
-            android:layout_weight=".1"
             android:adjustViewBounds="true"
             android:padding="@dimen/_4gkdp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_chooser"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/vertical10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_category_name"
+
+        <EditText
+            android:id="@+id/et_category_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight=".7"
-            android:ellipsize="marquee"
+            android:background="@android:color/transparent"
+            android:enabled="false"
             android:gravity="start|center_vertical"
             android:hint="Start typing"
             android:maxLines="1"
             android:paddingStart="@dimen/_5gkdp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
-            android:textSize="@dimen/_10gkdp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/_12gkdp"
+            app:layout_constraintEnd_toEndOf="@id/vertical80"
+            app:layout_constraintStart_toStartOf="@id/vertical10"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView
             android:id="@+id/iv_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_4gkdp"
-            android:layout_weight="0.1"
             android:adjustViewBounds="true"
+            android:padding="@dimen/_4gkdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_pencil"
-            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}" />
+            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="@id/vertical90"
+            app:layout_constraintStart_toStartOf="@id/vertical80"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-
             android:id="@+id/iv_trash"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_4gkdp"
             android:layout_weight="0.1"
             android:adjustViewBounds="true"
+            android:padding="@dimen/_4gkdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_trash"
-            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}" />
+            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vertical90"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <View
+            android:id="@+id/click_item_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/vertical80"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

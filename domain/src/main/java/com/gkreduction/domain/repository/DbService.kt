@@ -14,4 +14,7 @@ interface DbService {
     fun getCategoryByName(categoryName: String): Observable<Category?>
     fun getCardByCategoryId(params: Long):  Observable<List<Card>>
 
+    fun updateCategory(category:Category?):  Observable<Boolean>
+    fun deleteCategoryById(categoryId: Long):  Observable<Boolean>
+
 }

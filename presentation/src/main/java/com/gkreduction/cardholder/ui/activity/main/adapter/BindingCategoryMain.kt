@@ -2,7 +2,6 @@ package com.gkreduction.cardholder.ui.activity.main.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener
 import com.gkreduction.domain.entity.Category
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection

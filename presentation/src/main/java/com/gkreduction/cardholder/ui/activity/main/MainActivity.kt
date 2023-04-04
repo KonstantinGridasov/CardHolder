@@ -9,7 +9,7 @@ import com.gkreduction.cardholder.ui.activity.add.AddActivity
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
 import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
 import com.gkreduction.cardholder.ui.base.BaseActivity
-import com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener
+import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
 import com.gkreduction.domain.entity.Category
 
 

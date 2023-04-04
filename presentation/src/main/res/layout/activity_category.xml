@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.gkreduction.cardholder.ui.activity.category.CategoryViewModel" />
+
+        <variable
+            name="listenerClick"
+            type="com.gkreduction.cardholder.ui.activity.category.adapter.CategoryAdapterClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/image_background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/background_default"
+            android:gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:id="@+id/tv_category_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="Choose Category"
+                android:textAllCaps="false"
+                android:textColor="#004E5B"
+                android:textSize="@dimen/_12gkdp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_category"
+            android:layout_marginStart="@dimen/_5gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:layout_marginEnd="@dimen/_5gkdp"
+            android:background="@android:color/transparent"
+            app:item_chooses="@{viewModel.chooses}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:list_items="@{viewModel.list}"
+            app:list_items_click="@{listenerClick}"
+            tools:listitem="@layout/item_list" />
+
+
+        <Button
+            android:id="@+id/add_category"
+            android:layout_width="@dimen/_30gkdp"
+            android:layout_height="@dimen/_30gkdp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="@dimen/_20gkdp"
+            android:layout_marginBottom="@dimen/_20gkdp"
+            android:background="@drawable/fub_plus"
+            android:onClick="@{()->viewModel.addNewCategory()}" />
+    </RelativeLayout>
+
+</layout>

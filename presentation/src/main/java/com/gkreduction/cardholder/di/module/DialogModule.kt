@@ -4,23 +4,16 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.gkreduction.cardholder.di.scope.DialogScope
-import com.gkreduction.cardholder.ui.dialog.CategoryDialogViewModel
-import com.gkreduction.data.db.DbServiceImpl
-import com.gkreduction.domain.usecase.GetAllCategoryUseCase
-import com.gkreduction.domain.usecase.SaveCategoryUseCase
+import com.gkreduction.cardholder.ui.dialog.DialogInfoViewModel
 import dagger.Module
 import dagger.Provides
 
 @Module
 abstract class DialogModule {
     companion object {
-
         @Provides
-        fun provideCardModule(
+        fun provideDialogModule(
             app: Application,
-            getAllCategoryUseCase: GetAllCategoryUseCase,
-            saveCategoryUseCase: SaveCategoryUseCase
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
@@ -29,9 +22,9 @@ abstract class DialogModule {
                     extras: CreationExtras
                 ): T {
                     return when {
-                        modelClass.isAssignableFrom(CategoryDialogViewModel::class.java) ->
-                            CategoryDialogViewModel(
-                                app, getAllCategoryUseCase, saveCategoryUseCase
+                        modelClass.isAssignableFrom(DialogInfoViewModel::class.java) ->
+                            DialogInfoViewModel(
+                                app
                             ) as T
 
                         else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

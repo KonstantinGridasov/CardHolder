@@ -7,12 +7,13 @@ import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import com.gkreduction.cardholder.R
+import com.gkreduction.cardholder.constant.CATEGORY
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityAddBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
+import com.gkreduction.cardholder.ui.activity.category.CategoryActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
-import com.gkreduction.cardholder.ui.dialog.CategoryDialog
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -20,13 +21,22 @@ import com.gkreduction.domain.entity.ScanCode
 
 
 class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewModel::class.java) {
-    private val startForResult =
+    private val startCameraForResult =
         registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val scan = result.data!!.getSerializableExtra(SCAN_CODE) as ScanCode
                 val type = result.data!!.getSerializableExtra(TYPE_SCAN) as CameraActivity.TypeScan
                 setBarcode(scan, type)
             }
+        }
+
+    private val startCategoryForResult =
+        registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val category = result.data!!.getSerializableExtra(CATEGORY) as Category
+                viewModel.updateCategory(category)
+            } else if (result.resultCode == Activity.RESULT_CANCELED)
+                viewModel.updateCategory(null)
         }
 
     private var colorStart: Int = 0
@@ -54,9 +64,7 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
 
 
     fun showDialog(view: View?) {
-        val dialog = CategoryDialog()
-        dialog.setListener { viewModel.updateCategory(it) }
-        dialog.show(supportFragmentManager, "")
+        navigateToCategory()
     }
 
     private fun initListener() {
@@ -115,6 +123,11 @@ class AddActivity : BaseActivity<AddViewModel>(R.layout.activity_add, AddViewMod
     private fun navigateToCameraActivity(type: CameraActivity.TypeScan) {
         val intent = Intent(this, CameraActivity::class.java)
         intent.putExtra(TYPE_SCAN, type)
-        startForResult.launch(intent)
+        startCameraForResult.launch(intent)
+    }
+
+    private fun navigateToCategory() {
+        val intent = Intent(this, CategoryActivity::class.java)
+        startCategoryForResult.launch(intent)
     }
 }

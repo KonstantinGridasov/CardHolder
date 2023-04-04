@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemCategoryBinding
-import com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Category
 

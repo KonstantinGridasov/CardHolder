@@ -17,7 +17,7 @@
 
         <variable
             name="categoryChoose"
-            type="com.gkreduction.cardholder.ui.dialog.adapter.CategoryClickListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener" />
 
     </data>
 

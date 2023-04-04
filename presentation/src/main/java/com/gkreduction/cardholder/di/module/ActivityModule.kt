@@ -4,8 +4,9 @@ import com.gkreduction.cardholder.di.scope.*
 import com.gkreduction.cardholder.ui.activity.add.AddActivity
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.card.CardActivity
+import com.gkreduction.cardholder.ui.activity.category.CategoryActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
-import com.gkreduction.cardholder.ui.dialog.CategoryDialog
+import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
 import com.gkreduction.domain.usecase.GetCategoryByNameUseCase
@@ -35,7 +36,11 @@ abstract class ActivityModule {
 
     @DialogScope
     @ContributesAndroidInjector(modules = [DialogModule::class])
-    abstract fun contributeCategoryDialog(): CategoryDialog
+    abstract fun contributeDialogInfo(): DialogInfo
+
+    @CategoryScope
+    @ContributesAndroidInjector(modules = [CategoryModule::class])
+    abstract fun contributeCategoryActivity(): CategoryActivity
 
     companion object {
         @Provides
