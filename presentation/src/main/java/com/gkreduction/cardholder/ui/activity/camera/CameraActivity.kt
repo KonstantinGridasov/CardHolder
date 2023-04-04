@@ -22,6 +22,7 @@ import com.gkreduction.cardholder.ui.base.BaseActivity
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
 import com.gkreduction.domain.entity.ScanCode
 import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanner
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import java.io.Serializable
 import java.util.concurrent.ExecutorService
@@ -47,13 +48,35 @@ class CameraActivity :
 
 
     private lateinit var cameraExecutor: ExecutorService
-
+    private var scanner: GmsBarcodeScanner? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.extras != null) {
             type = intent.extras!!.getSerializable(TYPE_SCAN) as TypeScan
         }
+        scanner = GmsBarcodeScanning.getClient(this)
+        scanCode()
+
+    }
+
+    fun scanCode() {
+        if (scanner != null)
+            scanner!!.startScan()
+                .addOnSuccessListener { barcode ->
+                    navigateToBack(createScanCode(barcode))
+                }
+                .addOnCanceledListener {
+                    finish()
+                }
+                .addOnFailureListener { e ->
+                    initDefaultCamerar()
+                }
+
+    }
+
+
+    private fun initDefaultCamerar() {
         if (allPermissionsGranted()) {
             startCamera()
         } else {
@@ -62,7 +85,6 @@ class CameraActivity :
             )
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
-
 
     }
 
