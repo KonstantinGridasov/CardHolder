@@ -32,7 +32,7 @@ class MainViewModel(
 
     private var allCategories: List<Category> = ArrayList()
     private var showAllCategories = false
-
+    var sizeAll = ObservableField<Int>()
     var listCards = ObservableField<List<Card>>()
     var listCategories = ObservableField<List<Category>>()
     var choosesCategory = ObservableField<Category>()
@@ -72,6 +72,7 @@ class MainViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isNotEmpty()) {
+                    sizeAll.set(it.size)
                     allCategories = it
                     choosesCategory.set(allCategories[0])
                     changeShowCategories()

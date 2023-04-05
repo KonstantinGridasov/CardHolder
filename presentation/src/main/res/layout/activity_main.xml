@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="itemListener"
             type="com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener" />
@@ -81,7 +83,8 @@
                     android:layout_marginEnd="@dimen/_20gkdp"
                     android:layout_marginBottom="@dimen/_20gkdp"
                     android:background="@drawable/category_not_active"
-                    android:text="..." />
+                    android:text="..."
+                    android:visibility="@{viewModel.sizeAll>6 ? View.VISIBLE : View.GONE, default=gone }" />
 
                 <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
                     android:id="@+id/carouselRecyclerview"
