@@ -2,5 +2,6 @@
     <string name="app_name">CardHolder</string>
     <string name="default_category_name">All</string>
     <string name="text_dialog_info">Remove the </string>
+    <string name="text_editor_toolbar">Editor</string>
 
 </resources>

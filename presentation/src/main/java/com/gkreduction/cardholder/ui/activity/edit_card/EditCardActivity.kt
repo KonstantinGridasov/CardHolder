@@ -3,6 +3,8 @@ package com.gkreduction.cardholder.ui.activity.edit_card
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -46,6 +48,8 @@ class EditCardActivity :
     }
 
     private var mode: ModeEdit = ModeEdit.CREATE
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initListener()
@@ -58,6 +62,21 @@ class EditCardActivity :
                 viewModel.getCardById(cardId)
         } else
             viewModel.getCategoryByName(getDefaultCategoryName(this))
+
+        setSupportActionBar((binding as ActivityEditBinding).toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_editor, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_menu_save -> saveCard()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
@@ -77,7 +96,6 @@ class EditCardActivity :
     private fun initListener() {
         (binding as ActivityEditBinding).pickerFirst.listener = { viewModel.updateColorStart(it) }
         (binding as ActivityEditBinding).pickerSecond.listener = { viewModel.updateColorEnd(it) }
-        (binding as ActivityEditBinding).save.setOnClickListener { saveCard() }
         (binding as ActivityEditBinding).llGroupCategory.setOnClickListener { navigateToCategory() }
     }
 

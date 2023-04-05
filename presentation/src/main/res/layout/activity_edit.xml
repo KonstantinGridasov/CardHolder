@@ -23,15 +23,23 @@
         android:background="@drawable/image_background"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="save"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/background_default"
+            app:menu="@menu/menu_editor">
+
+            <TextView
+                android:id="@+id/tv_toolbar_editor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/text_editor_toolbar"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12gkdp" />
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:id="@+id/ll_group_category"
