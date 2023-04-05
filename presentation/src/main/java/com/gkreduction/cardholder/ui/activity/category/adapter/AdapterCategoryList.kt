@@ -39,6 +39,7 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.binding.isModeEdit = false
         holder.binding.etCategoryName.setText(items[position].catName)
         holder.binding.clickItemView.setOnClickListener {
             if ((items[position].catId) == chooses) {
@@ -79,9 +80,11 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
     private fun setModeDefault(holder: ViewHolder) {
         holder.binding.etCategoryName.isEnabled = false
         holder.binding.clickItemView.visibility = View.VISIBLE
+        holder.binding.isModeEdit = false
     }
 
     private fun setModeEditable(holder: ViewHolder, category: Category) {
+        holder.binding.isModeEdit = true
         holder.binding.clickItemView.visibility = View.GONE
         holder.binding.etCategoryName.isEnabled = true
         val imm = holder.itemView.context?.getSystemService(Context.INPUT_METHOD_SERVICE)

@@ -8,6 +8,10 @@
             name="isDefaultCat"
             type="java.lang.Boolean" />
 
+        <variable
+            name="isModeEdit"
+            type="java.lang.Boolean" />
+
         <import type="android.view.View" />
     </data>
 
@@ -80,7 +84,7 @@
             android:padding="@dimen/_4gkdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_pencil"
-            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}"
+            android:visibility="@{(isDefaultCat || isModeEdit) ? View.INVISIBLE :View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="@id/vertical90"
             app:layout_constraintStart_toStartOf="@id/vertical80"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +98,7 @@
             android:padding="@dimen/_4gkdp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_trash"
-            android:visibility="@{isDefaultCat ? View.INVISIBLE :View.VISIBLE}"
+            android:visibility="@{(isDefaultCat || isModeEdit) ? View.INVISIBLE :View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/vertical90"
             app:layout_constraintTop_toTopOf="parent" />
