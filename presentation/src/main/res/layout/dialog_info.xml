@@ -5,6 +5,9 @@
 
         <import type="android.view.View" />
 
+        <variable
+            name="viewModel"
+            type="com.gkreduction.cardholder.ui.dialog.DialogInfoViewModel" />
     </data>
 
     <LinearLayout
@@ -18,7 +21,8 @@
             android:layout_height="@dimen/_20gkdp"
             android:layout_margin="@dimen/_20gkdp"
             android:gravity="center_horizontal|center_vertical"
-            android:text="You want dell category?"
+            android:text="@string/text_dialog_info"
+            android:textColor="@color/black"
             android:textSize="@dimen/_10gkdp" />
 
         <LinearLayout

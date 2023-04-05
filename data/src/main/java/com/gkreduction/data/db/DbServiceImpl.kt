@@ -129,4 +129,17 @@ class DbServiceImpl(
             }
     }
 
+    override fun deleteCard(card: Card): Observable<Boolean> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.delete(dbMapper.getCardDb(card)))
+                    .flatMap {
+                        Observable.just(true)
+                    }
+
+
+            }
+    }
+
 }

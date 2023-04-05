@@ -48,7 +48,7 @@ class CategoryActivity :
 
     override fun removeCategory(category: Category) {
         val dialog = DialogInfo()
-        dialog.setListener(category) { viewModel.removeCategory(it) }
+        dialog.setListener(category.catName) { if (it) viewModel.removeCategory(category) }
         dialog.show(supportFragmentManager, "")
 
 
@@ -59,8 +59,7 @@ class CategoryActivity :
         if (category != null) {
             returnIntent.putExtra(CATEGORY, category)
             setResult(RESULT_OK, returnIntent)
-        } else
-            setResult(RESULT_CANCELED, returnIntent)
+        } else setResult(RESULT_CANCELED, returnIntent)
         finish()
     }
 }

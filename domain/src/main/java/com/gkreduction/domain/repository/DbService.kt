@@ -17,5 +17,6 @@ interface DbService {
     fun updateCategory(category: Category?): Observable<Boolean>
     fun deleteCategoryById(categoryId: Long): Observable<Boolean>
     fun updateCard(card: Card): Observable<Boolean>
+    fun deleteCard(card: Card): Observable<Boolean>
 
 }

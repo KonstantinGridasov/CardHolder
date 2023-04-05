@@ -23,13 +23,12 @@
 
         android:background="@drawable/image_background">
 
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_default"
-            android:gravity="center_vertical|center_horizontal">
+            app:menu="@menu/menu_card">
 
             <TextView
                 android:id="@+id/tv_category_name"
@@ -37,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@{viewmodel.card.cardName}"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12gkdp" />
         </androidx.appcompat.widget.Toolbar>

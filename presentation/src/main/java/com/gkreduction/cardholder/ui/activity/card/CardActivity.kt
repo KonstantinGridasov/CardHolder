@@ -3,6 +3,8 @@ package com.gkreduction.cardholder.ui.activity.card
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
@@ -11,6 +13,7 @@ import com.gkreduction.cardholder.constant.CARD_ID
 import com.gkreduction.cardholder.databinding.ActivityCardBinding
 import com.gkreduction.cardholder.ui.activity.edit_card.EditCardActivity
 import com.gkreduction.cardholder.ui.base.BaseActivity
+import com.gkreduction.cardholder.ui.dialog.DialogInfo
 
 class CardActivity :
     BaseActivity<CardViewModel>(R.layout.activity_card, CardViewModel::class.java) {
@@ -34,12 +37,34 @@ class CardActivity :
             (binding as ActivityCardBinding).isRevert = !isRevert
             isRevert = !isRevert
         }
+        setSupportActionBar((binding as ActivityCardBinding).toolbar)
 
-        (binding as ActivityCardBinding).cardItem.setOnClickListener {
-            //TODO to menu
-            navigateToEdit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.menu_card, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_edit -> navigateToEdit()
+            R.id.action_delete -> showDialogDelete()
         }
+        return super.onOptionsItemSelected(item)
+    }
 
+    private fun showDialogDelete() {
+        val info = viewModel.card.get()?.cardName ?: ""
+        val dialog = DialogInfo()
+        dialog.setListener(info) {
+            if (it) {
+                viewModel.deleteCard()
+                finish()
+            }
+        }
+        dialog.show(supportFragmentManager, "")
     }
 
     private fun navigateToEdit() {

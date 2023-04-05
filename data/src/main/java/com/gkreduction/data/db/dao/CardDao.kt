@@ -82,5 +82,8 @@ interface CardDao {
     @Query("DELETE FROM category_db WHERE catId = :id")
     fun deleteCategoryById(id: Long)
 
+    @Delete
+    fun delete(cardDb: CardDb)
+
 
 }
