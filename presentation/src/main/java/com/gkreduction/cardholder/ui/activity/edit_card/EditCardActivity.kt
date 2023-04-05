@@ -27,7 +27,7 @@ class EditCardActivity :
             if (result.resultCode == Activity.RESULT_OK) {
                 val scan = result.data!!.getSerializableExtra(SCAN_CODE) as ScanCode
                 val type = result.data!!.getSerializableExtra(TYPE_SCAN) as CameraActivity.TypeScan
-                setBarcode(scan, type)
+                viewModel.setBarcode(scan, type)
             }
         }
 
@@ -40,12 +40,9 @@ class EditCardActivity :
                 viewModel.updateCategory(null)
         }
 
-    private var colorStart: Int = 0
-    private var colorEnd: Int = 0
 
     private enum class ModeEdit {
-        CREATE,
-        UPDATE
+        CREATE, UPDATE
     }
 
     private var mode: ModeEdit = ModeEdit.CREATE
@@ -66,53 +63,31 @@ class EditCardActivity :
 
     fun onClickBarcode(view: View?) {
         when (view?.id) {
-            (binding as ActivityEditBinding).barcodeBase.id, (binding as ActivityEditBinding).ivBarcode.id ->
-                navigateToCameraActivity(CameraActivity.TypeScan.BASE)
-
-            (binding as ActivityEditBinding).barcodeSecond.id, (binding as ActivityEditBinding).ivBarcodeSecond.id ->
-                navigateToCameraActivity(CameraActivity.TypeScan.SECONDARY)
+            (binding as ActivityEditBinding).barcodeBase.id -> navigateToCameraActivity(
+                CameraActivity.TypeScan.BASE
+            )
+            (binding as ActivityEditBinding).barcodeSecond.id -> navigateToCameraActivity(
+                CameraActivity.TypeScan.SECONDARY
+            )
 
         }
     }
 
 
     private fun initListener() {
-        (binding as ActivityEditBinding).pickerFirst.listener = { colorStart = it; changeColor() }
-        (binding as ActivityEditBinding).pickerSecond.listener = { colorEnd = it; changeColor() }
+        (binding as ActivityEditBinding).pickerFirst.listener = { viewModel.updateColorStart(it) }
+        (binding as ActivityEditBinding).pickerSecond.listener = { viewModel.updateColorEnd(it) }
         (binding as ActivityEditBinding).save.setOnClickListener { saveCard() }
         (binding as ActivityEditBinding).llGroupCategory.setOnClickListener { navigateToCategory() }
     }
 
-    private fun changeColor() {
-        (binding as ActivityEditBinding).cardBase.changeColor(colorStart, colorEnd)
-        (binding as ActivityEditBinding).cardCecondary.changeColor(colorStart, colorEnd)
-    }
-
-
     private fun saveCard() {
-        val header = (binding as ActivityEditBinding).editHeader.text.toString()
-        val cardBaseInfo = (binding as ActivityEditBinding).editDescBase.text.toString()
-        val cardSecondInfo = (binding as ActivityEditBinding).editDescSecond.text.toString()
-        val card = viewModel.createCard(header, cardBaseInfo, cardSecondInfo, colorStart, colorEnd)
+        val card = viewModel.getExistOrNewCard()
         when (mode) {
             ModeEdit.CREATE -> viewModel.saveCard(card)
             ModeEdit.UPDATE -> viewModel.updateCard(card)
         }
         this.finish()
-
-    }
-
-
-    private fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
-        when (type) {
-            CameraActivity.TypeScan.BASE -> {
-                viewModel.primary.set(scanCode)
-            }
-            CameraActivity.TypeScan.SECONDARY -> {
-                viewModel.secondary.set(scanCode)
-            }
-        }
-
     }
 
 

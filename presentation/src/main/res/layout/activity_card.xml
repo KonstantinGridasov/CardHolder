@@ -50,6 +50,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20gkdp"
             android:background="@color/overlay_light_10"
+            app:bottom_to_top="@{true}"
             app:cardCornerRadius="@dimen/_10gkdp"
             app:set_color_gradient="@{viewmodel.card}">
 

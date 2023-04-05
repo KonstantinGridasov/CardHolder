@@ -29,7 +29,9 @@ class AdapterCard(var listener: CardClickListener?) :
         holder.binding.textHeader.text = items[position].cardName
         holder.binding.textDescription.text = items[position].cardBaseInfo
         holder.binding.cardItem.changeColor(items[position].colorStart, items[position].colorEnd)
-        holder.binding.barcode.scanCode = (items[position].primary)
+        items[position].primary?.let {
+            holder.binding.barcode.scanCode = it
+        }
 
         holder.binding.cardItem.setOnClickListener {
             listener?.onItemClick(items[position].cardId)

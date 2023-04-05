@@ -9,7 +9,7 @@ data class Card(
     var cardName: String = "",
     var cardBaseInfo: String = "",
     var cardSecondInfo: String = "",
-    var primary: ScanCode = ScanCode(),
+    var primary: ScanCode? = null,
     var existSecondary: Boolean = false,
-    var secondary: ScanCode = ScanCode()
+    var secondary: ScanCode? = null
 )

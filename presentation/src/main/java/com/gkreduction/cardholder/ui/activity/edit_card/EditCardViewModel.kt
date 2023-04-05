@@ -2,15 +2,19 @@ package com.gkreduction.cardholder.ui.activity.edit_card
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.databinding.ObservableField
+import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
 import com.gkreduction.domain.usecase.*
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
+import io.reactivex.internal.disposables.DisposableHelper.dispose
 import io.reactivex.schedulers.Schedulers
 
 class EditCardViewModel(
@@ -27,34 +31,32 @@ class EditCardViewModel(
     private var updateCardDis: Disposable? = null
     private var categoryByNameDis: Disposable? = null
     private var saveCategoryDis: Disposable? = null
-    private var getCardById: Disposable? = null
+    private var getCardByIdDis: Disposable? = null
 
     var card = ObservableField<Card>()
-    var primary = ObservableField<ScanCode>()
-    var secondary = ObservableField<ScanCode>()
-    var existSecondary = ObservableField<Boolean>()
 
-    var categoryChoose = ObservableField<Category>()
-    var categoryName = ObservableField<String>()
+    fun getExistOrNewCard() = card.get() ?: Card()
 
-    fun createCard(
-        header: String,
-        cardBaseInfo: String,
-        cardSecondInfo: String,
-        colorStart: Int,
-        colorEnd: Int
-    ) = Card(
-        cardId = card.get()?.cardId ?: 0L,
-        category = getCategory(),
-        primary = primary.get() ?: ScanCode(),
-        secondary = secondary.get() ?: ScanCode(),
-        existSecondary = (secondary.get() != null),
-        colorEnd = colorStart,
-        colorStart = colorEnd,
-        cardBaseInfo = cardBaseInfo,
-        cardName = header,
-        cardSecondInfo = cardSecondInfo
-    )
+    fun updateExist(isChecked: Boolean) {
+        val update = getExistOrNewCard()
+        update.existSecondary = isChecked
+        card.set(update)
+        card.notifyChange()
+    }
+
+    fun updateColorStart(colorStart: Int) {
+        val update = getExistOrNewCard()
+        update.colorStart = colorStart
+        card.set(update)
+        card.notifyChange()
+    }
+
+    fun updateColorEnd(colorEnd: Int) {
+        val update = getExistOrNewCard()
+        update.colorEnd = colorEnd
+        card.set(update)
+        card.notifyChange()
+    }
 
     fun saveCard(card: Card) {
         if (saveCardDis != null)
@@ -80,41 +82,77 @@ class EditCardViewModel(
         addDisposable(updateCardDis!!)
     }
 
-    private fun getCategory(): Category {
-        return if (categoryChoose.get() != null)
-            categoryChoose.get()!!
-        else {
-            Category(catName = categoryName.get() ?: "")
+    fun updateHeader(string: Observable<String>) {
+        observableSubscriber(string) {
+            val update = getExistOrNewCard()
+            update.cardName = it
+            card.set(update)
+            card.notifyChange()
+        }
 
+    }
+
+    fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
+        val update = getExistOrNewCard()
+        when (type) {
+            CameraActivity.TypeScan.BASE -> update.primary = scanCode
+            CameraActivity.TypeScan.SECONDARY -> update.secondary = scanCode
+        }
+        card.set(update)
+        card.notifyChange()
+    }
+
+    fun updateBaseInfo(string: Observable<String>) {
+        observableSubscriber(string) {
+            val update = getExistOrNewCard()
+            update.cardBaseInfo = it
+            card.set(update)
+            card.notifyChange()
         }
     }
 
-    fun getCardById(id: Long) {
-        if (getCardById != null)
-            removeDisposable(getCardById!!)
+    fun updateSecondInfo(string: Observable<String>) {
+        observableSubscriber(string) {
+            val update = getExistOrNewCard()
+            update.cardSecondInfo = it
+            card.set(update)
+            card.notifyChange()
+        }
+    }
 
-        getCardById = getCardByIdUseCase
+    private fun observableSubscriber(string: Observable<String>, item: (String) -> Unit) {
+        string
+            .doOnNext {
+                item.invoke(it)
+            }
+            .subscribe()
+    }
+
+
+    fun getCardById(id: Long) {
+        if (getCardByIdDis != null)
+            removeDisposable(getCardByIdDis!!)
+
+        getCardByIdDis = getCardByIdUseCase
             .execute(id)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 card.set(it)
-                primary.set(it?.primary)
-                secondary.set(it?.secondary)
-                existSecondary.set(it?.existSecondary)
-                getCategoryByName(it?.category?.catName)
             }
 
-        addDisposable(getCardById!!)
+        addDisposable(getCardByIdDis!!)
 
     }
 
     fun updateCategory(category: Category?) {
+        val update = getExistOrNewCard()
         if (category != null) {
-            categoryChoose.set(category)
-            categoryName.set(category.catName)
+            update.category = category
         } else
-            categoryName.set(getDefaultCategoryName(context))
+            getCategoryByName(null)
+        card.set(update)
+        card.notifyChange()
 
     }
 
@@ -131,12 +169,18 @@ class EditCardViewModel(
                 if (it == null || it.catName.isEmpty()) {
                     createDefaultCategory()
                 } else
-                    categoryName.set(it.catName)
-                categoryChoose.set(it)
+                    setCategory(it)
             }
 
         addDisposable(categoryByNameDis!!)
 
+    }
+
+    private fun setCategory(category: Category) {
+        val update = getExistOrNewCard()
+        update.category = category
+        card.set(update)
+        card.notifyChange()
     }
 
 
@@ -149,8 +193,7 @@ class EditCardViewModel(
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                categoryName.set(it.catName)
-                categoryChoose.set(it)
+                setCategory(it)
             }
 
         addDisposable(saveCategoryDis!!)

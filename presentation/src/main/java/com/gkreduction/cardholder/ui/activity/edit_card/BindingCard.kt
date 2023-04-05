@@ -1,10 +1,14 @@
 package com.gkreduction.cardholder.ui.activity.edit_card
 
+import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
-import com.gkreduction.cardholder.ui.widjet.MyCardView
-import com.gkreduction.domain.entity.Card
+import com.gkreduction.cardholder.utils.AppTextWatcher
 import com.gkreduction.domain.entity.ScanCode
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 
 object BindingCard {
     @JvmStatic
@@ -21,19 +25,34 @@ object BindingCard {
         }
     }
 
+
     @JvmStatic
     @BindingAdapter(
-        "set_color_gradient",
+        "edit_listeners",
         requireAll = false
     )
-    fun setColorGradient(
-        view: MyCardView,
-        card: Card?,
+    fun setEditListener(
+        view: EditText,
+        listener: EditTextListener?,
     ) {
-        card?.let {
-            view.setBottomTopOrientation()
-            view.changeColor(it.colorStart, it.colorEnd)
-        }
+
+        val publishSubject: PublishSubject<String> = PublishSubject.create()
+        listener?.onText(
+            publishSubject
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+        )
+
+        view.addTextChangedListener(AppTextWatcher {
+            it?.let {
+                publishSubject.onNext(it.toString())
+            }
+        })
+
     }
 
 }
+
+

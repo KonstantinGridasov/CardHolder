@@ -17,27 +17,30 @@ object BindingCard {
         card: Card?,
         status_revert: Boolean?
     ) {
-        card?.let {
-            if (status_revert != null && status_revert && it.existSecondary) {
-                view.scanCode = card.secondary
+        card?.let { item ->
+            if (status_revert != null && status_revert && item.existSecondary) {
+                item.secondary?.let { view.scanCode = it }
             } else
-                view.scanCode = card.primary
-
-
+                item.primary?.let { view.scanCode = it }
+            
         }
     }
 
     @JvmStatic
     @BindingAdapter(
         "set_color_gradient",
+        "bottom_to_top",
         requireAll = false
     )
     fun setColorGradient(
         view: MyCardView,
         card: Card?,
+        bottom_to_top: Boolean?
+
     ) {
         card?.let {
-            view.setBottomTopOrientation()
+            if (bottom_to_top == true)
+                view.setBottomTopOrientation()
             view.changeColor(it.colorStart, it.colorEnd)
         }
     }
