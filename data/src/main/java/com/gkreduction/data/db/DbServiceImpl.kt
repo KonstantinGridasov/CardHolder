@@ -120,7 +120,7 @@ class DbServiceImpl(
         return Observable.just(true)
             .flatMap {
                 Observable
-                    .just(cardDao.update(dbMapper.getCardDb(card)))
+                    .just(cardDao.updateWithTimestamp(dbMapper.getCardDb(card)))
                     .flatMap {
                         Observable.just(true)
                     }

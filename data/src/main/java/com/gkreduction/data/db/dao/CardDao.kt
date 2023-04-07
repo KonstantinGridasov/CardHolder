@@ -47,15 +47,30 @@ interface CardDao {
             if (isExistCard(card.cardName))
                 update(card)
             else
-                insert(card)
+                insertWithTimestamp(card)
         }
     }
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(card: CardDb)
 
+
+    fun updateWithTimestamp(data: CardDb) {
+        update(data.apply {
+            modifiedAt = System.currentTimeMillis()
+        })
+    }
+
+
     @Query("SELECT EXISTS(SELECT * FROM card_db WHERE card_db.cardName LIKE :cardName)")
     fun isExistCard(cardName: String): Boolean
+
+    fun insertWithTimestamp(data: CardDb) {
+        insert(data.apply {
+            createdAt = System.currentTimeMillis()
+            modifiedAt = System.currentTimeMillis()
+        })
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(card: CardDb): Long
@@ -87,3 +102,4 @@ interface CardDao {
 
 
 }
+

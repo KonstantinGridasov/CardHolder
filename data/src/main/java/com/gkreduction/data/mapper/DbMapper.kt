@@ -1,6 +1,5 @@
 package com.gkreduction.data.mapper
 
-import android.util.Log
 import com.gkreduction.data.db.entity.CardDb
 import com.gkreduction.data.db.entity.CardWithCategory
 import com.gkreduction.data.db.entity.CategoryDb
@@ -77,6 +76,8 @@ class DbMapper {
             existSecondary = card.existSecondary,
             typeSecondary = card.secondary?.type ?: 0,
             valueSecondary = card.secondary?.value ?: "",
+            createdAt = card.createdAt,
+            modifiedAt = card.modifiedAt
         )
         else CardDb(
             cardId = card.cardId,
@@ -88,7 +89,9 @@ class DbMapper {
             cardSecondInfo = card.cardSecondInfo,
             typeBase = card.primary?.type ?: 0,
             valueBase = card.primary?.value ?: "",
-            existSecondary = card.existSecondary
+            existSecondary = card.existSecondary,
+            createdAt = card.createdAt,
+            modifiedAt = card.modifiedAt
         )
     }
 
@@ -105,7 +108,9 @@ class DbMapper {
             primary = getScanCode(true, card),
             secondary = getScanCode(false, card),
             existSecondary = card.existSecondary,
-            countOpen = card.countOpen
+            countOpen = card.countOpen,
+            createdAt = card.createdAt,
+            modifiedAt = card.modifiedAt
         )
 
 

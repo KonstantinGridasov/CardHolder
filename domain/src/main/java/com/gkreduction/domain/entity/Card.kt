@@ -11,5 +11,7 @@ data class Card(
     var cardSecondInfo: String = "",
     var primary: ScanCode? = null,
     var existSecondary: Boolean = false,
-    var secondary: ScanCode? = null
+    var secondary: ScanCode? = null,
+    var createdAt: Long = 0L,
+    var modifiedAt: Long = 0L
 )

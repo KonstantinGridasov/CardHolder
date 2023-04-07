@@ -36,12 +36,16 @@ data class CardDb(
     var existSecondary: Boolean = false,
     @ColumnInfo
     var typeSecondary: Int = 0,
+
     @ColumnInfo
-    var valueSecondary: String = ""
+    var valueSecondary: String = "",
+
+    @ColumnInfo(name = "created_at") var createdAt: Long ,
+    @ColumnInfo(name = "modified_at") var modifiedAt: Long
 
 
 ) {
     override fun toString(): String {
-        return cardName + cardId + categoryId
+        return cardName + cardId + categoryId + createdAt + modifiedAt
     }
 }
