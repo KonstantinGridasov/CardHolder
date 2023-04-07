@@ -120,7 +120,7 @@ class MainViewModel(
             .subscribe {
                 listCards.set(it)
             }
-
+        addDisposable(getCardByCategoryDis!!)
     }
 
 

@@ -12,6 +12,8 @@ import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
 import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.ui.widjet.MyCardView
+import com.gkreduction.cardholder.ui.widjet.carousel.CarouselLayoutManager
+import com.gkreduction.cardholder.ui.widjet.carousel.CarouselRecyclerview
 import com.gkreduction.cardholder.utils.AppTextWatcher
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -20,7 +22,6 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -85,13 +86,14 @@ object BindingView {
             val adapter = AdapterCard(listener)
             adapter.updateItems(it)
             view.adapter = adapter
-            view.apply {
-                set3DItem(false)
-                setAlpha(false)
-                setIntervalRatio(0.8f)
-                setInfinite(it.size > 2)
-                setOrientation(RecyclerView.VERTICAL)
-            }
+            val manager =
+                CarouselLayoutManager(
+                    mInfinite = it.size > 2,
+                    orientation = RecyclerView.VERTICAL,
+                    intervalRatio = 0.8f
+                )
+            view.layoutManager = manager
+
         }
     }
 

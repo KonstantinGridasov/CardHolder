@@ -63,7 +63,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/category_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_50gkdp"
                     android:layout_marginStart="@dimen/_2gkdp"
                     android:layout_marginTop="@dimen/_3gkdp"
                     android:layout_marginEnd="@dimen/_2gkdp"
@@ -86,7 +86,7 @@
                     android:text="..."
                     android:visibility="@{viewModel.sizeAll>6 ? View.VISIBLE : View.GONE, default=gone }" />
 
-                <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                <com.gkreduction.cardholder.ui.widjet.carousel.CarouselRecyclerview
                     android:id="@+id/carouselRecyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_200gkdp"
