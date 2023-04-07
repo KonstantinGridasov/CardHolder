@@ -59,6 +59,7 @@
                 android:layout_weight=".5"
                 android:gravity="center_vertical|start"
                 android:text="Категория"
+                android:textColor="#004E5B"
                 android:textSize="@dimen/_13gkdp" />
 
             <TextView
@@ -190,18 +191,32 @@
 
         </LinearLayout>
 
-
-        <CheckBox
-            android:id="@+id/checkbox"
+        <LinearLayout
+            android:background="@drawable/background_default"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_20gkdp"
-            android:layout_marginTop="@dimen/_10gkdp"
-            android:background="@color/white"
-            android:checked="@={viewModel.card.existSecondary}"
-            android:onCheckedChanged="@{(v,ch)->viewModel.updateExist(ch)}"
-            android:text="Second code"
-            android:textSize="@dimen/_10gkdp" />
+            android:layout_height="@dimen/_30gkdp"
+            android:layout_marginTop="@dimen/_10gkdp">
 
+            <TextView
+                android:id="@+id/tv_checkBox"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10gkdp"
+                android:layout_weight=".7"
+                android:gravity="center_vertical|start"
+                android:text="Second code"
+                android:textColor="#004E5B"
+                android:textSize="@dimen/_13gkdp" />
+
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:checked="@={viewModel.card.existSecondary}"
+                android:onCheckedChanged="@{(v,ch)->viewModel.updateExist(ch)}"
+                android:textSize="@dimen/_10gkdp" />
+        </LinearLayout>
 
     </LinearLayout>
 
