@@ -47,18 +47,28 @@ class DbMapper {
     fun mapCardToCardWithCategory(card: Card): CardWithCategory {
         val list = ArrayList<CardDb>()
         list.add(getCardDb(card))
-        return CardWithCategory(getCategoryDb(card.category.catName), list)
+        return CardWithCategory(mapCategory(card.category), list)
     }
 
     fun mapCategory(category: CategoryDb?): Category? {
         return if (category != null)
-            Category(catId = category.catId, catName = category.catName, position = category.catId)
+            Category(
+                catId = category.catId,
+                catName = category.catName,
+                position = category.catId,
+                createdAt = category.createdAt,
+                modifiedAt = category.modifiedAt
+            )
         else
             null
     }
 
     fun mapCategory(category: Category): CategoryDb {
-        return CategoryDb(catId = category.catId, catName = category.catName)
+        return CategoryDb(
+            catId = category.catId, catName = category.catName,
+            createdAt = category.createdAt,
+            modifiedAt = category.modifiedAt
+        )
 
     }
 
@@ -116,7 +126,6 @@ class DbMapper {
 
     }
 
-    private fun getCategoryDb(catName: String) = CategoryDb(catName = catName)
 
 
     private fun getScanCode(base: Boolean, cardDb: CardDb): ScanCode {

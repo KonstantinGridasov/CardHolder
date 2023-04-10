@@ -1,6 +1,7 @@
 package com.gkreduction.domain.entity
 
 data class Card(
+    var serverCardId: Int = -1,
     var category: Category = Category(),
     var colorStart: Int = 0,
     var colorEnd: Int = 0,

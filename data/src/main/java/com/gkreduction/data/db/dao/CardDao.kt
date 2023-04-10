@@ -40,12 +40,13 @@ interface CardDao {
         val categoryId = if (isExistCategory(cardByCategory.cat.catName))
             findCategoryByName(cardByCategory.cat.catName).catId
         else
-            insert(CategoryDb(catId = 0L, catName = cardByCategory.cat.catName))
+            insertCategory(cardByCategory.cat.catName)
+
 
         for (card in cardByCategory.cards) {
             card.categoryId = categoryId
             if (isExistCard(card.cardName))
-                update(card)
+                updateWithTimestamp(card)
             else
                 insertWithTimestamp(card)
         }
@@ -77,6 +78,16 @@ interface CardDao {
 
     @Query("SELECT EXISTS(SELECT * FROM category_db WHERE category_db.catName LIKE :category)")
     fun isExistCategory(category: String): Boolean
+
+
+    fun insertCategory(name: String): Long {
+        val category = CategoryDb(
+            catId = 0L, catName = name,
+            createdAt = System.currentTimeMillis(),
+            modifiedAt = System.currentTimeMillis()
+        )
+      return  insert(category)
+    }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(category: CategoryDb): Long

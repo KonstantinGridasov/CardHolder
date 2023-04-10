@@ -6,41 +6,23 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "card_db")
 data class CardDb(
-    @PrimaryKey(autoGenerate = true)
-    var cardId: Long = 0L,
+    @PrimaryKey(autoGenerate = true) var cardId: Long = 0L,
 
-    @ColumnInfo
+    var serverCardId: Int = -1,
     var categoryId: Long = 0L,
-
-    @ColumnInfo
     var colorStart: Int,
-    @ColumnInfo
     var colorEnd: Int,
-
-    @ColumnInfo
     var countOpen: Int = 0,
-
-    @ColumnInfo
     var cardName: String = "",
-    @ColumnInfo
     var cardBaseInfo: String = "",
-    @ColumnInfo
     var cardSecondInfo: String = "",
-
-    @ColumnInfo
     var typeBase: Int,
-    @ColumnInfo
     var valueBase: String,
-
-    @ColumnInfo
     var existSecondary: Boolean = false,
-    @ColumnInfo
     var typeSecondary: Int = 0,
-
-    @ColumnInfo
     var valueSecondary: String = "",
 
-    @ColumnInfo(name = "created_at") var createdAt: Long ,
+    @ColumnInfo(name = "created_at") var createdAt: Long,
     @ColumnInfo(name = "modified_at") var modifiedAt: Long
 
 

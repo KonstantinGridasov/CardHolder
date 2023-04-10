@@ -1,7 +1,6 @@
 package com.gkreduction.data.db
 
 import com.gkreduction.data.db.dao.CardDao
-import com.gkreduction.data.db.entity.CategoryDb
 import com.gkreduction.data.mapper.DbMapper
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -60,7 +59,7 @@ class DbServiceImpl(
     override fun saveCategory(catName: String?): Observable<Category> {
         return if (catName != null)
             Observable.just(true)
-                .flatMap { Observable.just(cardDao.insert(CategoryDb(catName = catName))) }
+                .flatMap { Observable.just(cardDao.insertCategory(catName)) }
                 .flatMap { Observable.just(cardDao.findCategoryByName(catName)) }
                 .map { dbMapper.mapCategory(it) }
         else Observable.empty()
