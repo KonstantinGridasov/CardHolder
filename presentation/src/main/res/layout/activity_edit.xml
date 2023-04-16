@@ -20,7 +20,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/image_background"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -80,7 +79,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10gkdp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_3gkdp"
+            android:paddingBottom="@dimen/_3gkdp">
 
             <com.gkreduction.cardholder.ui.widjet.CVColorPicker
                 android:id="@+id/picker_first"
@@ -98,31 +99,36 @@
 
                 <com.gkreduction.cardholder.ui.widjet.MyCardView
                     android:id="@+id/card_base"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/_150gkdp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/_10gkdp"
+                    app:cardCornerRadius="@dimen/_5gkdp"
                     app:set_color_gradient="@{viewModel.card}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_10gkdp"
+                        android:layout_margin="@dimen/_3gkdp"
                         android:orientation="vertical">
 
                         <EditText
                             android:id="@+id/edit_header"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20gkdp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@{viewModel.card.cardName}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10gkdp"
+                            android:textStyle="bold"
                             app:edit_listeners="@{(s) -> viewModel.updateHeader(s)}" />
 
                         <EditText
                             android:id="@+id/edit_desc_base"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20gkdp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@{viewModel.card.cardBaseInfo}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8gkdp"
                             app:edit_listeners="@{(s) -> viewModel.updateBaseInfo(s)}" />
 
                         <com.gkreduction.cardholder.ui.widjet.BarcodeView
@@ -131,7 +137,7 @@
                             android:layout_height="@dimen/_50gkdp"
                             android:layout_gravity="center_vertical|center_horizontal"
                             android:onClick="onClickBarcode"
-                            android:padding="@dimen/_5gkdp"
+                            android:padding="@dimen/_2gkdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -143,11 +149,11 @@
 
                 <com.gkreduction.cardholder.ui.widjet.MyCardView
                     android:id="@+id/card_cecondary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_150gkdp"
+                    android:layout_height="@dimen/_90gkdp"
                     android:layout_marginTop="@dimen/_10gkdp"
                     android:visibility="@{viewModel.card.existSecondary ? View.VISIBLE : View.GONE, default = gone}"
-                    app:cardCornerRadius="@dimen/_10gkdp"
+                    app:cardCornerRadius="@dimen/_5gkdp"
                     app:set_color_gradient="@{viewModel.card}">
 
                     <LinearLayout
@@ -159,9 +165,11 @@
                         <EditText
                             android:id="@+id/edit_desc_second"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20gkdp"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@{viewModel.card.cardSecondInfo}"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8gkdp"
                             app:edit_listeners="@{(s) -> viewModel.updateSecondInfo(s)}" />
 
                         <com.gkreduction.cardholder.ui.widjet.BarcodeView
@@ -192,10 +200,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/background_default"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30gkdp"
-            android:layout_marginTop="@dimen/_10gkdp">
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:background="@drawable/background_default">
 
             <TextView
                 android:id="@+id/tv_checkBox"

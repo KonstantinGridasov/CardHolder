@@ -18,14 +18,15 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        drawable.setBounds(0, 0, width , height )
+        val bias = 4
+        drawable.setBounds(bias, bias, width - bias, height - bias)
         drawable.draw(canvas)
     }
 
 
-    fun changeColor(first: Int,second:Int) {
+    fun changeColor(first: Int, second: Int) {
         try {
-            drawable = createLayerDrawable(first,second)
+            drawable = createLayerDrawable(first, second)
             invalidate()
         } catch (e: Exception) {
             setCardBackgroundColor(Color.BLACK)
@@ -40,8 +41,8 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
 
     private fun createLayerDrawable(color: Int, second: Int): LayerDrawable {
         val drawableArray = arrayOf(
-            createGradientDrawable(true, color,second),
-            createGradientDrawable(false, color,second)
+            createGradientDrawable(true, color, second),
+            createGradientDrawable(false, color, second)
         )
         return LayerDrawable(drawableArray)
     }
@@ -51,7 +52,11 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
         return createGradientDrawable(false, Color.BLACK, Color.WHITE)
     }
 
-    private fun createGradientDrawable(isFirst: Boolean, color: Int, second: Int): GradientDrawable {
+    private fun createGradientDrawable(
+        isFirst: Boolean,
+        color: Int,
+        second: Int
+    ): GradientDrawable {
         val gradient = GradientDrawable()
         if (isFirst) {
             gradient.orientation = orientationOne

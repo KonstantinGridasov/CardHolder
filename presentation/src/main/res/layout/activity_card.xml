@@ -19,9 +19,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:background="@drawable/image_background">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -43,14 +41,13 @@
 
         <com.gkreduction.cardholder.ui.widjet.MyCardView
             android:id="@+id/card_item"
-            android:layout_width="@dimen/_160gkdp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_140gkdp"
+            android:layout_height="@dimen/_230gkdp"
             android:layout_below="@id/toolbar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/_20gkdp"
-            android:background="@color/overlay_light_10"
             app:bottom_to_top="@{true}"
-            app:cardCornerRadius="@dimen/_10gkdp"
+            app:cardCornerRadius="@dimen/_5gkdp"
             app:set_color_gradient="@{viewmodel.card}">
 
             <LinearLayout
@@ -62,9 +59,11 @@
                 <TextView
                     android:id="@+id/text_description"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20gkdp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{isRevert ?viewmodel.card.cardSecondInfo :viewmodel.card.cardBaseInfo}" />
+                    android:text="@{isRevert ?viewmodel.card.cardSecondInfo :viewmodel.card.cardBaseInfo}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12gkdp" />
 
                 <com.gkreduction.cardholder.ui.widjet.BarcodeView
                     android:id="@+id/barcode"
@@ -95,7 +94,7 @@
             android:layout_alignEnd="@id/card_item"
             android:layout_alignBottom="@id/card_item"
             android:visibility="gone"
-            app:cardCornerRadius="@dimen/_10gkdp"
+            app:cardCornerRadius="@dimen/_5gkdp"
             app:set_color_gradient="@{viewmodel.card}" />
 
         <Button
