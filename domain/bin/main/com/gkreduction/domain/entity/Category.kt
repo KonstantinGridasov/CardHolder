@@ -1,3 +1,12 @@
 package com.gkreduction.domain.entity
 
-data class Category(var catId: Long, var catName: String = "Default")
+import java.io.Serializable
+
+data class Category(
+    var catId: Long = 0L,
+    var catName: String = "",
+    var position: Long = 0L,
+    var serverCardId: Int = -1,
+    var createdAt: Long = 0L,
+    var modifiedAt: Long = 0L
+) : Serializable

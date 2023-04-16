@@ -53,8 +53,8 @@ object BindingView {
     fun setColorGradient(view: MyCardView, card: Card?, bottom_to_top: Boolean?) {
         card?.let {
             if (bottom_to_top == true)
-                view.setBottomTopOrientation()
-            view.changeColor(it.colorStart, it.colorEnd)
+                view.revertOrientation()
+            view.changeColor(it.colorStart,it.colorEnd)
         }
     }
 

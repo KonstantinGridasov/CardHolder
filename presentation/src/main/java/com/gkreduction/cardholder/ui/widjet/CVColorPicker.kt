@@ -11,11 +11,12 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
     private var mBitmap: Bitmap? = null
     var listener: ((Int) -> Unit)? = null
 
-
     private val colors = intArrayOf(
-        Color.MAGENTA,
+        Color.parseColor("#8B00FF"),
         Color.BLUE,
+        Color.parseColor("#80A6FF"),
         Color.GREEN,
+        Color.parseColor("#FFFF00"),
         Color.YELLOW,
         Color.RED,
         Color.GRAY,
