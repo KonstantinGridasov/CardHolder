@@ -1,5 +1,11 @@
 # Card Holder
 
+<p align="center">
+  <img  src="static/ic_app.svg" alt="Vector">
+</p>
+
+
+
 ## Tags
 
 - Kotlin
