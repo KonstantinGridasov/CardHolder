@@ -101,6 +101,8 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <com.google.android.material.navigation.NavigationView
+            app:itemMaxLines="2"
+            app:itemTextAppearance="@style/Style_Menu"
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

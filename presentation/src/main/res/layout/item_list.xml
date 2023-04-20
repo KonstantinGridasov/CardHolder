@@ -59,6 +59,7 @@
 
 
         <EditText
+            android:fontFamily="@font/comfortaa_medium"
             android:id="@+id/et_category_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"

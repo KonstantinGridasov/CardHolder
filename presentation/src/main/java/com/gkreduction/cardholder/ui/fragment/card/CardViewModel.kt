@@ -3,6 +3,7 @@ package com.gkreduction.cardholder.ui.fragment.card
 import android.app.Application
 import android.content.Context
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.usecase.DeleteCardUseCase
@@ -21,6 +22,7 @@ class CardViewModel(
     private var deleteCardDis: Disposable? = null
 
     var card = ObservableField<Card>()
+    var nameToolbar = MutableLiveData<String>()
 
     fun getCards(id: Long) {
         if (getCardById != null)
@@ -32,6 +34,9 @@ class CardViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 card.set(it)
+                if (it != null) {
+                    nameToolbar.value = it.cardName
+                }
             }
 
         addDisposable(getCardById!!)

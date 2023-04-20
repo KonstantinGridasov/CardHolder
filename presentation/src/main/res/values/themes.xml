@@ -24,5 +24,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="Style_Menu">
+        <item name="fontFamily">@font/comfortaa_medium</item>
+    </style>
 
 </resources>

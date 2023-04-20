@@ -11,6 +11,7 @@
     </data>
 
     <TextView
+        android:fontFamily="@font/comfortaa_medium"
         android:id="@+id/main_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

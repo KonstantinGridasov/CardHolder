@@ -6,12 +6,13 @@
     <string name="text_editor_toolbar">Редактор</string>
     <string name="save">Сохранить</string>
     <string name="second_code">Второй код</string>
+    <string name="category">Категория</string>
+    <string name="add">Добавить</string>
 
 
     <string name="menu_home">Домой</string>
     <string name="menu_add">Добавить</string>
     <string name="menu_category">Категории</string>
     <string name="menu_policy">Политика конфиденциальности</string>
-    <string name="menu_settings_header">Настройки</string>
 
 </resources>

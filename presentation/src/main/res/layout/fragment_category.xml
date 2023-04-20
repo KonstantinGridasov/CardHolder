@@ -16,17 +16,52 @@
             type="com.gkreduction.cardholder.ui.fragment.category.adapter.CategoryAdapterClickListener" />
     </data>
 
-    <RelativeLayout
-        android:background="@android:color/transparent"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:id="@+id/add_category"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:layout_marginStart="@dimen/_5gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:layout_marginEnd="@dimen/_5gkdp"
+            android:background="@drawable/background_button_corners"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.addNewCategory()}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_10gkdp"
+                android:layout_height="@dimen/_10gkdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10gkdp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_plus" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_5gkdp"
+                android:layout_marginEnd="@dimen/_5gkdp"
+                android:fontFamily="@font/comfortaa_medium"
+                android:gravity="start|center_vertical"
+                android:maxLines="1"
+                android:padding="@dimen/_4gkdp"
+                android:text="@string/add"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/_10gkdp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/_5gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_5gkdp"
@@ -37,18 +72,6 @@
             app:list_items_click="@{listenerClick}"
             tools:listitem="@layout/item_list" />
 
-
-        <Button
-            android:id="@+id/add_category"
-            android:layout_width="@dimen/_30gkdp"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_20gkdp"
-            android:layout_marginBottom="@dimen/_20gkdp"
-            android:background="@drawable/ic_plus"
-            android:onClick="@{()->viewModel.addNewCategory()}" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </layout>

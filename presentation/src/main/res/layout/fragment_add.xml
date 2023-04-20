@@ -36,15 +36,16 @@
             android:orientation="horizontal">
 
             <TextView
+                android:fontFamily="@font/comfortaa_medium"
                 android:id="@+id/tv_category_name"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10gkdp"
                 android:layout_weight=".5"
                 android:gravity="center_vertical|start"
-                android:text="Категория"
-                android:textColor="#004E5B"
-                android:textSize="@dimen/_13gkdp" />
+                android:text="@string/category"
+                android:textColor="@color/color_primary"
+                android:textSize="@dimen/_12gkdp" />
 
             <TextView
                 android:id="@+id/tv_category_type"
@@ -191,6 +192,7 @@
             android:background="@drawable/background_toolbar">
 
             <TextView
+                android:fontFamily="@font/comfortaa_medium"
                 android:id="@+id/tv_checkBox"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -224,6 +226,8 @@
             android:orientation="horizontal">
 
             <TextView
+                android:fontFamily="@font/comfortaa_medium"
+
                 android:id="@+id/tv_save"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -231,7 +235,7 @@
                 android:layout_weight=".5"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/save"
-                android:textColor="#004E5B"
+                android:textColor="@color/color_primary"
                 android:textSize="@dimen/_13gkdp" />
 
 

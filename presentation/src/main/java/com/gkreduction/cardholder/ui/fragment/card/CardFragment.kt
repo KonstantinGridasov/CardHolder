@@ -43,6 +43,17 @@ class CardFragment : BaseFragment<CardViewModel>(
         (binding as FragmentCardBinding).llRemove.setOnClickListener { showDialogDelete() }
         (binding as FragmentCardBinding).llPencil.setOnClickListener { navigateToEdit() }
 
+        activity?.let {
+            viewModel?.nameToolbar?.observe(it) { name ->
+                updateNameToolbar(name)
+            }
+        }
+
+
+    }
+
+    private fun updateNameToolbar(nameToolbar: String?) {
+        (activity as? MainActivity)?.updateToolbarName(nameToolbar)
     }
 
     private fun showDialogDelete() {
