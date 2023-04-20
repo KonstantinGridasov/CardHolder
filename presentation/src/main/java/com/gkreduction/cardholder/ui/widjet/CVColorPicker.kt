@@ -12,13 +12,13 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
     var listener: ((Int) -> Unit)? = null
 
     private val colors = intArrayOf(
-        Color.parseColor("#8B00FF"),
-        Color.BLUE,
-        Color.parseColor("#80A6FF"),
-        Color.GREEN,
-        Color.parseColor("#FFFF00"),
-        Color.YELLOW,
         Color.RED,
+        Color.YELLOW,
+        Color.parseColor("#FFFF00"),
+        Color.GREEN,
+        Color.parseColor("#80A6FF"),
+        Color.BLUE,
+        Color.parseColor("#8B00FF"),
         Color.GRAY,
         Color.BLACK,
     )

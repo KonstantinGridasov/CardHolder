@@ -15,7 +15,7 @@
 
         <com.gkreduction.cardholder.ui.widjet.MyCardView
             android:id="@+id/card_item"
-            android:layout_width="@dimen/_180gkdp"
+            android:layout_width="@dimen/_190gkdp"
             android:layout_height="@dimen/_110gkdp"
             android:background="@color/overlay_light_10"
             app:cardCornerRadius="@dimen/_5gkdp">

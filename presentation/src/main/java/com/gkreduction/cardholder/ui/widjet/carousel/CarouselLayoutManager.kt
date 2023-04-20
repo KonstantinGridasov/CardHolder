@@ -22,7 +22,7 @@ import kotlin.math.roundToInt
 
 class CarouselLayoutManager(
     private var mInfinite: Boolean = false,
-    private var intervalRatio: Float = 0.5F,
+    private var intervalRatio: Float = 0.6F,
     @RecyclerView.Orientation
     private var orientation: Int = RecyclerView.VERTICAL
 
@@ -596,7 +596,7 @@ class CarouselLayoutManager(
      * Get the item interval
      */
     private fun getIntervalDistance(): Int {
-        return (getItemDecoratedWidthOrHeight() * intervalRatio).roundToInt()
+        return (getItemDecoratedWidthOrHeight())
     }
 
     /**

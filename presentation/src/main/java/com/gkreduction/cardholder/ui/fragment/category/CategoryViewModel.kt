@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.category
+package com.gkreduction.cardholder.ui.fragment.category
 
 import android.app.Application
 import android.content.Context

@@ -22,7 +22,7 @@ ext {
     core_ktx = '1.7.0'
     lifecycle = '2.5.1'
     kotlin_stdlib_jdk8 = '1.8.0'
-
+    navigationVersion = '2.5.3'
     /*RX*/
     rxKotlinVersion = '2.4.0'
     rxAndroidVersion = '2.1.1'
@@ -60,6 +60,9 @@ ext {
             "androidx.core:core-ktx:$core_ktx",
             "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_stdlib_jdk8",
             "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle",
+
+            "androidx.navigation:navigation-fragment-ktx:$navigationVersion",
+            "androidx.navigation:navigation-ui-ktx:$navigationVersion",
 
             /*RX*/
             "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",

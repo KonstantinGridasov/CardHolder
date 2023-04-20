@@ -1,9 +1,8 @@
-package com.gkreduction.cardholder.ui.activity.main
+package com.gkreduction.cardholder.ui.fragment.home
 
 import android.app.Application
 import android.content.Context
 import androidx.databinding.ObservableField
-import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Card
@@ -16,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(
+class HomeViewModel(
     context: Context,
     private var getAllCardsUseCase: GetAllCardsUseCase,
     private var getAllCategoryUseCase: GetAllCategoryUseCase,
@@ -37,14 +36,6 @@ class MainViewModel(
     var listCards = ObservableField<List<Card>>()
     var listCategories = ObservableField<List<Category>>()
     var choosesCategory = ObservableField<Category>()
-
-    var toolbarName = ObservableField<String>()
-
-    fun updateToolbarName(name: String?) {
-        val updateName = name ?: context.resources.getString(R.string.app_name)
-        toolbarName.set(updateName)
-        toolbarName.notifyChange()
-    }
 
 
     fun changeShowCategories() {
@@ -113,10 +104,12 @@ class MainViewModel(
     }
 
     private fun updateCardByCategory(category: Category?) {
-        if (category != null && category.catName != getDefaultCategoryName(context))
+        if (category != null && category.catName != getDefaultCategoryName(context)) {
             getCardByCategoryId(category.catId)
-        else
+        } else {
             getAllCards()
+        }
+
     }
 
     private fun getCardByCategoryId(id: Long) {

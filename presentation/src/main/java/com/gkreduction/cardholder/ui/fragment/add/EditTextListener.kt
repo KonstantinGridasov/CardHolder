@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.edit_card
+package com.gkreduction.cardholder.ui.fragment.add
 
 import io.reactivex.Observable
 

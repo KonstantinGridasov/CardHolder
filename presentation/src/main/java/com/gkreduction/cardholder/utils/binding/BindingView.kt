@@ -3,13 +3,13 @@ package com.gkreduction.cardholder.utils.binding
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gkreduction.cardholder.ui.activity.category.adapter.AdapterCategoryList
-import com.gkreduction.cardholder.ui.activity.category.adapter.CategoryAdapterClickListener
-import com.gkreduction.cardholder.ui.activity.edit_card.EditTextListener
+import com.gkreduction.cardholder.ui.fragment.add.EditTextListener
 import com.gkreduction.cardholder.ui.activity.main.adapter.AdapterCard
 import com.gkreduction.cardholder.ui.activity.main.adapter.AdapterCategoryMain
 import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
 import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
+import com.gkreduction.cardholder.ui.fragment.category.adapter.AdapterCategoryList
+import com.gkreduction.cardholder.ui.fragment.category.adapter.CategoryAdapterClickListener
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.ui.widjet.MyCardView
 import com.gkreduction.cardholder.ui.widjet.carousel.CarouselLayoutManager
@@ -54,7 +54,7 @@ object BindingView {
         card?.let {
             if (bottom_to_top == true)
                 view.revertOrientation()
-            view.changeColor(it.colorStart,it.colorEnd)
+            view.changeColor(it.colorStart, it.colorEnd)
         }
     }
 

@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">CardHolder</string>
+    <string name="app_name">Card Holder</string>
     <string name="default_category_name">All</string>
     <string name="text_dialog_info">Remove the </string>
     <string name="text_editor_toolbar">Editor</string>
+    <string name="save">Save</string>
+    <string name="second_code">Second code</string>
 
+    <string name="menu_home">Home</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_category">Category</string>
+    <string name="menu_policy">Privacy policy</string>
+    <string name="menu_settings_header">Settings</string>
 </resources>

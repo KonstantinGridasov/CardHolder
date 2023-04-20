@@ -1,10 +1,9 @@
 package com.gkreduction.cardholder.di.module
 
-import com.gkreduction.cardholder.di.scope.*
+import com.gkreduction.cardholder.di.scope.CameraScope
+import com.gkreduction.cardholder.di.scope.DialogScope
+import com.gkreduction.cardholder.di.scope.MainScope
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
-import com.gkreduction.cardholder.ui.activity.card.CardActivity
-import com.gkreduction.cardholder.ui.activity.category.CategoryActivity
-import com.gkreduction.cardholder.ui.activity.edit_card.EditCardActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.data.db.DbServiceImpl
@@ -27,21 +26,11 @@ abstract class ActivityModule {
     @ContributesAndroidInjector(modules = [CameraModule::class])
     abstract fun contributesCamera(): CameraActivity
 
-    @EditScope
-    @ContributesAndroidInjector(modules = [EditModule::class])
-    abstract fun contributesEditCard(): EditCardActivity
-
-    @CardScope
-    @ContributesAndroidInjector(modules = [CardModule::class])
-    abstract fun contributesCard(): CardActivity
 
     @DialogScope
     @ContributesAndroidInjector(modules = [DialogModule::class])
     abstract fun contributeDialogInfo(): DialogInfo
 
-    @CategoryScope
-    @ContributesAndroidInjector(modules = [CategoryModule::class])
-    abstract fun contributeCategoryActivity(): CategoryActivity
 
     companion object {
         @Provides

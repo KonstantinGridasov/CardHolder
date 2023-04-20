@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.card
+package com.gkreduction.cardholder.ui.fragment.card
 
 import android.app.Application
 import android.content.Context

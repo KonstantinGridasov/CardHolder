@@ -1,8 +1,7 @@
-package com.gkreduction.cardholder.ui.activity.edit_card
+package com.gkreduction.cardholder.ui.fragment.add
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.databinding.ObservableField
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
@@ -14,10 +13,9 @@ import com.gkreduction.domain.usecase.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.internal.disposables.DisposableHelper.dispose
 import io.reactivex.schedulers.Schedulers
 
-class EditCardViewModel(
+class AddViewModel(
     context: Context,
     private var saveCardUseCase: SaveCardUseCase,
     private var getCategoryByNameUseCase: GetCategoryByNameUseCase,
@@ -150,14 +148,14 @@ class EditCardViewModel(
         if (category != null) {
             update.category = category
         } else
-            getCategoryByName(null)
+            getCategoryByName()
         card.set(update)
         card.notifyChange()
 
     }
 
-    fun getCategoryByName(name: String?) {
-        val catName: String = name ?: getDefaultCategoryName(context)
+    fun getCategoryByName() {
+        val catName = getDefaultCategoryName(context)
         if (categoryByNameDis != null)
             removeDisposable(categoryByNameDis!!)
         categoryByNameDis = getCategoryByNameUseCase

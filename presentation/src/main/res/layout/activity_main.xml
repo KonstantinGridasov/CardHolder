@@ -12,101 +12,101 @@
             name="itemListener"
             type="com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener" />
 
+
         <variable
             name="viewModel"
             type="com.gkreduction.cardholder.ui.activity.main.MainViewModel" />
 
 
-        <variable
-            name="categoryChoose"
-            type="com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener" />
-
     </data>
 
-    <RelativeLayout
-        android:background="@drawable/background_layout"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/background_toolbar"
-            android:gravity="center_vertical|center_horizontal">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_category_name"
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/app_name"
-                android:textAllCaps="false"
-                android:textColor="#004E5B"
-                android:textSize="@dimen/_12gkdp" />
+                android:layout_height="wrap_content">
 
-        </androidx.appcompat.widget.Toolbar>
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#EBECF1">
 
-        <ScrollView
-            android:id="@+id/scrollView"
-            android:layout_width="match_parent"
+                    <ImageView
+                        android:id="@+id/image_toolbar"
+                        android:layout_width="@dimen/_20gkdp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_gravity="start"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_card_toolbar" />
+
+                    <TextView
+                        android:id="@+id/toolbar_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@{viewModel.toolbarName}"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_primary"
+                        android:textSize="@dimen/_12gkdp" />
+                </androidx.appcompat.widget.Toolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <RelativeLayout
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_blur" />
+
+                <fragment
+                    android:id="@+id/fcNavigation"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    app:defaultNavHost="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navGraph="@navigation/navigation"
+                    tools:layout="@layout/fragment_home" />
+
+
+            </RelativeLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:layout_marginTop="@dimen/_10gkdp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/category_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2gkdp"
-                    android:layout_marginTop="@dimen/_3gkdp"
-                    android:layout_marginEnd="@dimen/_2gkdp"
-                    android:background="@android:color/transparent"
-                    android:scrollbars="vertical"
-                    app:category_choose="@{categoryChoose}"
-                    app:item_categories_main="@{viewModel.choosesCategory}"
-                    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:list_categories_main="@{viewModel.listCategories}"
-                    tools:listitem="@layout/item_category" />
-
-                <Button
-                    android:id="@+id/showAllCategory"
-                    android:layout_width="@dimen/_20gkdp"
-                    android:layout_height="@dimen/_20gkdp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/_20gkdp"
-                    android:layout_marginBottom="@dimen/_20gkdp"
-                    android:background="@drawable/category_not_active"
-                    android:text="..."
-                    android:visibility="@{viewModel.sizeAll>6 ? View.VISIBLE : View.GONE, default=gone }" />
-
-                <com.gkreduction.cardholder.ui.widjet.carousel.CarouselRecyclerview
-                    android:id="@+id/carouselRecyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200gkdp"
-                    android:layout_marginStart="@dimen/_5gkdp"
-                    android:layout_marginEnd="@dimen/_5gkdp"
-                    app:item_listener="@{itemListener}"
-                    app:items_cards="@{viewModel.listCards}" />
-
-            </LinearLayout>
-        </ScrollView>
-
-        <Button
-            android:id="@+id/toCamera"
-            android:layout_width="@dimen/_30gkdp"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_20gkdp"
-            android:layout_marginBottom="@dimen/_20gkdp"
-            android:background="@drawable/fub_add" />
-    </RelativeLayout>
+            android:layout_gravity="start"
+            android:fitsSystemWindows="false"
+            app:headerLayout="@layout/nav_header_start"
+            app:menu="@menu/main_drawer" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

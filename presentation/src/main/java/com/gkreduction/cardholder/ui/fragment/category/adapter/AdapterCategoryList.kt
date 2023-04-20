@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.category.adapter
+package com.gkreduction.cardholder.ui.fragment.category.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context

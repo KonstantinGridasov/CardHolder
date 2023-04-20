@@ -4,5 +4,14 @@
     <string name="default_category_name">Все</string>
     <string name="text_dialog_info">Вы хотите удалить</string>
     <string name="text_editor_toolbar">Редактор</string>
+    <string name="save">Сохранить</string>
+    <string name="second_code">Второй код</string>
+
+
+    <string name="menu_home">Домой</string>
+    <string name="menu_add">Добавить</string>
+    <string name="menu_category">Категории</string>
+    <string name="menu_policy">Политика конфиденциальности</string>
+    <string name="menu_settings_header">Настройки</string>
 
 </resources>

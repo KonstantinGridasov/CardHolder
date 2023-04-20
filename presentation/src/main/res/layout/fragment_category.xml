@@ -9,43 +9,24 @@
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.activity.category.CategoryViewModel" />
+            type="com.gkreduction.cardholder.ui.fragment.category.CategoryViewModel" />
 
         <variable
             name="listenerClick"
-            type="com.gkreduction.cardholder.ui.activity.category.adapter.CategoryAdapterClickListener" />
+            type="com.gkreduction.cardholder.ui.fragment.category.adapter.CategoryAdapterClickListener" />
     </data>
 
     <RelativeLayout
-        android:background="@drawable/background_layout"
+        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/background_toolbar"
-            android:gravity="center_vertical|center_horizontal">
-
-            <TextView
-                android:id="@+id/tv_category_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Choose Category"
-                android:textAllCaps="false"
-                android:textColor="#004E5B"
-                android:textSize="@dimen/_12gkdp" />
-
-        </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/toolbar_category"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/_5gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_5gkdp"
@@ -66,7 +47,7 @@
             android:layout_gravity="end"
             android:layout_marginEnd="@dimen/_20gkdp"
             android:layout_marginBottom="@dimen/_20gkdp"
-            android:background="@drawable/fub_plus"
+            android:background="@drawable/ic_plus"
             android:onClick="@{()->viewModel.addNewCategory()}" />
     </RelativeLayout>
 
