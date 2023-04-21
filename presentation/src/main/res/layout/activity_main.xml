@@ -39,7 +39,7 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#EBECF1">
+                    android:background="@color/color_secondary">
 
                     <ImageView
                         android:id="@+id/image_toolbar"
@@ -51,6 +51,7 @@
                         android:src="@drawable/ic_card_toolbar" />
 
                     <TextView
+                        style="@style/Style_Text_medium"
                         android:id="@+id/toolbar_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -102,7 +103,7 @@
 
         <com.google.android.material.navigation.NavigationView
             app:itemMaxLines="2"
-            app:itemTextAppearance="@style/Style_Menu"
+            app:itemTextAppearance="@style/Style_Text_medium"
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

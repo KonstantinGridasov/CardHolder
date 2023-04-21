@@ -44,11 +44,11 @@
                 android:src="@drawable/ic_plus" />
 
             <TextView
+                style="@style/Style_Text_medium"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_5gkdp"
                 android:layout_marginEnd="@dimen/_5gkdp"
-                android:fontFamily="@font/comfortaa_medium"
                 android:gravity="start|center_vertical"
                 android:maxLines="1"
                 android:padding="@dimen/_4gkdp"

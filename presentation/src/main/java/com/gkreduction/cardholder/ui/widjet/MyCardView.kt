@@ -23,15 +23,18 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
         drawable.draw(canvas)
     }
 
-
     fun changeColor(first: Int, second: Int) {
-        try {
-            drawable = createLayerDrawable(first, second)
-            invalidate()
-        } catch (e: Exception) {
-            setCardBackgroundColor(Color.BLACK)
-        }
+        if (first == 0 && second == 0)
+            drawable = getDefaultDrawable()
+        else
+            try {
+                drawable = createLayerDrawable(first, second)
+                invalidate()
+            } catch (e: Exception) {
+                setCardBackgroundColor(Color.BLACK)
+            }
     }
+
 
     fun revertOrientation() {
         orientationOne = GradientDrawable.Orientation.BOTTOM_TOP
@@ -49,7 +52,11 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
 
 
     private fun getDefaultDrawable(): Drawable {
-        return createGradientDrawable(false, Color.BLACK, Color.WHITE)
+        return createGradientDrawable(false, getRandomInt(), getRandomInt())
+    }
+
+    private fun getRandomInt(): Int {
+        return (Int.MIN_VALUE..Int.MAX_VALUE).random()
     }
 
     private fun createGradientDrawable(

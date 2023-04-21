@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#01092D"
+    android:background="@color/color_primary"
     android:gravity="bottom"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
@@ -17,7 +17,7 @@
         android:src="@drawable/ic_header_menu" />
 
     <TextView
-        android:fontFamily="@font/comfortaa_medium"
+        style="@style/Style_Text_medium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10gkdp"

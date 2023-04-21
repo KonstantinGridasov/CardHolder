@@ -20,9 +20,9 @@
     </data>
 
     <LinearLayout
-        android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -32,12 +32,12 @@
             android:layout_marginStart="@dimen/_3gkdp"
             android:layout_marginTop="@dimen/_5gkdp"
             android:layout_marginEnd="@dimen/_3gkdp"
-            android:background="@drawable/background_toolbar"
+            android:background="@drawable/background_layout"
             android:orientation="horizontal">
 
             <TextView
-                android:fontFamily="@font/comfortaa_medium"
                 android:id="@+id/tv_category_name"
+                style="@style/Style_Text_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10gkdp"
@@ -49,6 +49,7 @@
 
             <TextView
                 android:id="@+id/tv_category_type"
+                style="@style/Style_Text_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_5gkdp"
@@ -98,6 +99,7 @@
 
                         <EditText
                             android:id="@+id/edit_header"
+                            style="@style/Style_Text_medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -109,6 +111,7 @@
 
                         <EditText
                             android:id="@+id/edit_desc_base"
+                            style="@style/Style_Text_medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -150,6 +153,7 @@
 
                         <EditText
                             android:id="@+id/edit_desc_second"
+                            style="@style/Style_Text_medium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -188,12 +192,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30gkdp"
+            android:layout_marginStart="@dimen/_3gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
-            android:background="@drawable/background_toolbar">
+            android:layout_marginEnd="@dimen/_3gkdp"
+            android:background="@drawable/background_layout">
 
             <TextView
-                android:fontFamily="@font/comfortaa_medium"
                 android:id="@+id/tv_checkBox"
+                style="@style/Style_Text_medium"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10gkdp"
@@ -215,6 +221,7 @@
                 android:onCheckedChanged="@{(v,ch)->viewModel.updateExist(ch)}"
                 android:textSize="@dimen/_10gkdp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_group_save"
             android:layout_width="match_parent"
@@ -222,13 +229,13 @@
             android:layout_marginStart="@dimen/_10gkdp"
             android:layout_marginTop="@dimen/_20gkdp"
             android:layout_marginEnd="@dimen/_10gkdp"
-            android:background="@drawable/background_toolbar"
+            android:background="@drawable/background_button_corners"
             android:orientation="horizontal">
 
             <TextView
-                android:fontFamily="@font/comfortaa_medium"
-
                 android:id="@+id/tv_save"
+                style="@style/Style_Text_medium"
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10gkdp"
