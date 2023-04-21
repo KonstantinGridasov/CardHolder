@@ -24,15 +24,12 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
     }
 
     fun changeColor(first: Int, second: Int) {
-        if (first == 0 && second == 0)
-            drawable = getDefaultDrawable()
-        else
-            try {
-                drawable = createLayerDrawable(first, second)
-                invalidate()
-            } catch (e: Exception) {
-                setCardBackgroundColor(Color.BLACK)
-            }
+        try {
+            drawable = createLayerDrawable(first, second)
+            invalidate()
+        } catch (e: Exception) {
+            setCardBackgroundColor(Color.BLACK)
+        }
     }
 
 
@@ -52,12 +49,9 @@ class MyCardView(context: Context, attrs: AttributeSet?) : CardView(context, att
 
 
     private fun getDefaultDrawable(): Drawable {
-        return createGradientDrawable(false, getRandomInt(), getRandomInt())
+        return createGradientDrawable(false, Color.BLACK, Color.WHITE)
     }
 
-    private fun getRandomInt(): Int {
-        return (Int.MIN_VALUE..Int.MAX_VALUE).random()
-    }
 
     private fun createGradientDrawable(
         isFirst: Boolean,

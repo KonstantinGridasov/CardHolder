@@ -33,7 +33,7 @@ class AddFragment : BaseFragment<AddViewModel>(
         } else if (args.category != null) {
             viewModel?.updateCategory(args.category)
         } else
-            viewModel?.getCategoryByName()
+            viewModel?.getDefaultCategory()
         updateToolbarName()
         initListener()
     }

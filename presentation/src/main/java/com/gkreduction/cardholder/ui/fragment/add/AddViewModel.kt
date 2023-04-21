@@ -33,7 +33,7 @@ class AddViewModel(
 
     var card = ObservableField<Card>()
 
-    fun getExistOrNewCard() = card.get() ?: Card()
+    fun getExistOrNewCard() = card.get() ?: getEmptyCard()
 
     fun updateExist(isChecked: Boolean) {
         val update = getExistOrNewCard()
@@ -148,14 +148,15 @@ class AddViewModel(
         if (category != null) {
             update.category = category
         } else
-            getCategoryByName()
+            getDefaultCategory()
         card.set(update)
         card.notifyChange()
 
     }
 
-    fun getCategoryByName() {
+    fun getDefaultCategory() {
         val catName = getDefaultCategoryName(context)
+        this.card.set(getEmptyCard())
         if (categoryByNameDis != null)
             removeDisposable(categoryByNameDis!!)
         categoryByNameDis = getCategoryByNameUseCase
@@ -197,4 +198,10 @@ class AddViewModel(
         addDisposable(saveCategoryDis!!)
     }
 
+    private fun getEmptyCard(): Card {
+        val card = Card()
+        card.colorStart = (Int.MIN_VALUE..Int.MAX_VALUE).random()
+        card.colorEnd = (Int.MIN_VALUE..Int.MAX_VALUE).random()
+        return card
+    }
 }
