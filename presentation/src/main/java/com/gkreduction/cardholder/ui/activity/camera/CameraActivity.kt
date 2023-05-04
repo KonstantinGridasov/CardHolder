@@ -41,6 +41,10 @@ class CameraActivity :
     var type: TypeScan = TypeScan.BASE
     private var cam: Camera? = null
 
+    private lateinit var cameraExecutor: ExecutorService
+    private var scanner: GmsBarcodeScanner? = null
+    private var flashLightStatus = false
+
     companion object {
         private const val TAG = "CardHolder_Camera"
         private const val REQUEST_CODE_PERMISSIONS = 1
@@ -50,10 +54,6 @@ class CameraActivity :
     }
 
 
-    private lateinit var cameraExecutor: ExecutorService
-    private var scanner: GmsBarcodeScanner? = null
-    private var flashLightStatus = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.extras != null) {
@@ -62,23 +62,41 @@ class CameraActivity :
         scanner = GmsBarcodeScanning.getClient(this)
         scanCode()
         findViewById<ImageView?>(R.id.im_flash)
-            .setOnClickListener {
-                openFlashLight(it as ImageView)
-            }
-
+            .setOnClickListener { changeLighting(it as ImageView) }
     }
 
-    private fun openFlashLight(view: ImageView) {
-        flashLightStatus = !flashLightStatus
 
-        if (flashLightStatus)
-            view.setImageResource(R.drawable.ic_flashlight_on)
-        else
-            view.setImageResource(R.drawable.ic_flashlight_off)
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraExecutor.shutdown()
+    }
 
-        if (cam?.cameraInfo?.hasFlashUnit() == true) {
-            cam?.cameraControl?.enableTorch(flashLightStatus)
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                startCamera()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+            }
         }
+    }
+
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
 
@@ -170,15 +188,16 @@ class CameraActivity :
     }
 
 
-    private fun navigateToBack(scanCode: ScanCode) {
-        val returnIntent = Intent()
-        returnIntent.putExtra(SCAN_CODE, scanCode)
-        returnIntent.putExtra(TYPE_SCAN, type)
-        setResult(RESULT_OK, returnIntent)
-        finish()
-
+    private fun changeLighting(view: ImageView) {
+        flashLightStatus = !flashLightStatus
+        if (cam?.cameraInfo?.hasFlashUnit() == true) {
+            if (flashLightStatus)
+                view.setImageResource(R.drawable.ic_flashlight_on)
+            else
+                view.setImageResource(R.drawable.ic_flashlight_off)
+            cam?.cameraControl?.enableTorch(flashLightStatus)
+        }
     }
-
 
     private fun createScanCode(barcode: Barcode): ScanCode {
         return ScanCode(
@@ -189,35 +208,13 @@ class CameraActivity :
     }
 
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            baseContext, it
-        ) == PackageManager.PERMISSION_GRANTED
-    }
+    private fun navigateToBack(scanCode: ScanCode) {
+        val returnIntent = Intent()
+        returnIntent.putExtra(SCAN_CODE, scanCode)
+        returnIntent.putExtra(TYPE_SCAN, type)
+        setResult(RESULT_OK, returnIntent)
+        finish()
 
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraExecutor.shutdown()
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
-                startCamera()
-            } else {
-                Toast.makeText(
-                    this,
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
-            }
-        }
     }
 
 }
