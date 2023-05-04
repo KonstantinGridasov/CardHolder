@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -37,6 +39,7 @@ class CameraActivity :
     }
 
     var type: TypeScan = TypeScan.BASE
+    private var cam: Camera? = null
 
     companion object {
         private const val TAG = "CardHolder_Camera"
@@ -49,6 +52,7 @@ class CameraActivity :
 
     private lateinit var cameraExecutor: ExecutorService
     private var scanner: GmsBarcodeScanner? = null
+    private var flashLightStatus = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +61,28 @@ class CameraActivity :
         }
         scanner = GmsBarcodeScanning.getClient(this)
         scanCode()
+        findViewById<ImageView?>(R.id.im_flash)
+            .setOnClickListener {
+                openFlashLight(it as ImageView)
+            }
 
     }
 
-    fun scanCode() {
+    private fun openFlashLight(view: ImageView) {
+        flashLightStatus = !flashLightStatus
+
+        if (flashLightStatus)
+            view.setImageResource(R.drawable.ic_flashlight_on)
+        else
+            view.setImageResource(R.drawable.ic_flashlight_off)
+
+        if (cam?.cameraInfo?.hasFlashUnit() == true) {
+            cam?.cameraControl?.enableTorch(flashLightStatus)
+        }
+    }
+
+
+    private fun scanCode() {
         if (scanner != null)
             scanner!!.startScan()
                 .addOnSuccessListener { barcode ->
@@ -69,14 +91,14 @@ class CameraActivity :
                 .addOnCanceledListener {
                     finish()
                 }
-                .addOnFailureListener { e ->
-                    initDefaultCamerar()
+                .addOnFailureListener {
+                    initDefaultCamera()
                 }
 
     }
 
 
-    private fun initDefaultCamerar() {
+    private fun initDefaultCamera() {
         if (allPermissionsGranted()) {
             startCamera()
         } else {
@@ -118,10 +140,9 @@ class CameraActivity :
             imageAnalysis.setAnalyzer(cameraExecutor, analyzer)
 
             val preview = createPreview()
-
             try {
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
+                cam = cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageAnalysis
                 )
 
