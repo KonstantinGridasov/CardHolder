@@ -42,7 +42,7 @@ open class BaseDialogFragment<T : BaseAndroidViewModel>(
         mDialog.let { it ->
             it?.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                resources.getDimensionPixelOffset(R.dimen._200gkdp)
+                ViewGroup.LayoutParams.WRAP_CONTENT,
             )
         }
         initialized()

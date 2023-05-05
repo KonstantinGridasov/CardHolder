@@ -75,8 +75,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_5gkdp"
-                android:layout_marginEnd="@dimen/_5gkdp"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.08" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -88,13 +87,14 @@
                     android:id="@+id/card_base"
                     android:layout_width="@dimen/_150gkdp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5gkdp"
+                    android:layout_marginEnd="@dimen/_5gkdp"
                     app:cardCornerRadius="@dimen/_5gkdp"
                     app:set_color_gradient="@{viewModel.card}">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_3gkdp"
                         android:orientation="vertical">
 
                         <EditText
@@ -137,10 +137,12 @@
                 </com.gkreduction.cardholder.ui.widjet.MyCardView>
 
                 <com.gkreduction.cardholder.ui.widjet.MyCardView
-                    android:id="@+id/card_cecondary"
+                    android:id="@+id/card_secondary"
                     android:layout_width="@dimen/_150gkdp"
                     android:layout_height="@dimen/_90gkdp"
+                    android:layout_marginStart="@dimen/_5gkdp"
                     android:layout_marginTop="@dimen/_10gkdp"
+                    android:layout_marginEnd="@dimen/_5gkdp"
                     android:visibility="@{viewModel.card.existSecondary ? View.VISIBLE : View.GONE, default = gone}"
                     app:cardCornerRadius="@dimen/_5gkdp"
                     app:set_color_gradient="@{viewModel.card}">
@@ -183,9 +185,8 @@
                 android:id="@+id/picker_second"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_5gkdp"
                 android:layout_marginEnd="@dimen/_5gkdp"
-                android:layout_weight="0.1" />
+                android:layout_weight="0.08" />
 
         </LinearLayout>
 
@@ -214,7 +215,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_4gkdp"
-                android:layout_weight="0.1"
+                android:layout_weight="0.15"
                 android:button="@drawable/checkbox_button"
                 android:checked="@={viewModel.card.existSecondary}"
                 android:gravity="center"

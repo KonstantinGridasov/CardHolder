@@ -8,6 +8,8 @@
     <string name="second_code">Второй код</string>
     <string name="category">Категория</string>
     <string name="add">Добавить</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">Ok</string>
 
 
     <string name="menu_home">Домой</string>
