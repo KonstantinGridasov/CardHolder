@@ -117,10 +117,10 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15gkdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_20gkdp"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -134,6 +134,7 @@
                 android:textSize="@dimen/_7gkdp" />
 
             <TextView
+
                 android:id="@+id/tv_developer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,7 +142,7 @@
                 android:fontFamily="@font/comfortaa_regular"
                 android:text="@string/name_developer"
                 android:textColor="?attr/colorOnPrimary"
-                android:textSize="@dimen/_10gkdp" />
+                android:textSize="@dimen/_9gkdp" />
 
         </LinearLayout>
 

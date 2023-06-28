@@ -23,7 +23,7 @@
 
     <style name="StyleButtonPrimary" >
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/_20gkdp</item>
+        <item name="android:layout_height">@dimen/_25gkdp</item>
         <item name="android:layout_marginStart">@dimen/_5gkdp</item>
         <item name="android:layout_marginEnd">@dimen/_5gkdp</item>
         <item name="android:layout_marginBottom">@dimen/_5gkdp</item>

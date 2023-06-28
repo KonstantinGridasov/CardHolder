@@ -23,6 +23,7 @@ class CardViewModel(
 
     var card = ObservableField<Card>()
     var nameToolbar = MutableLiveData<String>()
+    var isSecondCode = MutableLiveData<Boolean>()
 
     fun getCards(id: Long) {
         if (getCardById != null)
@@ -36,6 +37,7 @@ class CardViewModel(
                 card.set(it)
                 if (it != null) {
                     nameToolbar.value = it.cardName
+                    isSecondCode.value = it.existSecondary
                 }
             }
 

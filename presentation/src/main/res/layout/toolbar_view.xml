@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/image_toolbar"
-        android:layout_width="@dimen/_14gkdp"
-        android:layout_height="@dimen/_14gkdp"
+        android:layout_width="@dimen/_12gkdp"
+        android:layout_height="@dimen/_12gkdp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"

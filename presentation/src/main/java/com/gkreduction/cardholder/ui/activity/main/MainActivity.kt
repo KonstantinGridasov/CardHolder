@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -84,6 +85,10 @@ class MainActivity :
 
     fun getToolbar(): CustomToolbar {
         return (binding as ActivityMainBinding).toolbar
+    }
+
+    fun getButton(): AppCompatButton {
+        return (binding as ActivityMainBinding).btOk
     }
 
     private fun navigateToCategory() {

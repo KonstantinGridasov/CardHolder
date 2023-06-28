@@ -29,23 +29,34 @@ class CardFragment : BaseFragment<CardViewModel>(
         (binding as FragmentCardBinding).viewmodel = viewModel
         (binding as FragmentCardBinding).isRevert = isRevert
         viewModel?.getCards(id)
-
-        (binding as FragmentCardBinding).llRotate.setOnClickListener {
-            animation((binding as FragmentCardBinding).cardItem)
-            (binding as FragmentCardBinding).isRevert = !isRevert
-            isRevert = !isRevert
-        }
         initListener()
 
     }
 
     private fun initListener() {
-        (binding as FragmentCardBinding).llRemove.setOnClickListener { showDialogDelete() }
-        (binding as FragmentCardBinding).llPencil.setOnClickListener { navigateToEdit() }
-
+        if (activity is MainActivity) {
+            (activity as MainActivity).getToolbar().setOnImageClickListener { navigateToEdit() }
+        }
         activity?.let {
             viewModel?.nameToolbar?.observe(it) { name ->
                 updateNameToolbar(name)
+            }
+        }
+
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton()
+                .setOnClickListener {
+                    animation((binding as FragmentCardBinding).itemCard)
+                    (binding as FragmentCardBinding).isRevert = !isRevert
+                    isRevert = !isRevert
+                }
+        }
+
+        activity?.let {
+            viewModel?.isSecondCode?.observe(it) { exist ->
+                if (activity is MainActivity)
+                    (activity as MainActivity).getButton().visibility =
+                        if (exist) View.VISIBLE else View.INVISIBLE
             }
         }
 
