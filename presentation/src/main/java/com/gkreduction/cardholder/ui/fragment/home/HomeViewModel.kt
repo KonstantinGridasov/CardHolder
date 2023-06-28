@@ -103,7 +103,7 @@ class HomeViewModel(
         addDisposable(saveCategoryDis!!)
     }
 
-    private fun updateCardByCategory(category: Category?) {
+    fun updateCardByCategory(category: Category?) {
         if (category != null && category.catName != getDefaultCategoryName(context)) {
             getCardByCategoryId(category.catId)
         } else {

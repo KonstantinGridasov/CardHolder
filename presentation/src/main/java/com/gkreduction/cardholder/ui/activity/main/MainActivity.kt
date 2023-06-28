@@ -9,10 +9,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
+import com.gkreduction.cardholder.databinding.ActivityMain2Binding
 import com.gkreduction.cardholder.databinding.ActivityMainBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity :
-    BaseActivity<MainViewModel>(R.layout.activity_main, MainViewModel::class.java),
+    BaseActivity<MainViewModel>(R.layout.activity_main2, MainViewModel::class.java),
     CategoryClickListener, NavigationView.OnNavigationItemSelectedListener {
     private lateinit var navController: NavController
 
@@ -45,20 +45,20 @@ class MainActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = this.findNavController(R.id.fcNavigation)
-        (binding as ActivityMainBinding).viewModel = viewModel
+        (binding as ActivityMain2Binding).viewModel = viewModel
 
-        setSupportActionBar((binding as ActivityMainBinding).toolbar)
-        (binding as ActivityMainBinding).navView.setupWithNavController(navController)
-        (binding as ActivityMainBinding).navView.setNavigationItemSelectedListener(this)
+//        setSupportActionBar((binding as ActivityMainBinding).toolbar)
+//        (binding as ActivityMain2Binding).navView.setupWithNavController(navController)
+//        (binding as ActivityMain2Binding).navView.setNavigationItemSelectedListener(this)
 
-        initListener()
+//        initListener()
     }
 
-    private fun initListener() {
-        (binding as ActivityMainBinding).imageToolbar.setOnClickListener {
-            (binding as ActivityMainBinding).drawerLayout.openDrawer(GravityCompat.START)
-        }
-    }
+//    private fun initListener() {
+//        (binding as ActivityMain2Binding).imageToolbar.setOnClickListener {
+//            (binding as ActivityMainBinding).drawerLayout.openDrawer(GravityCompat.START)
+//        }
+//    }
 
 
     private fun navigateToCategory() {

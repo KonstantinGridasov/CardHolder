@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.main.adapter
+package com.gkreduction.cardholder.ui.fragment.home.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -6,33 +6,36 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.databinding.ItemCategoryBinding
-import com.gkreduction.cardholder.utils.getDefaultCategoryName
+import com.gkreduction.cardholder.databinding.ItemMainCategoryBinding
+import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
+import com.gkreduction.cardholder.utils.getColorByStatus
 import com.gkreduction.domain.entity.Category
 
 class AdapterCategoryMain(val listener: CategoryClickListener?) :
     RecyclerView.Adapter<AdapterCategoryMain.ViewHolder>() {
     private var items: List<Category> = ArrayList()
     private var chooses: Category? = null
+    private var oldPosition: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: ItemCategoryBinding =
-            DataBindingUtil.inflate(inflater, R.layout.item_category, parent, false)
+        val binding: ItemMainCategoryBinding =
+            DataBindingUtil.inflate(inflater, R.layout.item_main_category, parent, false)
         return ViewHolder(binding)
     }
 
-    inner class ViewHolder(val binding: ItemCategoryBinding) :
+    inner class ViewHolder(val binding: ItemMainCategoryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.mainCategory.text = items[position].catName
-        holder.binding.mainCategory.setOnClickListener {
-            if ((items[position]) == chooses) {
-                listener?.onItemClick(null)
-            } else {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        holder.binding.textMainCategory.text = items[position].catName
+        holder.binding.rootCategoriesMain.setOnClickListener {
+            if ((items[position]) != chooses) {
                 chooses = items[position]
+                notifyItemChanged(oldPosition)
+                oldPosition = position
+                activate(holder)
                 listener?.onItemClick(items[position])
             }
         }
@@ -41,8 +44,6 @@ class AdapterCategoryMain(val listener: CategoryClickListener?) :
         } else {
             deactivate(holder)
         }
-        holder.binding.isDefaultCat =
-            (items[position].catName == getDefaultCategoryName(holder.itemView.context))
 
         holder.binding.executePendingBindings()
 
@@ -65,17 +66,16 @@ class AdapterCategoryMain(val listener: CategoryClickListener?) :
 
 
     private fun deactivate(holder: ViewHolder) {
-        holder.binding.root.setBackgroundResource(R.drawable.category_not_active)
-        holder.binding.mainCategory.setTextColor(
-            holder.binding.mainCategory.resources.getColor(R.color.black, null)
-        )
+        holder.binding.rootCategoriesMain.isSelected = false
+        holder.binding.textMainCategory.setTextColor(getColorByStatus(false, holder.itemView))
+
     }
 
     private fun activate(holder: ViewHolder) {
-        holder.binding.root.setBackgroundResource(R.drawable.category_active)
-        holder.binding.mainCategory.setTextColor(
-            holder.binding.mainCategory.resources.getColor(R.color.white, null)
-        )
+        holder.binding.rootCategoriesMain.isSelected = true
+        holder.binding.textMainCategory.setTextColor(getColorByStatus(true, holder.itemView))
+
+
     }
 
 
