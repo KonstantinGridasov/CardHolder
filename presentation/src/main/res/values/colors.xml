@@ -8,6 +8,7 @@
 
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
+    <color name="grey">#949494</color>
     <color name="red">#FFE82E2E</color>
 
     <color name="background_camera">#B3000000</color>

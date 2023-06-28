@@ -49,7 +49,6 @@ class CardFragment : BaseFragment<CardViewModel>(
             }
         }
 
-
     }
 
     private fun updateNameToolbar(nameToolbar: String?) {

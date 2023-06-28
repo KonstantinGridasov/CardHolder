@@ -14,7 +14,7 @@
 
     <style name="StyleToolBarText">
         <item name="fontFamily">@font/comfortaa_bold</item>
-        <item name="android:textSize">@dimen/_12gkdp</item>
+        <item name="android:textSize">@dimen/_10gkdp</item>
         <item name="android:textColor">?colorOnPrimary</item>
     </style>
 

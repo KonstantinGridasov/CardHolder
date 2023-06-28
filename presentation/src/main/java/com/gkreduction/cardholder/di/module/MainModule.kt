@@ -14,6 +14,8 @@ import com.gkreduction.cardholder.ui.fragment.category.CategoryFragment
 import com.gkreduction.cardholder.ui.fragment.category.CategoryViewModel
 import com.gkreduction.cardholder.ui.fragment.home.HomeFragment
 import com.gkreduction.cardholder.ui.fragment.home.HomeViewModel
+import com.gkreduction.cardholder.ui.fragment.info.InfoFragment
+import com.gkreduction.cardholder.ui.fragment.info.InfoViewModel
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.*
 import dagger.Module
@@ -33,6 +35,9 @@ abstract class MainModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCardFragment(): CardFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeInfoFragment(): InfoFragment
 
     companion object {
         @Provides
@@ -122,6 +127,12 @@ abstract class MainModule {
                             CardViewModel(
                                 app, getCardByIdUseCase,
                                 deleteCardUseCase
+
+                            ) as T
+
+                        modelClass.isAssignableFrom(InfoViewModel::class.java) ->
+                            InfoViewModel(
+                                app
 
                             ) as T
 

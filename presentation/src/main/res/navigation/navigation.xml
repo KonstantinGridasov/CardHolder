@@ -18,6 +18,10 @@
                 app:argType="long" />
         </action>
 
+        <action
+            android:id="@+id/to_info"
+            app:destination="@id/infoFragment" />
+
         <argument
             android:name="category"
             android:defaultValue="@null"
@@ -25,6 +29,12 @@
             app:nullable="true" />
     </fragment>
 
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.gkreduction.cardholder.ui.fragment.info.InfoFragment"
+        android:label="InfoFragment">
+
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.gkreduction.cardholder.ui.fragment.category.CategoryFragment"

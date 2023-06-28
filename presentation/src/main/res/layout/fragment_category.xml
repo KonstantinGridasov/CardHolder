@@ -40,8 +40,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/_10gkdp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_plus" />
+                android:scaleType="centerInside"/>
 
             <TextView
                 style="@style/Style_Text_medium"

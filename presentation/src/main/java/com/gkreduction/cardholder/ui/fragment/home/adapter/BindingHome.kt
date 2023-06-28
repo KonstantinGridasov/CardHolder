@@ -2,8 +2,8 @@ package com.gkreduction.cardholder.ui.fragment.home.adapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
-import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
+import com.gkreduction.cardholder.ui.fragment.home.CardClickListener
+import com.gkreduction.cardholder.ui.fragment.home.CategoryClickListener
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 

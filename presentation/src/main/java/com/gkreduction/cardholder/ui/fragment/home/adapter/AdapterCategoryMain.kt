@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemMainCategoryBinding
-import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
+import com.gkreduction.cardholder.ui.fragment.home.CategoryClickListener
 import com.gkreduction.cardholder.utils.getColorByStatus
 import com.gkreduction.domain.entity.Category
 

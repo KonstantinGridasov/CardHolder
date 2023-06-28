@@ -26,8 +26,13 @@ class CustomToolbar @JvmOverloads constructor(
 
 
     fun setImageByDestination(destinationId: Int) {
+        image?.visibility = when (destinationId) {
+            R.id.infoFragment -> GONE
+            else -> VISIBLE
+        }
         when (destinationId) {
-            R.id.homeFragment -> image?.setImageResource(R.drawable.ic_pencil)
+            R.id.homeFragment -> image?.setImageResource(R.drawable.ic_info)
+            R.id.cardFragment -> image?.setImageResource(R.drawable.ic_pencil)
 
         }
     }

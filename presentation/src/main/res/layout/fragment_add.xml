@@ -216,7 +216,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_4gkdp"
                 android:layout_weight="0.15"
-                android:button="@drawable/checkbox_button"
                 android:checked="@={viewModel.card.existSecondary}"
                 android:gravity="center"
                 android:onCheckedChanged="@{(v,ch)->viewModel.updateExist(ch)}"

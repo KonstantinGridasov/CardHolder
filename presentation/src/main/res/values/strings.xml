@@ -7,6 +7,8 @@
     <string name="second_code">Second code</string>
     <string name="category">Category</string>
     <string name="add">Add</string>
+    <string name="back">Back</string>
+    <string name="revert">Revert</string>
 
     <string name="cancel">Cancel</string>
     <string name="ok">Ok</string>
@@ -14,5 +16,19 @@
     <string name="menu_home">Home</string>
     <string name="menu_add">Add</string>
     <string name="menu_category">Category</string>
-    <string name="menu_policy">Privacy policy</string>
+
+    <string name="theme">Theme</string>
+    <string name="change_theme_day"><u>Switch to light theme</u></string>
+    <string name="change_theme_night"><u>Switch to dark theme</u></string>
+
+    <string name="about_app">About App</string>
+    <string name="about_app_text">The application saves data only on your device. After deleting the application or clearing the cache (memory), all information may be lost beyond the control of the developer</string>
+    <string name="privacy_policy"><u>Privacy policy</u></string>
+
+    <string name="cooperation">Cooperation</string>
+    <string name="github">GitHub</string>
+    <string name="powered_by">Powered by</string>
+    <string name="name_developer">Konstantin Gridasov</string>
+
+
 </resources>

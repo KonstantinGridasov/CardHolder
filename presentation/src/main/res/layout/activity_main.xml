@@ -10,7 +10,7 @@
 
         <variable
             name="itemListener"
-            type="com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener" />
+            type="com.gkreduction.cardholder.ui.fragment.home.CardClickListener" />
 
 
         <variable
@@ -20,96 +20,40 @@
 
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:background="?attr/colorSecondary">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <com.gkreduction.cardholder.ui.widjet.CustomToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@color/color_secondary">
-
-                    <ImageView
-                        android:id="@+id/image_toolbar"
-                        android:layout_width="@dimen/_20gkdp"
-                        android:layout_height="?attr/actionBarSize"
-                        android:layout_gravity="start"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/ic_card_toolbar" />
-
-                    <TextView
-                        style="@style/Style_Text_medium"
-                        android:id="@+id/toolbar_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:text="@{viewModel.toolbarName}"
-                        android:textAllCaps="false"
-                        android:textColor="@color/color_primary"
-                        android:textSize="@dimen/_12gkdp" />
-                </androidx.appcompat.widget.Toolbar>
-
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <RelativeLayout
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/background_blur" />
-
-                <fragment
-                    android:id="@+id/fcNavigation"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    app:defaultNavHost="true"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:navGraph="@navigation/navigation"
-                    tools:layout="@layout/fragment_home" />
-
-
-            </RelativeLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            app:itemMaxLines="2"
-            app:itemTextAppearance="@style/Style_Text_medium"
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
+        <fragment
+            android:id="@+id/fcNavigation"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:fitsSystemWindows="false"
-            app:headerLayout="@layout/nav_header_start"
-            app:menu="@menu/main_drawer" />
-    </androidx.drawerlayout.widget.DrawerLayout>
+            android:layout_above="@id/btOk"
+            android:layout_below="@id/toolbar"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:layout_marginBottom="@dimen/_10gkdp"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/navigation"
+            tools:layout="@layout/fragment_home" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btOk"
+            style="@style/StyleButtonPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/save" />
+
+    </RelativeLayout>
 </layout>

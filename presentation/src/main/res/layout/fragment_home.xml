@@ -10,11 +10,11 @@
 
         <variable
             name="itemListener"
-            type="com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener" />
+            type="com.gkreduction.cardholder.ui.fragment.home.CardClickListener" />
 
         <variable
             name="categoryClick"
-            type="com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener" />
+            type="com.gkreduction.cardholder.ui.fragment.home.CategoryClickListener" />
 
 
         <variable

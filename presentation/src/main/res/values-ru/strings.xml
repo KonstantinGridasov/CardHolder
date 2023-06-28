@@ -10,11 +10,26 @@
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
     <string name="ok">Ok</string>
+    <string name="back">Назад</string>
+    <string name="revert">Развернуть</string>
 
 
     <string name="menu_home">Домой</string>
     <string name="menu_add">Добавить</string>
     <string name="menu_category">Категории</string>
-    <string name="menu_policy">Политика конфиденциальности</string>
+
+    <string name="theme">Тема</string>
+    <string name="change_theme_day"><u>Переключить на светлую тему</u></string>
+    <string name="change_theme_night"><u>Переключить на темную тему</u></string>
+
+    <string name="about_app">О Приложении</string>
+    <string name="about_app_text">Приложении сохраняет данные  только на Вашем устройстве. После удаления приложения или очистки кэша (памяти) возможна потеря всей информации не зависящая от разработчика</string>
+    <string name="privacy_policy"><u>Политика конфиденциальности</u></string>
+
+    <string name="cooperation">Сотрудничество</string>
+    <string name="github">GitHub</string>
+    <string name="powered_by">Powered by</string>
+    <string name="name_developer">Konstantin Gridasov </string>
+
 
 </resources>

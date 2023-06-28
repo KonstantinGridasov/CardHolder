@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemMainCardBinding
-import com.gkreduction.cardholder.ui.activity.main.adapter.CardClickListener
+import com.gkreduction.cardholder.ui.fragment.home.CardClickListener
 import com.gkreduction.domain.entity.Card
 
 class AdapterCard(var listener: CardClickListener?) :

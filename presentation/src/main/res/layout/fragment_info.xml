@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isDay"
+            type="java.lang.Boolean" />
+
+        <variable
+            name="viewModel"
+            type="com.gkreduction.cardholder.ui.fragment.info.InfoViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_5gkdp"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/_8gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/theme"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_13gkdp" />
+
+        <TextView
+            android:id="@+id/tv_changeTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_theme"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:fontFamily="@font/comfortaa_regular"
+            android:text="@{isDay ? @string/change_theme_day :@string/change_theme_night,default = @string/change_theme_day}"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_9gkdp" />
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_changeTheme"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_8gkdp"
+            android:layout_marginTop="@dimen/_20gkdp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/about_app"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_13gkdp" />
+
+
+        <TextView
+            android:id="@+id/tv_about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_about"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:fontFamily="@font/comfortaa_regular"
+            android:text="@string/about_app_text"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_9gkdp" />
+
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_about_text"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:fontFamily="@font/comfortaa_regular"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_9gkdp" />
+
+        <TextView
+            android:id="@+id/tv_cooperation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_privacy"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_8gkdp"
+            android:layout_marginTop="@dimen/_20gkdp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/cooperation"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_13gkdp" />
+
+        <TextView
+            android:id="@+id/tv_cooperation_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_cooperation"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/_15gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            android:fontFamily="@font/comfortaa_regular"
+            android:text="@string/github"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="@dimen/_9gkdp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_20gkdp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="@string/powered_by"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="@dimen/_7gkdp" />
+
+            <TextView
+                android:id="@+id/tv_developer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_3gkdp"
+                android:fontFamily="@font/comfortaa_regular"
+                android:text="@string/name_developer"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="@dimen/_10gkdp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</layout>

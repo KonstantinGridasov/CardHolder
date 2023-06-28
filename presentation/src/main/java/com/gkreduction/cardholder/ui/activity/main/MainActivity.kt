@@ -3,28 +3,24 @@ package com.gkreduction.cardholder.ui.activity.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
-import com.gkreduction.cardholder.databinding.ActivityMain2Binding
 import com.gkreduction.cardholder.databinding.ActivityMainBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
-import com.gkreduction.cardholder.ui.activity.main.adapter.CategoryClickListener
 import com.gkreduction.cardholder.ui.base.BaseActivity
-import com.gkreduction.domain.entity.Category
+import com.gkreduction.cardholder.ui.widjet.CustomToolbar
 import com.gkreduction.domain.entity.ScanCode
-import com.google.android.material.navigation.NavigationView
 
 
 class MainActivity :
-    BaseActivity<MainViewModel>(R.layout.activity_main2, MainViewModel::class.java),
-    CategoryClickListener, NavigationView.OnNavigationItemSelectedListener {
+    BaseActivity<MainViewModel>(R.layout.activity_main, MainViewModel::class.java) {
     private lateinit var navController: NavController
 
     interface CameraResultListener {
@@ -45,21 +41,50 @@ class MainActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = this.findNavController(R.id.fcNavigation)
-        (binding as ActivityMain2Binding).viewModel = viewModel
+        (binding as ActivityMainBinding).viewModel = viewModel
 
 //        setSupportActionBar((binding as ActivityMainBinding).toolbar)
 //        (binding as ActivityMain2Binding).navView.setupWithNavController(navController)
 //        (binding as ActivityMain2Binding).navView.setNavigationItemSelectedListener(this)
 
-//        initListener()
+        initListener()
     }
 
-//    private fun initListener() {
-//        (binding as ActivityMain2Binding).imageToolbar.setOnClickListener {
-//            (binding as ActivityMainBinding).drawerLayout.openDrawer(GravityCompat.START)
-//        }
-//    }
+    private fun initListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            activateToolbar(destination)
+            setButtonText(destination)
 
+        }
+    }
+
+    private fun activateToolbar(destination: NavDestination) {
+        (binding as ActivityMainBinding).toolbar.setImageByDestination(destination.id)
+    }
+
+
+    private fun setButtonText(destination: NavDestination) {
+        (binding as ActivityMainBinding).btOk.text
+        val text = when (destination.id) {
+            R.id.homeFragment -> resources.getString(R.string.add)
+            R.id.infoFragment -> resources.getString(R.string.back)
+            R.id.cardFragment -> resources.getString(R.string.revert)
+            else -> ""
+        }
+        setVisibilityButton(text.isNotEmpty())
+        (binding as ActivityMainBinding).btOk.text = text
+    }
+
+    fun setVisibilityButton(visible: Boolean) {
+        (binding as ActivityMainBinding).btOk.visibility = if (visible)
+            View.VISIBLE
+        else
+            View.GONE
+    }
+
+    fun getToolbar(): CustomToolbar {
+        return (binding as ActivityMainBinding).toolbar
+    }
 
     private fun navigateToCategory() {
         navController.navigate(R.id.categoryFragment)
@@ -72,21 +97,6 @@ class MainActivity :
     private fun navigateToHome() {
         navController.navigate(R.id.homeFragment)
 
-    }
-
-
-    override fun onItemClick(category: Category?) {
-        viewModel.sortListByCategory(category)
-    }
-
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_home -> navigateToHome()
-            R.id.nav_add -> navigateToAdd()
-            R.id.nav_category -> navigateToCategory()
-        }
-        (binding as ActivityMainBinding).drawerLayout.closeDrawer(GravityCompat.START)
-        return true
     }
 
 

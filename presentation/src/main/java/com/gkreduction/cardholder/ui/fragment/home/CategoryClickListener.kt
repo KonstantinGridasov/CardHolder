@@ -1,4 +1,4 @@
-package com.gkreduction.cardholder.ui.activity.main.adapter
+package com.gkreduction.cardholder.ui.fragment.home
 
 import com.gkreduction.domain.entity.Category
 
