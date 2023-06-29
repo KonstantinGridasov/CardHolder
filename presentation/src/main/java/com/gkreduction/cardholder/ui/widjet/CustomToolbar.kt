@@ -33,6 +33,7 @@ class CustomToolbar @JvmOverloads constructor(
         when (destinationId) {
             R.id.homeFragment -> image?.setImageResource(R.drawable.ic_info)
             R.id.cardFragment -> image?.setImageResource(R.drawable.ic_pencil)
+            R.id.addFragment -> image?.setImageResource(R.drawable.ic_trash)
 
         }
     }

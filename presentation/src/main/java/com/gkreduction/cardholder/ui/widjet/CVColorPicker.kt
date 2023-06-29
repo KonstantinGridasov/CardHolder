@@ -12,15 +12,14 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
     var listener: ((Int) -> Unit)? = null
 
     private val colors = intArrayOf(
-        Color.RED,
-        Color.YELLOW,
-        Color.parseColor("#FFFF00"),
-        Color.GREEN,
-        Color.parseColor("#80A6FF"),
-        Color.BLUE,
-        Color.parseColor("#8B00FF"),
-        Color.GRAY,
-        Color.BLACK,
+        Color.BLACK,/*ORANGE*/
+        Color.parseColor("#9400D3"),/*violet*/
+        Color.parseColor("#00008B"),/*dark BLUE*/
+        Color.parseColor("#00BFFF"),/*BLUE*/
+        Color.parseColor("#255F00"), /*GREEN*/
+        Color.parseColor("#FFFA0E"),/*YELLOW*/
+        Color.parseColor("#FF8C00"),/*ORANGE*/
+        Color.parseColor("#C41E3A"), /*RED*/
     )
 
 
@@ -56,7 +55,7 @@ class CVColorPicker(context: Context, attrs: AttributeSet?) : View(context, attr
 
     private fun initShader() {
         val shader = LinearGradient(
-          0f, 0f,0f, height.toFloat(),
+            width.toFloat(), 0f, 0f, 0f,
             colors, null, Shader.TileMode.CLAMP
         )
         mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)

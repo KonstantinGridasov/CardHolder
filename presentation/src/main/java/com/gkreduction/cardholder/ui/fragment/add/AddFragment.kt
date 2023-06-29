@@ -60,14 +60,18 @@ class AddFragment : BaseFragment<AddViewModel>(
 
     private fun initListener() {
         (binding as FragmentAddBinding).listener = this
-        (binding as FragmentAddBinding).pickerFirst.listener = { viewModel?.updateColorStart(it) }
-        (binding as FragmentAddBinding).pickerSecond.listener = { viewModel?.updateColorEnd(it) }
-        (binding as FragmentAddBinding).llGroupCategory.setOnClickListener { navigateToCategory() }
-
+        (binding as FragmentAddBinding).picker.listener = { setColor(it) }
+//        (binding as FragmentAddBinding).pickerSecond.listener = { viewModel?.updateColorEnd(it) }
+        (binding as FragmentAddBinding).tvCategory.setOnClickListener { navigateToCategory() }
+//
         if (activity is MainActivity) {
             (activity as MainActivity).setListenerCamera(this)
         }
-        (binding as FragmentAddBinding).llGroupSave.setOnClickListener { saveCard() }
+//        (binding as FragmentAddBinding).llGroupSave.setOnClickListener { saveCard() }
+    }
+
+    private fun setColor(color: Int) {
+        (binding as FragmentAddBinding).llItemColor.setBackgroundColor(color)
     }
 
     private fun saveCard() {

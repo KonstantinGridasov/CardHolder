@@ -70,6 +70,7 @@ class MainActivity :
             R.id.homeFragment -> resources.getString(R.string.add)
             R.id.infoFragment -> resources.getString(R.string.back)
             R.id.cardFragment -> resources.getString(R.string.revert)
+            R.id.addFragment -> resources.getString(R.string.save)
             else -> ""
         }
         setVisibilityButton(text.isNotEmpty())

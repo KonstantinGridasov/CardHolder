@@ -30,5 +30,15 @@
     <string name="powered_by">Powered by</string>
     <string name="name_developer">Konstantin Gridasov</string>
 
+    <string name="shop">Shop</string>
+    <string name="input_text">Enter name</string>
+    <string name="color">Color</string>
+
+    <string name="front">Front</string>
+    <string name="reverse">Reverse</string>
+    <string name="title">Title</string>
+    <string name="barcode">Barcode</string>
+    <string name="optional">(optional)</string>
+
 
 </resources>

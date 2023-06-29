@@ -19,235 +19,197 @@
             type="com.gkreduction.cardholder.ui.fragment.add.OnBarcodeListener" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:orientation="vertical">
+        android:background="?attr/colorPrimary">
 
-        <LinearLayout
-            android:id="@+id/ll_group_category"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_marginStart="@dimen/_3gkdp"
-            android:layout_marginTop="@dimen/_5gkdp"
-            android:layout_marginEnd="@dimen/_3gkdp"
-            android:background="@drawable/background_layout"
-            android:orientation="horizontal">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gui_ver55"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
 
-            <TextView
-                android:id="@+id/tv_category_name"
-                style="@style/Style_Text_medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10gkdp"
-                android:layout_weight=".5"
-                android:gravity="center_vertical|start"
-                android:text="@string/category"
-                android:textColor="@color/color_primary"
-                android:textSize="@dimen/_12gkdp" />
-
-            <TextView
-                android:id="@+id/tv_category_type"
-                style="@style/Style_Text_medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/_5gkdp"
-                android:layout_marginStart="@dimen/_20gkdp"
-                android:layout_weight=".5"
-                android:background="@drawable/category_active"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@{viewModel.card.category.catName}"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_9gkdp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/StyleNameAddHeader"
+            android:text="@string/category"
             android:layout_marginTop="@dimen/_10gkdp"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_3gkdp"
-            android:paddingBottom="@dimen/_3gkdp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <com.gkreduction.cardholder.ui.widjet.CVColorPicker
-                android:id="@+id/picker_first"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_5gkdp"
-                android:layout_weight="0.08" />
+
+        <TextView
+            android:id="@+id/tv_category_name"
+            style="@style/StyleNameInput"
+            android:text="@{viewModel.card.category.catName}"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55"
+            app:layout_constraintBottom_toBottomOf="@id/tv_category" />
+
+        <TextView
+            android:id="@+id/tv_shop"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginTop="@dimen/_8gkdp"
+            android:text="@string/shop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_category" />
+
+        <TextView
+            android:id="@+id/tv_shop_name"
+            style="@style/StyleNameInput"
+            android:hint="@string/input_text"
+            android:text="@{viewModel.card.cardName}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_shop"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55" />
+
+        <TextView
+            android:id="@+id/tv_color"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginTop="@dimen/_8gkdp"
+            android:text="@string/color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_shop" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_color"
+            android:layout_width="@dimen/_45gkdp"
+            android:layout_height="0dp"
+            app:cardCornerRadius="@dimen/_5gkdp"
+            android:layout_marginTop="@dimen/_10gkdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_color"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55"
+            app:layout_constraintTop_toBottomOf="@id/tv_shop_name">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.8"
-                android:orientation="vertical">
-
-                <com.gkreduction.cardholder.ui.widjet.MyCardView
-                    android:id="@+id/card_base"
-                    android:layout_width="@dimen/_150gkdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5gkdp"
-                    android:layout_marginEnd="@dimen/_5gkdp"
-                    app:cardCornerRadius="@dimen/_5gkdp"
-                    app:set_color_gradient="@{viewModel.card}">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/edit_header"
-                            style="@style/Style_Text_medium"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@{viewModel.card.cardName}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_10gkdp"
-                            android:textStyle="bold"
-                            app:edit_listeners="@{(s) -> viewModel.updateHeader(s)}" />
-
-                        <EditText
-                            android:id="@+id/edit_desc_base"
-                            style="@style/Style_Text_medium"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@{viewModel.card.cardBaseInfo}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_8gkdp"
-                            app:edit_listeners="@{(s) -> viewModel.updateBaseInfo(s)}" />
-
-                        <com.gkreduction.cardholder.ui.widjet.BarcodeView
-                            android:id="@+id/barcode_base"
-                            android:layout_width="@dimen/_110gkdp"
-                            android:layout_height="@dimen/_50gkdp"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:onClick="@{v->listener.onClickBarcode(v)}"
-                            android:padding="@dimen/_2gkdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:set_barcode="@{viewModel.card.primary}" />
-
-                    </LinearLayout>
-
-                </com.gkreduction.cardholder.ui.widjet.MyCardView>
-
-                <com.gkreduction.cardholder.ui.widjet.MyCardView
-                    android:id="@+id/card_secondary"
-                    android:layout_width="@dimen/_150gkdp"
-                    android:layout_height="@dimen/_90gkdp"
-                    android:layout_marginStart="@dimen/_5gkdp"
-                    android:layout_marginTop="@dimen/_10gkdp"
-                    android:layout_marginEnd="@dimen/_5gkdp"
-                    android:visibility="@{viewModel.card.existSecondary ? View.VISIBLE : View.GONE, default = gone}"
-                    app:cardCornerRadius="@dimen/_5gkdp"
-                    app:set_color_gradient="@{viewModel.card}">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="@dimen/_10gkdp"
-                        android:orientation="vertical">
-
-                        <EditText
-                            android:id="@+id/edit_desc_second"
-                            style="@style/Style_Text_medium"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@{viewModel.card.cardSecondInfo}"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_8gkdp"
-                            app:edit_listeners="@{(s) -> viewModel.updateSecondInfo(s)}" />
-
-                        <com.gkreduction.cardholder.ui.widjet.BarcodeView
-                            android:id="@+id/barcode_second"
-                            android:layout_width="@dimen/_110gkdp"
-                            android:layout_height="@dimen/_50gkdp"
-                            android:layout_gravity="center_vertical|center_horizontal"
-                            android:onClick="@{v->listener.onClickBarcode(v)}"
-                            android:padding="@dimen/_5gkdp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:set_barcode="@{viewModel.card.secondary}" />
-
-                    </LinearLayout>
-
-                </com.gkreduction.cardholder.ui.widjet.MyCardView>
-            </LinearLayout>
-
-            <com.gkreduction.cardholder.ui.widjet.CVColorPicker
-                android:id="@+id/picker_second"
-                android:layout_width="0dp"
+                android:id="@+id/ll_item_color"
+                android:layout_width="match_parent"
+                android:background="@{viewModel.card.colorStart}"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/_5gkdp"
-                android:layout_weight="0.08" />
+                android:orientation="vertical" />
+        </com.google.android.material.card.MaterialCardView>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <com.gkreduction.cardholder.ui.widjet.CVColorPicker
+            android:id="@+id/picker"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_marginStart="@dimen/_3gkdp"
+            android:layout_height="@dimen/_20gkdp"
+            android:layout_marginStart="@dimen/_5gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
-            android:layout_marginEnd="@dimen/_3gkdp"
-            android:background="@drawable/background_layout">
+            android:layout_marginEnd="@dimen/_5gkdp"
+            app:layout_constraintTop_toBottomOf="@id/tv_color" />
 
-            <TextView
-                android:id="@+id/tv_checkBox"
-                style="@style/Style_Text_medium"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10gkdp"
-                android:layout_weight=".7"
-                android:gravity="center_vertical|start"
-                android:text="@string/second_code"
-                android:textColor="@color/color_primary"
-                android:textSize="@dimen/_13gkdp" />
 
-            <CheckBox
-                android:id="@+id/checkbox"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/_4gkdp"
-                android:layout_weight="0.15"
-                android:checked="@={viewModel.card.existSecondary}"
-                android:gravity="center"
-                android:onCheckedChanged="@{(v,ch)->viewModel.updateExist(ch)}"
-                android:textSize="@dimen/_10gkdp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_card_info_first"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginTop="@dimen/_8gkdp"
+            android:text="@string/front"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/picker" />
 
-        <LinearLayout
-            android:id="@+id/ll_group_save"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30gkdp"
+        <TextView
+            android:id="@+id/header_card_name_first"
+            style="@style/StyleNameAddHeader"
             android:layout_marginStart="@dimen/_10gkdp"
-            android:layout_marginTop="@dimen/_20gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:text="@string/title"
+            app:layout_constraintStart_toStartOf="@id/tv_card_info_first"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_info_first" />
+
+
+        <TextView
+            android:id="@+id/tv_card_name_first"
+            style="@style/StyleNameInput"
+            android:hint="@string/input_text"
+            android:text="@{viewModel.card.cardBaseInfo}"
+            app:layout_constraintBottom_toBottomOf="@id/header_card_name_first"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55" />
+
+        <TextView
+            android:id="@+id/header_card_barcode_first"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginStart="@dimen/_10gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:text="@string/barcode"
+            app:layout_constraintStart_toStartOf="@id/tv_card_info_first"
+            app:layout_constraintTop_toBottomOf="@id/header_card_name_first" />
+
+        <com.gkreduction.cardholder.ui.widjet.BarcodeView
+            android:id="@+id/barcode_base"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="@dimen/_10gkdp"
-            android:background="@drawable/background_button_corners"
-            android:orientation="horizontal">
+            android:adjustViewBounds="true"
+            android:onClick="@{v->listener.onClickBarcode(v)}"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/header_card_barcode_first"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55"
+            app:layout_constraintTop_toTopOf="@id/header_card_barcode_first"
+            app:set_barcode="@{viewModel.card.primary}" />
 
-            <TextView
-                android:id="@+id/tv_save"
-                style="@style/Style_Text_medium"
-
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_10gkdp"
-                android:layout_weight=".5"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/save"
-                android:textColor="@color/color_primary"
-                android:textSize="@dimen/_13gkdp" />
-
-
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_card_info_second"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginTop="@dimen/_8gkdp"
+            android:text="@string/reverse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_card_barcode_first" />
 
 
+        <TextView
+            android:id="@+id/tv_card_info_second_"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginStart="@dimen/_5gkdp"
+            android:fontFamily="@font/comfortaa_bold"
+            android:text="@string/optional"
+            android:textSize="@dimen/_8gkdp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_card_info_second"
+            app:layout_constraintStart_toEndOf="@id/tv_card_info_second" />
+
+
+        <TextView
+            android:id="@+id/header_card_name_second"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginStart="@dimen/_10gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:text="@string/title"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="@id/tv_card_info_second"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_info_second" />
+
+
+        <TextView
+            android:id="@+id/tv_card_name_second"
+            style="@style/StyleNameInput"
+            android:hint="@string/input_text"
+            android:text="@{viewModel.card.cardSecondInfo}"
+            app:layout_constraintBottom_toBottomOf="@id/header_card_name_second"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55" />
+
+        <TextView
+            android:id="@+id/header_card_barcode_second"
+            style="@style/StyleNameAddHeader"
+            android:layout_marginStart="@dimen/_10gkdp"
+            android:layout_marginTop="@dimen/_5gkdp"
+            android:text="@string/barcode"
+            app:layout_constraintStart_toStartOf="@id/tv_card_info_second"
+            app:layout_constraintTop_toBottomOf="@id/header_card_name_second" />
+
+        <com.gkreduction.cardholder.ui.widjet.BarcodeView
+            android:id="@+id/barcode_second"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_10gkdp"
+            android:adjustViewBounds="true"
+            android:onClick="@{v->listener.onClickBarcode(v)}"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@id/header_card_barcode_second"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gui_ver55"
+            app:layout_constraintTop_toTopOf="@id/header_card_barcode_second"
+            app:set_barcode="@{viewModel.card.secondary}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
