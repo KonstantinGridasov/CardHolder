@@ -19,14 +19,16 @@
     <color name="colorForegroundDay">#FFFFFFFF</color>
     <color name="colorActiveDay">#EBECF1</color>
     <color name="colorNotActiveDay">#CDCDCD</color>
+
     <color name="colorTextActiveDay">#FF000000</color>
     <color name="colorTextNotActiveDay">#979797</color>
 
     <!--    Night   -->
-    <color name="colorBackgroundNight">#979797</color>
+    <color name="colorBackgroundNight">#505050</color>
     <color name="colorForegroundNight">#121212</color>
     <color name="colorActiveNight">#162242</color>
     <color name="colorNotActiveNight">#4D4D4D</color>
+
     <color name="colorTextActiveNight">#FFFFFFFF</color>
     <color name="colorTextNotActiveNight">#FF000000</color>
 
