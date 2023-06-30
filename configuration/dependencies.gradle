@@ -23,6 +23,7 @@ ext {
     lifecycle = '2.5.1'
     kotlin_stdlib_jdk8 = '1.8.0'
     navigationVersion = '2.5.3'
+
     /*RX*/
     rxKotlinVersion = '2.4.0'
     rxAndroidVersion = '2.1.1'
@@ -41,10 +42,6 @@ ext {
     glideVersion = '4.14.2'
     picassoVersion = '2.8'
 
-    /*Network*/
-    gson_version = '2.8.5'
-    retrofitVersion = '2.9.0'
-    okHttpVersion = '4.10.0'
 
     camerax_version = '1.3.0-alpha05'
 
@@ -83,8 +80,6 @@ ext {
             'androidx.appcompat:appcompat:1.6.1',
             'com.google.android.material:material:1.6.0',
             "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}",
-            'com.github.sparrow007:carouselrecyclerview:1.2.6',
-            'com.google.android.flexbox:flexbox:3.0.0',
 
 
             /*Bar Code scanner */
@@ -143,12 +138,6 @@ ext {
             /*RX*/
             "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion",
 
-            /*Network*/
-            "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
-            "com.google.code.gson:gson:$gson_version",
-            "com.squareup.retrofit2:retrofit:$retrofitVersion",
-            "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
-            "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     ]
 
     dataTestDependencies = [
