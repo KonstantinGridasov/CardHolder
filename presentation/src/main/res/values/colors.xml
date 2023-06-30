@@ -24,7 +24,7 @@
 
     <!--    Night   -->
     <color name="colorBackgroundNight">#979797</color>
-    <color name="colorForegroundNight">#020D36</color>
+    <color name="colorForegroundNight">#121212</color>
     <color name="colorActiveNight">#162242</color>
     <color name="colorNotActiveNight">#4D4D4D</color>
     <color name="colorTextActiveNight">#FFFFFFFF</color>

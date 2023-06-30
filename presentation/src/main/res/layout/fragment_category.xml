@@ -19,43 +19,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
+        android:background="?attr/colorPrimary"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/add_category"
-            android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:layout_marginStart="@dimen/_5gkdp"
-            android:layout_marginTop="@dimen/_10gkdp"
-            android:layout_marginEnd="@dimen/_5gkdp"
-            android:background="@drawable/background_button_corners"
-            android:gravity="center"
-            android:onClick="@{()->viewModel.addNewCategory()}"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/_10gkdp"
-                android:layout_height="@dimen/_10gkdp"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/_10gkdp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"/>
-
-            <TextView
-                style="@style/Style_Text_medium"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/_5gkdp"
-                android:layout_marginEnd="@dimen/_5gkdp"
-                android:gravity="start|center_vertical"
-                android:maxLines="1"
-                android:padding="@dimen/_4gkdp"
-                android:text="@string/add"
-                android:textColor="@color/color_primary"
-                android:textSize="@dimen/_10gkdp"
-                android:textStyle="bold" />
-        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_search"
@@ -64,13 +29,11 @@
             android:layout_marginStart="@dimen/_5gkdp"
             android:layout_marginTop="@dimen/_10gkdp"
             android:layout_marginEnd="@dimen/_5gkdp"
-            android:background="@android:color/transparent"
             app:item_chooses="@{viewModel.chooses}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:list_items="@{viewModel.list}"
             app:list_items_click="@{listenerClick}"
-            tools:listitem="@layout/item_list" />
-
+            tools:listitem="@layout/item_category" />
     </LinearLayout>
 
 </layout>

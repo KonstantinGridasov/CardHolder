@@ -55,8 +55,8 @@ class MainActivity :
         navController.addOnDestinationChangedListener { _, destination, _ ->
             activateToolbar(destination)
             setButtonText(destination)
-
         }
+
     }
 
     private fun activateToolbar(destination: NavDestination) {
@@ -71,6 +71,7 @@ class MainActivity :
             R.id.infoFragment -> resources.getString(R.string.back)
             R.id.cardFragment -> resources.getString(R.string.revert)
             R.id.addFragment -> resources.getString(R.string.save)
+            R.id.categoryFragment -> resources.getString(R.string.save)
             else -> ""
         }
         setVisibilityButton(text.isNotEmpty())
@@ -91,20 +92,6 @@ class MainActivity :
     fun getButton(): AppCompatButton {
         return (binding as ActivityMainBinding).btOk
     }
-
-    private fun navigateToCategory() {
-        navController.navigate(R.id.categoryFragment)
-    }
-
-    private fun navigateToAdd() {
-        navController.navigate(R.id.addFragment)
-    }
-
-    private fun navigateToHome() {
-        navController.navigate(R.id.homeFragment)
-
-    }
-
 
     fun updateToolbarName(name: String?) {
         viewModel.updateToolbarName(name)

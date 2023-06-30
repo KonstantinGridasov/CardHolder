@@ -10,7 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.databinding.ItemListBinding
+import com.gkreduction.cardholder.databinding.ItemCategoryBinding
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Category
 
@@ -18,6 +18,7 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
     RecyclerView.Adapter<AdapterCategoryList.ViewHolder>() {
     private var items: List<Category> = ArrayList()
     private var chooses: Long = -1L
+    private var oldPosition: Int = -1
 
     private enum class ModeCategory {
         EDIT,
@@ -29,24 +30,23 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding: ItemListBinding =
-            DataBindingUtil.inflate(inflater, R.layout.item_list, parent, false)
+        val binding: ItemCategoryBinding =
+            DataBindingUtil.inflate(inflater, R.layout.item_category, parent, false)
         return ViewHolder(binding)
     }
 
-    inner class ViewHolder(val binding: ItemListBinding) :
+    inner class ViewHolder(val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.binding.isModeEdit = false
         holder.binding.etCategoryName.setText(items[position].catName)
         holder.binding.clickItemView.setOnClickListener {
-            if ((items[position].catId) == chooses) {
-                chooses = -1L
-                deactivate(holder)
-                listener?.onChoose(null)
-            } else {
+            if ((items[position].catId) != chooses) {
+                if (oldPosition != -1)
+                    notifyItemChanged(oldPosition)
+                oldPosition = position
                 chooses = items[position].catId
                 activate(holder)
                 listener?.onChoose(items[position])
@@ -61,6 +61,7 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
             setModeEditable(holder, items[position])
         }
         if ((items[position].catId) == chooses) {
+            oldPosition = position
             activate(holder)
         } else {
             deactivate(holder)
@@ -140,14 +141,13 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
 
 
     private fun deactivate(holder: ViewHolder) {
-        holder.binding.ivChooser.visibility = View.INVISIBLE
         holder.itemView.setBackgroundResource(R.drawable.category_not_active)
 
     }
 
     private fun activate(holder: ViewHolder) {
-        holder.binding.ivChooser.visibility = View.VISIBLE
         holder.itemView.setBackgroundResource(R.drawable.category_active)
+
     }
 
 

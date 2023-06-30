@@ -2,4 +2,5 @@
 <resources>
     <attr name="colorOnPrimary" />
     <attr name="colorOnSecondary" />
+
 </resources>

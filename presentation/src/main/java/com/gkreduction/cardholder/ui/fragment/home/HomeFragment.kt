@@ -26,11 +26,20 @@ class HomeFragment : BaseFragment<HomeViewModel>(
         if (activity is MainActivity) {
             (activity as MainActivity).getToolbar().setOnImageClickListener { navigateToInfo() }
         }
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton().setOnClickListener {
+                navigateToAdd()
+            }
+        }
 
     }
 
     private fun navigateToInfo() {
         view?.findNavController()?.navigate(HomeFragmentDirections.toInfo())
+    }
+
+    private fun navigateToAdd() {
+        view?.findNavController()?.navigate(R.id.addFragment)
     }
 
     override fun onItemClick(id: Long) {

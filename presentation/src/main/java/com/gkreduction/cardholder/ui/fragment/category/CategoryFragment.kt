@@ -6,6 +6,7 @@ import com.gkreduction.cardholder.databinding.FragmentCategoryBinding
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.base.BaseFragment
 import com.gkreduction.cardholder.ui.dialog.DialogInfo
+import com.gkreduction.cardholder.ui.fragment.add.AddFragmentArgs
 import com.gkreduction.cardholder.ui.fragment.category.adapter.CategoryAdapterClickListener
 import com.gkreduction.domain.entity.Category
 
@@ -13,6 +14,9 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
     R.layout.fragment_category,
     CategoryViewModel::class.java
 ), CategoryAdapterClickListener {
+
+    private var category: Category? = null
+
     override fun onStart() {
         super.onStart()
         (binding as FragmentCategoryBinding).viewModel = viewModel
@@ -22,11 +26,21 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
 
     private fun initListeners() {
         (binding as FragmentCategoryBinding).listenerClick = this
+        if (activity is MainActivity) {
+            (activity as MainActivity).getToolbar()
+                .setOnImageClickListener { viewModel?.addNewCategory() }
+        }
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton().setOnClickListener {
+                navigateToBack(category)
+            }
+        }
     }
 
 
     override fun onChoose(category: Category?) {
-        navigateToBack(category)
+        this.category = category
+//        navigateToBack(category)
     }
 
     override fun addCategory(string: String) {
