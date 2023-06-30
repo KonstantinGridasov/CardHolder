@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.fragment.category.CategoryViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.category.CategoryViewModel" />
 
         <variable
             name="listenerClick"
-            type="com.gkreduction.cardholder.ui.fragment.category.adapter.CategoryAdapterClickListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener" />
     </data>
 
     <LinearLayout

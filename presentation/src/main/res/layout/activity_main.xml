@@ -10,7 +10,7 @@
 
         <variable
             name="itemListener"
-            type="com.gkreduction.cardholder.ui.fragment.home.CardClickListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.home.CardClickListener" />
 
 
         <variable

@@ -5,6 +5,7 @@ import com.gkreduction.cardholder.CardHolderApp
 import com.gkreduction.cardholder.di.module.ActivityModule
 import com.gkreduction.cardholder.di.module.AppModule
 import com.gkreduction.cardholder.di.module.DbModule
+import com.gkreduction.cardholder.di.module.SharedModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -19,6 +20,7 @@ import javax.inject.Singleton
         DbModule::class,
         AndroidInjectionModule::class,
         ActivityModule::class,
+        SharedModule::class
     ]
 )
 interface AppComponent : AndroidInjector<CardHolderApp> {

@@ -14,7 +14,7 @@
 
         <variable
             name="viewmodel"
-            type="com.gkreduction.cardholder.ui.fragment.card.CardViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.card.CardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

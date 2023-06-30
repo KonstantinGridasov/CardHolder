@@ -3,8 +3,10 @@ package com.gkreduction.cardholder.di.module
 import com.gkreduction.cardholder.di.scope.CameraScope
 import com.gkreduction.cardholder.di.scope.DialogScope
 import com.gkreduction.cardholder.di.scope.MainScope
+import com.gkreduction.cardholder.di.scope.SplashScope
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
+import com.gkreduction.cardholder.ui.activity.splash.SplashScreenActivity
 import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
@@ -21,6 +23,10 @@ abstract class ActivityModule {
     @MainScope
     @ContributesAndroidInjector(modules = [MainModule::class])
     abstract fun contributesMain(): MainActivity
+
+    @SplashScope
+    @ContributesAndroidInjector(modules = [SplashModule::class])
+    abstract fun contributesSplash(): SplashScreenActivity
 
     @CameraScope
     @ContributesAndroidInjector(modules = [CameraModule::class])

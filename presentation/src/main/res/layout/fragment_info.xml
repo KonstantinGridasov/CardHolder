@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.fragment.info.InfoViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.info.InfoViewModel" />
 
     </data>
 

@@ -6,17 +6,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.gkreduction.cardholder.di.scope.MainScope
 import com.gkreduction.cardholder.ui.activity.main.MainViewModel
-import com.gkreduction.cardholder.ui.fragment.add.AddFragment
-import com.gkreduction.cardholder.ui.fragment.add.AddViewModel
-import com.gkreduction.cardholder.ui.fragment.card.CardFragment
-import com.gkreduction.cardholder.ui.fragment.card.CardViewModel
-import com.gkreduction.cardholder.ui.fragment.category.CategoryFragment
-import com.gkreduction.cardholder.ui.fragment.category.CategoryViewModel
-import com.gkreduction.cardholder.ui.fragment.home.HomeFragment
-import com.gkreduction.cardholder.ui.fragment.home.HomeViewModel
-import com.gkreduction.cardholder.ui.fragment.info.InfoFragment
-import com.gkreduction.cardholder.ui.fragment.info.InfoViewModel
+import com.gkreduction.cardholder.ui.activity.main.fragment.add.AddFragment
+import com.gkreduction.cardholder.ui.activity.main.fragment.add.AddViewModel
+import com.gkreduction.cardholder.ui.activity.main.fragment.card.CardFragment
+import com.gkreduction.cardholder.ui.activity.main.fragment.card.CardViewModel
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.CategoryFragment
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.CategoryViewModel
+import com.gkreduction.cardholder.ui.activity.main.fragment.home.HomeFragment
+import com.gkreduction.cardholder.ui.activity.main.fragment.home.HomeViewModel
+import com.gkreduction.cardholder.ui.activity.main.fragment.info.InfoFragment
+import com.gkreduction.cardholder.ui.activity.main.fragment.info.InfoViewModel
 import com.gkreduction.data.db.DbServiceImpl
+import com.gkreduction.data.shared.SharedServiceImpl
 import com.gkreduction.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -71,6 +72,10 @@ abstract class MainModule {
         @MainScope
         fun providesDeleteCardUseCase(service: DbServiceImpl) = DeleteCardUseCase(service)
 
+        @Provides
+        @MainScope
+        fun providesSaveThemeUseCase(service: SharedServiceImpl) = SaveThemeUseCase(service)
+
 
         @Provides
         fun provideMainModule(
@@ -85,7 +90,8 @@ abstract class MainModule {
             updateCardUseCase: UpdateCardUseCase,
             getCategoryByNameUseCase: GetCategoryByNameUseCase,
             getCardByIdUseCase: GetCardByIdUseCase,
-            deleteCardUseCase: DeleteCardUseCase
+            deleteCardUseCase: DeleteCardUseCase,
+            saveThemeUseCase: SaveThemeUseCase
 
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
@@ -132,7 +138,8 @@ abstract class MainModule {
 
                         modelClass.isAssignableFrom(InfoViewModel::class.java) ->
                             InfoViewModel(
-                                app
+                                app,
+                                saveThemeUseCase
 
                             ) as T
 

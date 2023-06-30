@@ -12,11 +12,11 @@
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.fragment.add.AddViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.add.AddViewModel" />
 
         <variable
             name="listener"
-            type="com.gkreduction.cardholder.ui.fragment.add.OnBarcodeListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.add.OnBarcodeListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

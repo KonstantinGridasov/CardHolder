@@ -10,16 +10,16 @@
 
         <variable
             name="itemListener"
-            type="com.gkreduction.cardholder.ui.fragment.home.CardClickListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.home.CardClickListener" />
 
         <variable
             name="categoryClick"
-            type="com.gkreduction.cardholder.ui.fragment.home.CategoryClickListener" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.home.CategoryClickListener" />
 
 
         <variable
             name="viewModel"
-            type="com.gkreduction.cardholder.ui.fragment.home.HomeViewModel" />
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.home.HomeViewModel" />
 
 
     </data>

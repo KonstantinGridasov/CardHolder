@@ -4,8 +4,9 @@
     package="com.gkreduction.cardholder">
 
     <uses-feature android:name="android.hardware.camera.any" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:name=".CardHolderApp"
@@ -23,8 +24,10 @@
             android:value="barcode_ui" />
 
 
+        <activity android:name=".ui.activity.main.MainActivity" />
+
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name=".ui.activity.splash.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activity.camera.CameraActivity" />
+
     </application>
 
 </manifest>
