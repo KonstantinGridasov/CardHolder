@@ -15,11 +15,9 @@ import io.reactivex.schedulers.Schedulers
 class CardViewModel(
     context: Context,
     private var getCardByIdUseCase: GetCardByIdUseCase,
-    private var deleteCardUseCase: DeleteCardUseCase
 ) :
     BaseAndroidViewModel(context.applicationContext as Application) {
     private var getCardById: Disposable? = null
-    private var deleteCardDis: Disposable? = null
 
     var card = ObservableField<Card>()
     var nameToolbar = MutableLiveData<String>()
@@ -45,21 +43,4 @@ class CardViewModel(
 
     }
 
-    fun deleteCard() {
-        val card = card.get()
-        if (card != null) {
-            if (deleteCardDis != null)
-                removeDisposable(deleteCardDis!!)
-
-            deleteCardDis = deleteCardUseCase
-                .execute(card)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                }
-
-            addDisposable(deleteCardDis!!)
-        }
-
-    }
 }

@@ -126,15 +126,16 @@ abstract class MainModule {
                                 app, saveCardUseCase,
                                 getCategoryByNameUseCase,
                                 saveCategoryUseCase,
-                                getCardByIdUseCase, updateCardUseCase
+                                getCardByIdUseCase, updateCardUseCase,
+                                deleteCardUseCase
+
                             ) as T
 
                         modelClass.isAssignableFrom(CardViewModel::class.java) ->
                             CardViewModel(
                                 app, getCardByIdUseCase,
-                                deleteCardUseCase
 
-                            ) as T
+                                ) as T
 
                         modelClass.isAssignableFrom(InfoViewModel::class.java) ->
                             InfoViewModel(

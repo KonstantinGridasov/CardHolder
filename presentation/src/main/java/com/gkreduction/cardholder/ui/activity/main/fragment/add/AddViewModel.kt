@@ -21,7 +21,9 @@ class AddViewModel(
     private var getCategoryByNameUseCase: GetCategoryByNameUseCase,
     private var saveCategoryUseCase: SaveCategoryUseCase,
     private var getCardByIdUseCase: GetCardByIdUseCase,
-    private var updateCardUseCase: UpdateCardUseCase
+    private var updateCardUseCase: UpdateCardUseCase,
+    private var deleteCardUseCase: DeleteCardUseCase
+
 ) :
     BaseAndroidViewModel(context.applicationContext as Application) {
 
@@ -30,6 +32,7 @@ class AddViewModel(
     private var categoryByNameDis: Disposable? = null
     private var saveCategoryDis: Disposable? = null
     private var getCardByIdDis: Disposable? = null
+    private var deleteCardDis: Disposable? = null
 
     var card = ObservableField<Card>()
 
@@ -49,12 +52,6 @@ class AddViewModel(
         card.notifyChange()
     }
 
-    fun updateColorEnd(colorEnd: Int) {
-        val update = getExistOrNewCard()
-        update.colorEnd = colorEnd
-        card.set(update)
-        card.notifyChange()
-    }
 
     fun saveCard(card: Card) {
         if (saveCardDis != null)
@@ -66,6 +63,26 @@ class AddViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { }
         addDisposable(saveCardDis!!)
+    }
+
+
+    fun deleteCard() {
+        val card = card.get()
+        if (card != null) {
+            if (deleteCardDis != null)
+                removeDisposable(deleteCardDis!!)
+
+            deleteCardDis = deleteCardUseCase
+                .execute(card)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    this.card.set(getEmptyCard())
+                }
+
+            addDisposable(deleteCardDis!!)
+        }
+
     }
 
     fun updateCard(card: Card) {
@@ -80,7 +97,7 @@ class AddViewModel(
         addDisposable(updateCardDis!!)
     }
 
-    fun updateHeader(string: Observable<String>) {
+    fun updateCardName(string: Observable<String>) {
         observableSubscriber(string) {
             val update = getExistOrNewCard()
             update.cardName = it
@@ -88,16 +105,6 @@ class AddViewModel(
             card.notifyChange()
         }
 
-    }
-
-    fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
-        val update = getExistOrNewCard()
-        when (type) {
-            CameraActivity.TypeScan.BASE -> update.primary = scanCode
-            CameraActivity.TypeScan.SECONDARY -> update.secondary = scanCode
-        }
-        card.set(update)
-        card.notifyChange()
     }
 
     fun updateBaseInfo(string: Observable<String>) {
@@ -117,6 +124,17 @@ class AddViewModel(
             card.notifyChange()
         }
     }
+
+    fun setBarcode(scanCode: ScanCode, type: CameraActivity.TypeScan) {
+        val update = getExistOrNewCard()
+        when (type) {
+            CameraActivity.TypeScan.BASE -> update.primary = scanCode
+            CameraActivity.TypeScan.SECONDARY -> update.secondary = scanCode
+        }
+        card.set(update)
+        card.notifyChange()
+    }
+
 
     private fun observableSubscriber(string: Observable<String>, item: (String) -> Unit) {
         string

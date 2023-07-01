@@ -66,26 +66,6 @@ class CardFragment : BaseFragment<CardViewModel>(
         (activity as? MainActivity)?.updateToolbarName(nameToolbar)
     }
 
-    private fun showDialogDelete() {
-        val info = viewModel?.card?.get()?.cardName ?: ""
-
-        if (activity is MainActivity)
-            (activity as MainActivity).let {
-                val dialog = DialogInfo()
-                dialog.setListener(info) { isDell ->
-                    if (isDell) {
-                        viewModel?.deleteCard()
-                        navigateUp()
-                    }
-                }
-                dialog.show(it.supportFragmentManager, "")
-            }
-
-    }
-
-    private fun navigateUp() {
-        view?.findNavController()?.navigateUp()
-    }
 
     private fun navigateToEdit() {
         view?.findNavController()?.navigate(CardFragmentDirections.toEdit(id))

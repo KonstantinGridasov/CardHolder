@@ -7,6 +7,7 @@ import com.gkreduction.cardholder.databinding.FragmentAddBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.base.BaseFragment
+import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.domain.entity.ScanCode
 
 class AddFragment : BaseFragment<AddViewModel>(
@@ -61,17 +62,21 @@ class AddFragment : BaseFragment<AddViewModel>(
     private fun initListener() {
         (binding as FragmentAddBinding).listener = this
         (binding as FragmentAddBinding).picker.listener = { setColor(it) }
-//        (binding as FragmentAddBinding).pickerSecond.listener = { viewModel?.updateColorEnd(it) }
         (binding as FragmentAddBinding).tvCategory.setOnClickListener { navigateToCategory() }
-//
         if (activity is MainActivity) {
             (activity as MainActivity).setListenerCamera(this)
         }
-//        (binding as FragmentAddBinding).llGroupSave.setOnClickListener { saveCard() }
+        if (activity is MainActivity) {
+            (activity as MainActivity).getToolbar().setOnImageClickListener { showDialogDelete() }
+        }
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton().setOnClickListener { saveCard() }
+        }
     }
 
     private fun setColor(color: Int) {
         (binding as FragmentAddBinding).llItemColor.setBackgroundColor(color)
+        viewModel?.updateColorStart(color)
     }
 
     private fun saveCard() {
@@ -86,6 +91,27 @@ class AddFragment : BaseFragment<AddViewModel>(
 
     }
 
+    private fun showDialogDelete() {
+        val info = viewModel?.card?.get()?.cardName ?: ""
+
+        if (activity is MainActivity)
+            (activity as MainActivity).let {
+                val dialog = DialogInfo()
+                dialog.setListener(info) { isDell ->
+                    if (isDell) {
+                        viewModel?.deleteCard()
+//                        navigateUp()
+                    }
+                }
+                dialog.show(it.supportFragmentManager, "")
+            }
+
+    }
+
+    private fun navigateUp() {
+//        Or clear ??
+        view?.findNavController()?.navigateUp()
+    }
 
     private fun navigateToCameraActivity(type: CameraActivity.TypeScan) {
         if (activity is MainActivity) {
