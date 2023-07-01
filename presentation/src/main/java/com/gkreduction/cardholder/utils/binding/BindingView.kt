@@ -2,10 +2,12 @@ package com.gkreduction.cardholder.utils.binding
 
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.ui.activity.main.fragment.add.EditTextListener
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.AdapterCategoryList
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.DragItemTouchHelper
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.ui.widjet.MyCardView
 import com.gkreduction.cardholder.utils.AppTextWatcher
@@ -16,6 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
+
 
 object BindingView {
     @JvmStatic
@@ -74,10 +77,23 @@ object BindingView {
         listener: CategoryAdapterClickListener?
     ) {
         items?.let {
+
             val adapter = AdapterCategoryList(listener)
             adapter.updateItems(it)
             adapter.setActiveCategory(category)
             view.adapter = adapter
+            val callback: ItemTouchHelper.Callback = DragItemTouchHelper(adapter)
+
+            val mItemTouchHelper = ItemTouchHelper(callback)
+            mItemTouchHelper.attachToRecyclerView(view)
+            adapter.setDragListener(object : AdapterCategoryList.OnStartDragListener {
+                override fun onStartDrag(viewHolder: RecyclerView.ViewHolder?) {
+                    if (viewHolder != null) {
+                        mItemTouchHelper.startDrag(viewHolder)
+                    }
+                }
+            })
+
         }
 
     }

@@ -2,10 +2,7 @@ package com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -13,16 +10,26 @@ import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemCategoryBinding
 import com.gkreduction.cardholder.utils.getDefaultCategoryName
 import com.gkreduction.domain.entity.Category
+import java.util.*
+
 
 class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
-    RecyclerView.Adapter<AdapterCategoryList.ViewHolder>() {
+    RecyclerView.Adapter<AdapterCategoryList.ViewHolder>(), DragItemTouchHelper.MoveHelperAdapter {
     private var items: List<Category> = ArrayList()
     private var chooses: Long = -1L
-    private var oldPosition: Int = -1
+    private var mDragStartListener: OnStartDragListener? = null
 
     private enum class ModeCategory {
         EDIT,
         CREATE
+    }
+
+    interface OnStartDragListener {
+        fun onStartDrag(viewHolder: RecyclerView.ViewHolder?)
+    }
+
+    fun setDragListener(dragStartListener: OnStartDragListener) {
+        this.mDragStartListener = dragStartListener
     }
 
     private var mode: ModeCategory = ModeCategory.CREATE
@@ -39,19 +46,10 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
         RecyclerView.ViewHolder(binding.root)
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
         holder.binding.isModeEdit = false
         holder.binding.etCategoryName.setText(items[position].catName)
-        holder.binding.clickItemView.setOnClickListener {
-            if ((items[position].catId) != chooses) {
-                if (oldPosition != -1)
-                    notifyItemChanged(oldPosition)
-                oldPosition = position
-                chooses = items[position].catId
-                activate(holder)
-                listener?.onChoose(items[position])
-            }
-        }
         holder.binding.ivTrash.setOnClickListener {
             listener?.removeCategory(items[position])
         }
@@ -60,12 +58,7 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
             mode = ModeCategory.EDIT
             setModeEditable(holder, items[position])
         }
-        if ((items[position].catId) == chooses) {
-            oldPosition = position
-            activate(holder)
-        } else {
-            deactivate(holder)
-        }
+
         holder.binding.isDefaultCat =
             (items[position].catName == getDefaultCategoryName(holder.itemView.context))
 
@@ -74,6 +67,22 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
         } else
             setModeDefault(holder)
 
+        holder.binding.clickItemView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                if ((items[position].catId) != chooses) {
+                    chooses = items[position].catId
+                    listener?.onChoose(items[position])
+                }
+                deactivateAllItems()
+                mDragStartListener?.onStartDrag(holder)
+            }
+            false
+        }
+        if ((items[position].isActive)) {
+            activate(holder)
+        } else {
+            deactivate(holder)
+        }
         holder.binding.executePendingBindings()
 
     }
@@ -139,15 +148,27 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun deactivateAllItems() {
+        items.forEach {
+            it.isActive = it.catId == chooses
+        }
+        notifyDataSetChanged()
+
+    }
 
     private fun deactivate(holder: ViewHolder) {
         holder.itemView.setBackgroundResource(R.drawable.category_not_active)
-
     }
 
     private fun activate(holder: ViewHolder) {
         holder.itemView.setBackgroundResource(R.drawable.category_active)
+    }
 
+    override fun onItemMove(fromPosition: Int, toPosition: Int): Boolean {
+        Collections.swap(items, fromPosition, toPosition)
+        notifyItemMoved(fromPosition, toPosition)
+        return true
     }
 
 

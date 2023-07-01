@@ -8,5 +8,6 @@ data class Category(
     var position: Long = 0L,
     var serverCardId: Int = -1,
     var createdAt: Long = 0L,
-    var modifiedAt: Long = 0L
+    var modifiedAt: Long = 0L,
+    var isActive: Boolean = false
 ) : Serializable
