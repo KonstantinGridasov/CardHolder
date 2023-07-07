@@ -6,7 +6,6 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.domain.entity.Card
-import com.gkreduction.domain.usecase.DeleteCardUseCase
 import com.gkreduction.domain.usecase.GetCardByIdUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -20,7 +19,6 @@ class CardViewModel(
     private var getCardById: Disposable? = null
 
     var card = ObservableField<Card>()
-    var nameToolbar = MutableLiveData<String>()
     var isSecondCode = MutableLiveData<Boolean>()
 
     fun getCards(id: Long) {
@@ -34,7 +32,6 @@ class CardViewModel(
             .subscribe {
                 card.set(it)
                 if (it != null) {
-                    nameToolbar.value = it.cardName
                     isSecondCode.value = it.existSecondary
                 }
             }

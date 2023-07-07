@@ -38,12 +38,6 @@ class AddViewModel(
 
     fun getExistOrNewCard() = card.get() ?: getEmptyCard()
 
-    fun updateExist(isChecked: Boolean) {
-        val update = getExistOrNewCard()
-        update.existSecondary = isChecked
-        card.set(update)
-        card.notifyChange()
-    }
 
     fun updateColorStart(colorStart: Int) {
         val update = getExistOrNewCard()

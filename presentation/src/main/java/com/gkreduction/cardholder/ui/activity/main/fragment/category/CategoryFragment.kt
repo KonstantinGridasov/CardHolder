@@ -1,10 +1,12 @@
 package com.gkreduction.cardholder.ui.activity.main.fragment.category
 
+import android.util.Log
 import androidx.navigation.findNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.FragmentCategoryBinding
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.base.BaseFragment
 import com.gkreduction.cardholder.ui.dialog.DialogInfo
 import com.gkreduction.domain.entity.Category
@@ -12,7 +14,7 @@ import com.gkreduction.domain.entity.Category
 class CategoryFragment : BaseFragment<CategoryViewModel>(
     R.layout.fragment_category,
     CategoryViewModel::class.java
-), CategoryAdapterClickListener {
+), CategoryAdapterClickListener, OnChangePositionItemListener {
 
     private var category: Category? = null
 
@@ -25,6 +27,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
 
     private fun initListeners() {
         (binding as FragmentCategoryBinding).listenerClick = this
+        (binding as FragmentCategoryBinding).onChangeListener = this
         if (activity is MainActivity) {
             (activity as MainActivity).getToolbar()
                 .setOnImageClickListener { viewModel?.addNewCategory() }
@@ -78,5 +81,15 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
             else -> view?.findNavController()?.navigateUp()
         }
 
+    }
+
+    override fun onChange(items: List<Category>?) {
+        if (items != null) {
+            for (i in items.indices) {
+                items[i].position = i.toLong()
+            }
+        }
+
+//        items?.forEach { Log.d("TESTCATEGORY", it.catName) }
     }
 }

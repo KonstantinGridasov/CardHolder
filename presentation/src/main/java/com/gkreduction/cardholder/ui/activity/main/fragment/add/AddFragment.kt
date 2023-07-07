@@ -35,15 +35,7 @@ class AddFragment : BaseFragment<AddViewModel>(
             viewModel?.updateCategory(args.category)
         } else
             viewModel?.getDefaultCategory()
-        updateToolbarName()
         initListener()
-    }
-
-    private fun updateToolbarName() {
-        if (activity is MainActivity) {
-            (activity as MainActivity).updateToolbarName(context?.resources?.getString(R.string.text_editor_toolbar))
-
-        }
     }
 
     override fun onClickBarcode(view: View?) {
@@ -100,7 +92,7 @@ class AddFragment : BaseFragment<AddViewModel>(
                 dialog.setListener(info) { isDell ->
                     if (isDell) {
                         viewModel?.deleteCard()
-//                        navigateUp()
+                        navigateUp()
                     }
                 }
                 dialog.show(it.supportFragmentManager, "")
@@ -109,8 +101,7 @@ class AddFragment : BaseFragment<AddViewModel>(
     }
 
     private fun navigateUp() {
-//        Or clear ??
-        view?.findNavController()?.navigateUp()
+        view?.findNavController()?.popBackStack(R.id.homeFragment, true)
     }
 
     private fun navigateToCameraActivity(type: CameraActivity.TypeScan) {

@@ -20,6 +20,7 @@ open class DragItemTouchHelper(private val mAdapter: MoveHelperAdapter) :
 
     interface MoveHelperAdapter {
         fun onItemMove(fromPosition: Int, toPosition: Int): Boolean
+        fun movedFinish()
     }
 
     interface TouchViewHolder {
@@ -54,6 +55,20 @@ open class DragItemTouchHelper(private val mAdapter: MoveHelperAdapter) :
         if (target.adapterPosition != 0 && source.adapterPosition != 0)
             mAdapter.onItemMove(source.adapterPosition, target.adapterPosition)
         return true
+    }
+
+    override fun onMoved(
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        fromPos: Int,
+        target: RecyclerView.ViewHolder,
+        toPos: Int,
+        x: Int,
+        y: Int
+    ) {
+        super.onMoved(recyclerView, viewHolder, fromPos, target, toPos, x, y)
+        mAdapter.movedFinish()
+
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, i: Int) {}

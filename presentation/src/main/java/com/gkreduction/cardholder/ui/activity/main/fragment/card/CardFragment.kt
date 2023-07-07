@@ -37,11 +37,7 @@ class CardFragment : BaseFragment<CardViewModel>(
         if (activity is MainActivity) {
             (activity as MainActivity).getToolbar().setOnImageClickListener { navigateToEdit() }
         }
-        activity?.let {
-            viewModel?.nameToolbar?.observe(it) { name ->
-                updateNameToolbar(name)
-            }
-        }
+
 
         if (activity is MainActivity) {
             (activity as MainActivity).getButton()
@@ -62,9 +58,6 @@ class CardFragment : BaseFragment<CardViewModel>(
 
     }
 
-    private fun updateNameToolbar(nameToolbar: String?) {
-        (activity as? MainActivity)?.updateToolbarName(nameToolbar)
-    }
 
 
     private fun navigateToEdit() {

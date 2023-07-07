@@ -2,6 +2,7 @@ package com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
@@ -18,6 +19,11 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
     private var items: List<Category> = ArrayList()
     private var chooses: Long = -1L
     private var mDragStartListener: OnStartDragListener? = null
+    private var onChangeListener: OnChangePositionItemListener? = null
+    fun setOnChangeListener(onChangePositionItemListener: OnChangePositionItemListener?) {
+        onChangeListener = onChangePositionItemListener
+    }
+
 
     private enum class ModeCategory {
         EDIT,
@@ -68,6 +74,7 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
             setModeDefault(holder)
 
         holder.binding.clickItemView.setOnTouchListener { _, event ->
+
             if (event.action == MotionEvent.ACTION_DOWN) {
                 if ((items[position].catId) != chooses) {
                     chooses = items[position].catId
@@ -169,6 +176,10 @@ class AdapterCategoryList(val listener: CategoryAdapterClickListener?) :
         Collections.swap(items, fromPosition, toPosition)
         notifyItemMoved(fromPosition, toPosition)
         return true
+    }
+
+    override fun movedFinish() {
+        onChangeListener?.onChange(items)
     }
 
 

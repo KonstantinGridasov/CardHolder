@@ -8,6 +8,7 @@ import com.gkreduction.cardholder.ui.activity.main.fragment.add.EditTextListener
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.AdapterCategoryList
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.DragItemTouchHelper
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.ui.widjet.MyCardView
 import com.gkreduction.cardholder.utils.AppTextWatcher
@@ -71,10 +72,17 @@ object BindingView {
 
 
     @JvmStatic
-    @BindingAdapter("list_items", "item_chooses", "list_items_click", requireAll = false)
+    @BindingAdapter(
+        "list_items",
+        "item_chooses",
+        "list_items_click",
+        "on_change_position",
+        requireAll = false
+    )
     fun setCategoriesList(
         view: RecyclerView, items: List<Category>?, category: Category?,
-        listener: CategoryAdapterClickListener?
+        listener: CategoryAdapterClickListener?,
+        onChangePositionItemListener: OnChangePositionItemListener?
     ) {
         items?.let {
 
@@ -93,6 +101,7 @@ object BindingView {
                     }
                 }
             })
+            adapter.setOnChangeListener(onChangePositionItemListener)
 
         }
 

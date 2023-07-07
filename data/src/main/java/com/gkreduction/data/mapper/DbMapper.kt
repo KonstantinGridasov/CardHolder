@@ -73,7 +73,7 @@ class DbMapper {
     }
 
     fun getCardDb(card: Card): CardDb {
-        return if (card.existSecondary) CardDb(
+        return CardDb(
             cardId = card.cardId,
             categoryId = card.category.catId,
             colorStart = card.colorStart,
@@ -83,26 +83,13 @@ class DbMapper {
             cardSecondInfo = card.cardSecondInfo,
             typeBase = card.primary?.type ?: 0,
             valueBase = card.primary?.value ?: "",
-            existSecondary = card.existSecondary,
+            existSecondary = card.secondary == null,
             typeSecondary = card.secondary?.type ?: 0,
             valueSecondary = card.secondary?.value ?: "",
             createdAt = card.createdAt,
             modifiedAt = card.modifiedAt
         )
-        else CardDb(
-            cardId = card.cardId,
-            categoryId = card.category.catId,
-            colorStart = card.colorStart,
-            colorEnd = card.colorEnd,
-            cardName = card.cardName,
-            cardBaseInfo = card.cardBaseInfo,
-            cardSecondInfo = card.cardSecondInfo,
-            typeBase = card.primary?.type ?: 0,
-            valueBase = card.primary?.value ?: "",
-            existSecondary = card.existSecondary,
-            createdAt = card.createdAt,
-            modifiedAt = card.modifiedAt
-        )
+
     }
 
 
@@ -117,7 +104,7 @@ class DbMapper {
             cardSecondInfo = card.cardSecondInfo,
             primary = getScanCode(true, card),
             secondary = getScanCode(false, card),
-            existSecondary = card.existSecondary,
+            existSecondary = card.valueSecondary.isNotEmpty(),
             countOpen = card.countOpen,
             createdAt = card.createdAt,
             modifiedAt = card.modifiedAt
@@ -125,7 +112,6 @@ class DbMapper {
 
 
     }
-
 
 
     private fun getScanCode(base: Boolean, cardDb: CardDb): ScanCode {

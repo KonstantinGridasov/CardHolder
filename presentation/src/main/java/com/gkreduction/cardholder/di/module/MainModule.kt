@@ -103,8 +103,7 @@ abstract class MainModule {
                     return when {
                         modelClass.isAssignableFrom(MainViewModel::class.java) ->
                             MainViewModel(
-                                app, getAllCardsUseCase, getAllCategoryUseCase,
-                                saveCategoryUseCase, getCardByCategoryIdUseCase
+                                app
                             ) as T
 
                         modelClass.isAssignableFrom(HomeViewModel::class.java) ->

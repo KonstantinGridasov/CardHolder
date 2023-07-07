@@ -14,6 +14,10 @@
         <variable
             name="listenerClick"
             type="com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener" />
+
+        <variable
+            name="onChangeListener"
+            type="com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener" />
     </data>
 
     <LinearLayout
@@ -33,6 +37,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:list_items="@{viewModel.list}"
             app:list_items_click="@{listenerClick}"
+            app:on_change_position="@{onChangeListener}"
             tools:listitem="@layout/item_category" />
     </LinearLayout>
 

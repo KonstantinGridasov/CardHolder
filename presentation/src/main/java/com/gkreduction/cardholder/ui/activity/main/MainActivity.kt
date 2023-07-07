@@ -44,10 +44,6 @@ class MainActivity :
         navController = this.findNavController(R.id.fcNavigation)
         (binding as ActivityMainBinding).viewModel = viewModel
 
-//        setSupportActionBar((binding as ActivityMainBinding).toolbar)
-//        (binding as ActivityMain2Binding).navView.setupWithNavController(navController)
-//        (binding as ActivityMain2Binding).navView.setNavigationItemSelectedListener(this)
-
         initListener()
     }
 
@@ -92,11 +88,6 @@ class MainActivity :
     fun getButton(): AppCompatButton {
         return (binding as ActivityMainBinding).btOk
     }
-
-    fun updateToolbarName(name: String?) {
-        viewModel.updateToolbarName(name)
-    }
-
 
     fun setListenerCamera(listener: CameraResultListener) {
         this.listenerCam = listener
