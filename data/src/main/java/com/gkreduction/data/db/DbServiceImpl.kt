@@ -141,4 +141,16 @@ class DbServiceImpl(
             }
     }
 
+    override fun updatePositionCategory(params: List<Category>): Observable<Boolean> {
+        return Observable.just(true)
+            .flatMap {
+                Observable
+                    .just(cardDao.updatePositionCategory(dbMapper.mapCategoryToDb(params)))
+                    .flatMap {
+                        Observable.just(true)
+                    }
+
+            }
+    }
+
 }

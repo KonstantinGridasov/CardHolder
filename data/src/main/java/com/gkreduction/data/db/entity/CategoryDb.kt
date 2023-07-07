@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey
 data class CategoryDb(
     @PrimaryKey(autoGenerate = true)
     var catId: Long = 0L,
+    var position: Int = 0,
     var serverCategoryId: Int = -1,
     var catName: String = "",
 

@@ -76,6 +76,11 @@ abstract class MainModule {
         @MainScope
         fun providesSaveThemeUseCase(service: SharedServiceImpl) = SaveThemeUseCase(service)
 
+        @Provides
+        @MainScope
+        fun providesUpdatePositionUseCase(service: DbServiceImpl) =
+            UpdatePositionCategoryUseCase(service)
+
 
         @Provides
         fun provideMainModule(
@@ -91,7 +96,8 @@ abstract class MainModule {
             getCategoryByNameUseCase: GetCategoryByNameUseCase,
             getCardByIdUseCase: GetCardByIdUseCase,
             deleteCardUseCase: DeleteCardUseCase,
-            saveThemeUseCase: SaveThemeUseCase
+            saveThemeUseCase: SaveThemeUseCase,
+            updatePositionCategoryUseCase: UpdatePositionCategoryUseCase
 
         ): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
@@ -118,7 +124,8 @@ abstract class MainModule {
                                 getAllCategoryUseCase,
                                 saveCategoryUseCase,
                                 updateCategoryUseCase,
-                                deleteCategoryUseCase
+                                deleteCategoryUseCase,
+                                updatePositionCategoryUseCase
                             ) as T
                         modelClass.isAssignableFrom(AddViewModel::class.java) ->
                             AddViewModel(

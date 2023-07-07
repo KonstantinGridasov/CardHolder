@@ -49,12 +49,6 @@ class HomeViewModel(
 
     fun sortListByCategory(category: Category?) {
         choosesCategory.set(category)
-        allCategories.forEach {
-            if (it.catName == category?.catName)
-                it.position = -1L
-            else
-                it.position = it.catId
-        }
         val list = allCategories.sortedWith(compareBy { it.position })
         allCategories = list
         showAllCategories = false

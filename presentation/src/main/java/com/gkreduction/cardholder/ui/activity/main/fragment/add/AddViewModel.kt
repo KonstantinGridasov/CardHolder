@@ -213,7 +213,6 @@ class AddViewModel(
     private fun getEmptyCard(): Card {
         val card = Card()
         card.colorStart = (Int.MIN_VALUE..Int.MAX_VALUE).random()
-        card.colorEnd = (Int.MIN_VALUE..Int.MAX_VALUE).random()
         return card
     }
 }

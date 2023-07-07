@@ -11,7 +11,6 @@ data class CardDb(
     var serverCardId: Int = -1,
     var categoryId: Long = 0L,
     var colorStart: Int,
-    var colorEnd: Int,
     var countOpen: Int = 0,
     var cardName: String = "",
     var cardBaseInfo: String = "",

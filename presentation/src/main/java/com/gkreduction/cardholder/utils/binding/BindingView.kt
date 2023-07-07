@@ -10,7 +10,6 @@ import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.Cat
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.DragItemTouchHelper
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
-import com.gkreduction.cardholder.ui.widjet.MyCardView
 import com.gkreduction.cardholder.utils.AppTextWatcher
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
@@ -39,17 +38,6 @@ object BindingView {
     @BindingAdapter("set_barcode", requireAll = false)
     fun setScanView(view: BarcodeView, barcode: ScanCode?) {
         barcode?.let { view.scanCode = it }
-    }
-
-
-    @JvmStatic
-    @BindingAdapter("set_color_gradient", "bottom_to_top", requireAll = false)
-    fun setColorGradient(view: MyCardView, card: Card?, bottom_to_top: Boolean?) {
-        card?.let {
-            if (bottom_to_top == true)
-                view.revertOrientation()
-            view.changeColor(it.colorStart, it.colorEnd)
-        }
     }
 
 

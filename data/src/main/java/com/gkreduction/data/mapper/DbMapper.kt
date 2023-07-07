@@ -44,6 +44,14 @@ class DbMapper {
         return result
     }
 
+    fun mapCategoryToDb(list: List<Category>): List<CategoryDb> {
+        val result = ArrayList<CategoryDb>()
+        for (i in list)
+            result.add(mapCategory(i))
+
+        return result
+    }
+
     fun mapCardToCardWithCategory(card: Card): CardWithCategory {
         val list = ArrayList<CardDb>()
         list.add(getCardDb(card))
@@ -55,7 +63,7 @@ class DbMapper {
             Category(
                 catId = category.catId,
                 catName = category.catName,
-                position = category.catId,
+                position = category.position,
                 createdAt = category.createdAt,
                 modifiedAt = category.modifiedAt
             )
@@ -65,7 +73,9 @@ class DbMapper {
 
     fun mapCategory(category: Category): CategoryDb {
         return CategoryDb(
-            catId = category.catId, catName = category.catName,
+            catId = category.catId,
+            catName = category.catName,
+            position = category.position,
             createdAt = category.createdAt,
             modifiedAt = category.modifiedAt
         )
@@ -77,7 +87,6 @@ class DbMapper {
             cardId = card.cardId,
             categoryId = card.category.catId,
             colorStart = card.colorStart,
-            colorEnd = card.colorEnd,
             cardName = card.cardName,
             cardBaseInfo = card.cardBaseInfo,
             cardSecondInfo = card.cardSecondInfo,
@@ -96,7 +105,6 @@ class DbMapper {
     private fun mapCard(card: CardDb, category: CategoryDb): Card {
         return Card(
             colorStart = card.colorStart,
-            colorEnd = card.colorEnd,
             cardId = card.cardId,
             category = mapCategory(category)!!,
             cardName = card.cardName,

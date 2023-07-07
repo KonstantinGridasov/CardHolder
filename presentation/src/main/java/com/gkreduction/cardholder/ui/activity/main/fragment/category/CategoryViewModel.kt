@@ -5,10 +5,7 @@ import android.content.Context
 import androidx.databinding.ObservableField
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
 import com.gkreduction.domain.entity.Category
-import com.gkreduction.domain.usecase.DeleteCategoryUseCase
-import com.gkreduction.domain.usecase.GetAllCategoryUseCase
-import com.gkreduction.domain.usecase.SaveCategoryUseCase
-import com.gkreduction.domain.usecase.UpdateCategoryUseCase
+import com.gkreduction.domain.usecase.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +15,8 @@ class CategoryViewModel(
     private var getAllCategoryUseCase: GetAllCategoryUseCase,
     private var saveCategoryUseCase: SaveCategoryUseCase,
     private var updateCategoryUseCase: UpdateCategoryUseCase,
-    private var deleteCategoryUseCase: DeleteCategoryUseCase
+    private var deleteCategoryUseCase: DeleteCategoryUseCase,
+    private var updatePosition: UpdatePositionCategoryUseCase
 ) :
     BaseAndroidViewModel(context.applicationContext as Application) {
 
@@ -26,6 +24,7 @@ class CategoryViewModel(
     private var saveCategoryDis: Disposable? = null
     private var updateCategoryDis: Disposable? = null
     private var deleteCategoryDis: Disposable? = null
+    private var updatePositionDis: Disposable? = null
 
     private var allCategories = ArrayList<Category>()
     var list = ObservableField<List<Category>>()
@@ -101,5 +100,20 @@ class CategoryViewModel(
 
         addDisposable(updateCategoryDis!!)
 
+    }
+
+    fun updatePosition(list: List<Category>) {
+        if (updatePositionDis != null)
+            removeDisposable(updatePositionDis!!)
+
+        updatePositionDis = updatePosition
+            .execute(list)
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                getAllCategories()
+            }
+
+        addDisposable(updatePositionDis!!)
     }
 }

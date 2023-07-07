@@ -1,6 +1,5 @@
 package com.gkreduction.cardholder.ui.activity.main.fragment.category
 
-import android.util.Log
 import androidx.navigation.findNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.FragmentCategoryBinding
@@ -17,6 +16,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
 ), CategoryAdapterClickListener, OnChangePositionItemListener {
 
     private var category: Category? = null
+    private var list: List<Category>? = null
 
     override fun onStart() {
         super.onStart()
@@ -34,6 +34,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
         }
         if (activity is MainActivity) {
             (activity as MainActivity).getButton().setOnClickListener {
+                list?.let { viewModel?.updatePosition(it) }
                 navigateToBack(category)
             }
         }
@@ -83,13 +84,14 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
 
     }
 
+
     override fun onChange(items: List<Category>?) {
         if (items != null) {
             for (i in items.indices) {
-                items[i].position = i.toLong()
+                items[i].position = i
             }
+            this.list = items
         }
 
-//        items?.forEach { Log.d("TESTCATEGORY", it.catName) }
     }
 }

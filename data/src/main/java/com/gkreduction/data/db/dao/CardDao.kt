@@ -34,6 +34,8 @@ interface CardDao {
     @Query("SELECT * FROM category_db WHERE category_db.catId =:categoryId")
     fun getCardsByCategoryId(categoryId: Long): List<CardWithCategory>
 
+    @Query("SELECT COUNT() FROM category_db")
+    fun countCategory(): Int
 
     @Transaction
     fun insert(cardByCategory: CardWithCategory) {
@@ -81,12 +83,15 @@ interface CardDao {
 
 
     fun insertCategory(name: String): Long {
+        val position = countCategory()
+
         val category = CategoryDb(
             catId = 0L, catName = name,
+            position = position,
             createdAt = System.currentTimeMillis(),
             modifiedAt = System.currentTimeMillis()
         )
-      return  insert(category)
+        return insert(category)
     }
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -110,6 +115,10 @@ interface CardDao {
 
     @Delete
     fun delete(cardDb: CardDb)
+
+    fun updatePositionCategory(mapCategory: List<CategoryDb>) {
+        mapCategory.forEach { update(it) }
+    }
 
 
 }
