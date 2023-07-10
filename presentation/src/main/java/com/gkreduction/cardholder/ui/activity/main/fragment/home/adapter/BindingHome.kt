@@ -39,7 +39,6 @@ object BindingHome {
             adapter.updateItems(it)
             adapter.setActiveCategory(category)
             view.adapter = adapter
-
         }
     }
 

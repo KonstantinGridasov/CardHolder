@@ -31,29 +31,17 @@ class HomeViewModel(
 
 
     private var allCategories: List<Category> = ArrayList()
-    private var showAllCategories = false
     var sizeAll = ObservableField<Int>()
     var listCards = ObservableField<List<Card>>()
     var listCategories = ObservableField<List<Category>>()
     var choosesCategory = ObservableField<Category>()
 
 
-    fun changeShowCategories() {
-        if (showAllCategories || (allCategories.size < 5)) {
-            listCategories.set(allCategories)
-        } else {
-            listCategories.set(allCategories.subList(0, 5))
-        }
-        showAllCategories = !showAllCategories
-    }
-
-    fun sortListByCategory(category: Category?) {
-        choosesCategory.set(category)
-        val list = allCategories.sortedWith(compareBy { it.position })
-        allCategories = list
-        showAllCategories = false
-        changeShowCategories()
-        updateCardByCategory(category)
+    fun updateByCategories() {
+        if (choosesCategory.get() != null)
+            updateCardByCategory(choosesCategory.get())
+        else
+            getAllCategories()
     }
 
 
@@ -70,7 +58,7 @@ class HomeViewModel(
                     sizeAll.set(it.size)
                     allCategories = it
                     choosesCategory.set(allCategories[0])
-                    changeShowCategories()
+                    listCategories.set(it)
                     getAllCards()
 
                 } else
@@ -98,7 +86,7 @@ class HomeViewModel(
     }
 
     fun updateCardByCategory(category: Category?) {
-        if (category != null && category.catName != getDefaultCategoryName(context)) {
+        if (category != null && category.position != 0) {
             getCardByCategoryId(category.catId)
         } else {
             getAllCards()
@@ -106,7 +94,7 @@ class HomeViewModel(
 
     }
 
-    private fun getCardByCategoryId(id: Long) {
+    fun getCardByCategoryId(id: Long) {
         if (getCardByCategoryDis != null)
             removeDisposable(getCardByCategoryDis!!)
 

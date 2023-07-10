@@ -17,7 +17,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(
         (binding as FragmentHomeBinding).viewModel = viewModel
         (binding as FragmentHomeBinding).itemListener = this
         (binding as FragmentHomeBinding).categoryClick = this
-        viewModel?.getAllCategories()
+        viewModel?.updateByCategories()
         initListener()
 
     }

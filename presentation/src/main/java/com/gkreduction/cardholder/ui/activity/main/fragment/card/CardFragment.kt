@@ -51,11 +51,9 @@ class CardFragment : BaseFragment<CardViewModel>(
         activity?.let {
             viewModel?.isSecondCode?.observe(it) { exist ->
                 if (activity is MainActivity)
-                    (activity as MainActivity).getButton().visibility =
-                        if (exist) View.VISIBLE else View.INVISIBLE
+                    (activity as MainActivity).setVisibilityButton(exist)
             }
         }
-
     }
 
 
