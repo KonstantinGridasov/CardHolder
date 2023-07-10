@@ -42,9 +42,11 @@ open class BaseDialogFragment<T : BaseAndroidViewModel>(
         mDialog.let { it ->
             it?.window?.setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.MATCH_PARENT,
             )
+            it?.window?.setBackgroundDrawableResource(R.drawable.background_dialog)
         }
+
         initialized()
         return mDialog!!
     }

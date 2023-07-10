@@ -89,7 +89,7 @@ class AddFragment : BaseFragment<AddViewModel>(
         if (activity is MainActivity)
             (activity as MainActivity).let {
                 val dialog = DialogInfo()
-                dialog.setListener(info) { isDell ->
+                dialog.setListener(info, true) { isDell ->
                     if (isDell) {
                         viewModel?.deleteCard()
                         navigateUp()

@@ -59,7 +59,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
         if (activity is MainActivity)
             (activity as MainActivity).let {
                 val dialog = DialogInfo()
-                dialog.setListener(category.catName) { isDell ->
+                dialog.setListener(category.catName,false) { isDell ->
                     if (isDell) viewModel?.removeCategory(
                         category
                     )

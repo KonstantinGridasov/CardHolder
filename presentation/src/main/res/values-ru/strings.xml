@@ -2,13 +2,16 @@
 <resources>
     <string name="app_name">Card Holder</string>
     <string name="default_category_name">Все</string>
-    <string name="text_dialog_info">Вы хотите удалить</string>
+    <string name="text_dialog_info">Удалить</string>
+    <string name="text_dialog_info_card">дисконтную карту?</string>
+    <string name="text_dialog_info_category">категорию</string>
     <string name="text_editor_toolbar">Редактор</string>
     <string name="save">Сохранить</string>
     <string name="second_code">Второй код</string>
     <string name="category">Категория</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
+    <string name="dell">Удалить</string>
     <string name="ok">Ok</string>
     <string name="back">Назад</string>
     <string name="revert">Развернуть</string>

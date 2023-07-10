@@ -5,16 +5,29 @@ import com.gkreduction.cardholder.databinding.DialogInfoBinding
 import com.gkreduction.cardholder.ui.base.BaseDialogFragment
 
 class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
-    R.layout.dialog_info,
-    DialogInfoViewModel::class.java
+    R.layout.dialog_info, DialogInfoViewModel::class.java
 
 ) {
     private var listener: ((Boolean) -> Unit)? = null
     private var info: String = ""
+    private var isCard: Boolean = false
 
     override fun initialized() {
         super.initialized()
         initListener()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        (binding as DialogInfoBinding).tvDialog.text = getText()
+    }
+
+    fun setListener(info: String, isCard: Boolean, listener: (Boolean) -> Unit) {
+        this.info = info
+        this.isCard = isCard
+        this.listener = listener
+
     }
 
     private fun initListener() {
@@ -27,15 +40,14 @@ class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        val text = "${resources.getText(R.string.text_dialog_info)} $info ?"
-        (binding as DialogInfoBinding).textToolbar.text = text
-    }
-
-    fun setListener(info: String, listener: (Boolean) -> Unit) {
-        this.info = info
-        this.listener = listener
+    private fun getText(): String {
+        return if (isCard)
+            "${resources.getText(R.string.text_dialog_info)} " +
+                    "${resources.getText(R.string.text_dialog_info_card)}"
+        else
+            "${resources.getText(R.string.text_dialog_info)} " +
+                    "${resources.getText(R.string.text_dialog_info_category)} " +
+                    " \"$info\" ? "
 
     }
 
