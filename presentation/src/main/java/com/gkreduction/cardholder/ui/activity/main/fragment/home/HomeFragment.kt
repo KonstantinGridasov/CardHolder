@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<HomeViewModel>(
     }
 
     private fun navigateToAdd() {
-        view?.findNavController()?.navigate(R.id.addFragment)
+        view?.findNavController()?.navigate(HomeFragmentDirections.homeToAdd())
     }
 
     override fun onItemClick(id: Long) {

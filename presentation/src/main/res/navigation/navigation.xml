@@ -4,7 +4,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/homeFragment">
 
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.gkreduction.cardholder.ui.activity.main.fragment.home.HomeFragment"
@@ -20,36 +19,25 @@
 
         <action
             android:id="@+id/to_info"
-            app:destination="@id/infoFragment" />
+            app:destination="@id/infoFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="false" />
 
-        <argument
-            android:name="category"
-            android:defaultValue="@null"
-            app:argType="com.gkreduction.domain.entity.Category"
-            app:nullable="true" />
+        <action
+            android:id="@+id/home_to_add"
+            app:destination="@id/addFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/infoFragment"
         android:name="com.gkreduction.cardholder.ui.activity.main.fragment.info.InfoFragment"
-        android:label="InfoFragment">
+        android:label="InfoFragment" />
 
-    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.gkreduction.cardholder.ui.activity.main.fragment.category.CategoryFragment"
         android:label="CategoryFragment">
-        <action
-            android:id="@+id/to_home"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@+id/homeFragment"
-            app:popUpToInclusive="true">
-            <argument
-                android:name="category"
-                app:argType="com.gkreduction.domain.entity.Category"
-                app:nullable="true" />
-
-        </action>
 
         <action
             android:id="@+id/to_add"
@@ -69,6 +57,16 @@
         android:name="com.gkreduction.cardholder.ui.activity.main.fragment.add.AddFragment"
         android:label="AddFragment">
 
+        <action
+            android:id="@+id/add_to_category"
+            app:destination="@id/categoryFragment" />
+
+        <action
+            android:id="@+id/add_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@+id/homeFragment"
+            app:popUpToInclusive="true" />
+
         <argument
             android:name="category"
             android:defaultValue="@null"
@@ -80,8 +78,9 @@
             android:defaultValue="0L"
             app:argType="long" />
 
-    </fragment>
 
+
+    </fragment>
 
     <fragment
         android:id="@+id/cardFragment"
@@ -92,13 +91,14 @@
             android:id="@+id/to_edit"
             app:destination="@id/addFragment"
             app:popUpTo="@+id/addFragment"
-            app:popUpToInclusive="true">
+            app:popUpToInclusive="false">
             <argument
                 android:name="cardId"
                 app:argType="long" />
 
-
         </action>
+
+
         <argument
             android:name="cardId"
             android:defaultValue="0L"

@@ -2,8 +2,10 @@ package com.gkreduction.cardholder.ui.activity.main.fragment.info
 
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.findNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.FragmentInfoBinding
+import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.base.BaseFragment
 
 class InfoFragment : BaseFragment<InfoViewModel>(
@@ -18,8 +20,20 @@ class InfoFragment : BaseFragment<InfoViewModel>(
             setupDayNightMode()
         }
         initTheme()
+        initListeners()
     }
 
+    private fun initListeners() {
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton().setOnClickListener {
+                navigateBack()
+            }
+        }
+    }
+
+    private fun navigateBack() {
+        view?.findNavController()?.popBackStack()
+    }
 
     private fun initTheme() {
         val currentMode = (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK)

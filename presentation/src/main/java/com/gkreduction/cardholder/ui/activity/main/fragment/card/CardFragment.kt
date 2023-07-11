@@ -9,7 +9,6 @@ import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.FragmentCardBinding
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.base.BaseFragment
-import com.gkreduction.cardholder.ui.dialog.DialogInfo
 
 class CardFragment : BaseFragment<CardViewModel>(
     R.layout.fragment_card,
@@ -24,11 +23,12 @@ class CardFragment : BaseFragment<CardViewModel>(
         val args = CardFragmentArgs.fromBundle(requireArguments())
         if (args.cardId != 0L) {
             id = args.cardId
+            viewModel?.getCards(id)
+        } else
+            view?.findNavController()?.navigateUp()
 
-        }
         (binding as FragmentCardBinding).viewmodel = viewModel
         (binding as FragmentCardBinding).isRevert = isRevert
-        viewModel?.getCards(id)
         initListener()
 
     }
@@ -55,7 +55,6 @@ class CardFragment : BaseFragment<CardViewModel>(
             }
         }
     }
-
 
 
     private fun navigateToEdit() {

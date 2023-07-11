@@ -2,6 +2,7 @@ package com.gkreduction.cardholder.ui.activity.main.fragment.add
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.databinding.ObservableField
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.base.BaseAndroidViewModel
@@ -70,9 +71,8 @@ class AddViewModel(
                 .execute(card)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    this.card.set(getEmptyCard())
-                }
+                .doOnError { er -> Log.d("deleteCard HOLDER", er.message.toString()) }
+                .subscribe {}
 
             addDisposable(deleteCardDis!!)
         }

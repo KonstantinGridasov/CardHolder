@@ -36,6 +36,7 @@ class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
             dismiss()
         }
         (binding as DialogInfoBinding).cancel.setOnClickListener {
+            listener?.invoke(false)
             dismiss()
         }
     }

@@ -122,9 +122,8 @@
             android:id="@+id/tv_card_name_first"
             style="@style/StyleNameInput"
             android:hint="@string/input_text"
-            app:edit_listeners="@{(s)->viewModel.updateBaseInfo(s)}"
-
             android:text="@{viewModel.card.cardBaseInfo}"
+            app:edit_listeners="@{(s)->viewModel.updateBaseInfo(s)}"
             app:layout_constraintBottom_toBottomOf="@id/header_card_name_first"
             app:layout_constraintStart_toStartOf="@id/gui_ver55" />
 

@@ -59,10 +59,9 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
         if (activity is MainActivity)
             (activity as MainActivity).let {
                 val dialog = DialogInfo()
-                dialog.setListener(category.catName,false) { isDell ->
-                    if (isDell) viewModel?.removeCategory(
-                        category
-                    )
+                dialog.setListener(category.catName, false) { isDell ->
+                    if (isDell)
+                        viewModel?.removeCategory(category)
                 }
                 dialog.show(it.supportFragmentManager, "")
             }
@@ -71,17 +70,8 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
     }
 
     private fun navigateToBack(category: Category?) {
-        when (view?.findNavController()?.previousBackStackEntry?.destination?.id) {
-            R.id.homeFragment ->
-                view?.findNavController()
-                    ?.navigate(CategoryFragmentDirections.toHome(category))
-            R.id.addFragment ->
-                view?.findNavController()
-                    ?.navigate(CategoryFragmentDirections.toAdd(category))
-
-            else -> view?.findNavController()?.navigateUp()
-        }
-
+        view?.findNavController()
+            ?.navigate(CategoryFragmentDirections.toAdd(category))
     }
 
 

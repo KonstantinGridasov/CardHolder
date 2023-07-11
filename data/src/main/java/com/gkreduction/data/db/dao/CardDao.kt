@@ -116,6 +116,7 @@ interface CardDao {
     @Delete
     fun delete(cardDb: CardDb)
 
+
     fun updatePositionCategory(mapCategory: List<CategoryDb>) {
         mapCategory.forEach { update(it) }
     }

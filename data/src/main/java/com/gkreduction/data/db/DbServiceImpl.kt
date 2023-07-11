@@ -92,64 +92,40 @@ class DbServiceImpl(
     override fun updateCategory(category: Category?): Observable<Boolean> {
         return Observable.just(true)
             .flatMap {
-                Observable
-                    .just(cardDao.update(dbMapper.mapCategory(category!!)))
-                    .flatMap {
-                        Observable.just(true)
-                    }
-
-
+                cardDao.update(dbMapper.mapCategory(category!!))
+                Observable.just(true)
             }
     }
 
     override fun deleteCategoryById(categoryId: Long): Observable<Boolean> {
         return Observable.just(true)
             .flatMap {
-                Observable
-                    .just(cardDao.updateCardDeleteCategory(categoryId))
-                    .flatMap {
-                        Observable.just(true)
-                    }
-
-
+                cardDao.updateCardDeleteCategory(categoryId)
+                Observable.just(true)
             }
     }
 
     override fun updateCard(card: Card): Observable<Boolean> {
         return Observable.just(true)
             .flatMap {
-                Observable
-                    .just(cardDao.updateWithTimestamp(dbMapper.getCardDb(card)))
-                    .flatMap {
-                        Observable.just(true)
-                    }
-
-
+                cardDao.updateWithTimestamp(dbMapper.getCardDb(card))
+                Observable.just(true)
             }
     }
 
     override fun deleteCard(card: Card): Observable<Boolean> {
         return Observable.just(true)
             .flatMap {
-                Observable
-                    .just(cardDao.delete(dbMapper.getCardDb(card)))
-                    .flatMap {
-                        Observable.just(true)
-                    }
-
-
+                cardDao.delete(dbMapper.getCardDb(card))
+                Observable.just(true)
             }
     }
 
     override fun updatePositionCategory(params: List<Category>): Observable<Boolean> {
         return Observable.just(true)
             .flatMap {
-                Observable
-                    .just(cardDao.updatePositionCategory(dbMapper.mapCategoryToDb(params)))
-                    .flatMap {
-                        Observable.just(true)
-                    }
-
+                cardDao.updatePositionCategory(dbMapper.mapCategoryToDb(params))
+                Observable.just(true)
             }
     }
 

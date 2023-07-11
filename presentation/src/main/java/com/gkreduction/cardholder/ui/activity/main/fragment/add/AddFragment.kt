@@ -38,6 +38,10 @@ class AddFragment : BaseFragment<AddViewModel>(
         initListener()
     }
 
+    override fun onResult(scanCode: ScanCode, type: CameraActivity.TypeScan) {
+        viewModel?.setBarcode(scanCode, type)
+    }
+
     override fun onClickBarcode(view: View?) {
         when (view?.id) {
             (binding as FragmentAddBinding).barcodeBase.id -> navigateToCameraActivity(
@@ -101,7 +105,7 @@ class AddFragment : BaseFragment<AddViewModel>(
     }
 
     private fun navigateUp() {
-        view?.findNavController()?.popBackStack(R.id.homeFragment, true)
+        view?.findNavController()?.navigate(AddFragmentDirections.addToHome())
     }
 
     private fun navigateToCameraActivity(type: CameraActivity.TypeScan) {
@@ -111,10 +115,8 @@ class AddFragment : BaseFragment<AddViewModel>(
     }
 
     private fun navigateToCategory() {
-        view?.findNavController()?.navigate(R.id.categoryFragment)
+        view?.findNavController()?.navigate(AddFragmentDirections.addToCategory())
     }
 
-    override fun onResult(scanCode: ScanCode, type: CameraActivity.TypeScan) {
-        viewModel?.setBarcode(scanCode, type)
-    }
+
 }
