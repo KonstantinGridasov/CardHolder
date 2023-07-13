@@ -1,9 +1,26 @@
 # Card Holder
+ <img  src="static/ic_app.svg" alt="Vector">
 
-<p align="center">
-  <img  src="static/ic_app.svg" alt="Vector">
+<h3>Digitize your discount cards</h3>
+<h4> Manage all your cards in one app. Put your wallet in order by scanning the code from the plastic cards of stores. After that, you will always have all your cards.</h4>
+
+
+<h3>Choose you theme</h3>
+DAY
+<p align="start">
+  <img   height= "300" src="static/day_1.png" alt="Image">
+  <img   height= "300"src="static/day_2.png" alt="Image">
+  <img  height= "300" src="static/day_3.png" alt="Image">
+  <img  height= "300" src="static/day_4.png" alt="Image">
 </p>
 
+Night
+<p align="start">
+  <img   height= "300" src="static/night_1.png" alt="Image">
+  <img   height= "300"src="static/night_2.png" alt="Image">
+  <img  height= "300" src="static/night_3.png" alt="Image">
+  <img  height= "300" src="static/night_4.png" alt="Image">
+</p>
 
 
 ## Tags
