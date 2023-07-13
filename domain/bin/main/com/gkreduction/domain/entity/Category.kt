@@ -5,8 +5,9 @@ import java.io.Serializable
 data class Category(
     var catId: Long = 0L,
     var catName: String = "",
-    var position: Long = 0L,
+    var position: Int = 0,
     var serverCardId: Int = -1,
     var createdAt: Long = 0L,
-    var modifiedAt: Long = 0L
+    var modifiedAt: Long = 0L,
+    var isActive: Boolean = false
 ) : Serializable

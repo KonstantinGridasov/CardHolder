@@ -4,7 +4,6 @@ data class Card(
     var serverCardId: Int = -1,
     var category: Category = Category(),
     var colorStart: Int = 0,
-    var colorEnd: Int = 0,
     var countOpen: Int = 0,
     var cardId: Long = 0L,
     var cardName: String = "",
