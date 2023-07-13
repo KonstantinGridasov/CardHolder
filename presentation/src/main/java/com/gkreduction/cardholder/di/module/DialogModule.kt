@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.gkreduction.cardholder.ui.dialog.remove.DialogRemoveViewModel
 import com.gkreduction.cardholder.ui.dialog.preview.DialogPreviewViewModel
+import com.gkreduction.cardholder.ui.dialog.remove.DialogRemoveViewModel
+import com.gkreduction.cardholder.ui.dialog.settings.DialogSettingsViewModel
 import dagger.Module
 import dagger.Provides
 
@@ -30,6 +31,11 @@ abstract class DialogModule {
 
                         modelClass.isAssignableFrom(DialogPreviewViewModel::class.java) ->
                             DialogPreviewViewModel(
+                                app
+                            ) as T
+
+                        modelClass.isAssignableFrom(DialogSettingsViewModel::class.java) ->
+                            DialogSettingsViewModel(
                                 app
                             ) as T
 

@@ -12,6 +12,8 @@
     <string name="pr_continue">Продолжить</string>
     <string name="check_data">Проверьте отсканирование данные</string>
 
+    <string name="open_settings">Для работы приложения необходим доступ к камере.\n \nОткройте настройки и разрешите доступ</string>
+
     <string name="second_code">Второй код</string>
     <string name="category">Категория</string>
     <string name="add">Добавить</string>

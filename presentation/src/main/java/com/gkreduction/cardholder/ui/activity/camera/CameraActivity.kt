@@ -4,7 +4,9 @@ package com.gkreduction.cardholder.ui.activity.camera
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.util.Size
 import android.widget.ImageView
@@ -21,6 +23,7 @@ import com.gkreduction.cardholder.constant.SCAN_CODE
 import com.gkreduction.cardholder.constant.TYPE_SCAN
 import com.gkreduction.cardholder.databinding.ActivityCameraBinding
 import com.gkreduction.cardholder.ui.base.BaseActivity
+import com.gkreduction.cardholder.ui.dialog.settings.DialogSettings
 import com.gkreduction.cardholder.utils.BarcodeAnalyzer
 import com.gkreduction.domain.entity.ScanCode
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -82,12 +85,7 @@ class CameraActivity :
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(
-                    this,
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
+                showDialogSettings()
             }
         }
     }
@@ -204,9 +202,7 @@ class CameraActivity :
             type = (barcode.format),
             value = barcode.rawValue!!
         )
-
     }
-
 
     private fun navigateToBack(scanCode: ScanCode) {
         val returnIntent = Intent()
@@ -214,7 +210,33 @@ class CameraActivity :
         returnIntent.putExtra(TYPE_SCAN, type)
         setResult(RESULT_OK, returnIntent)
         finish()
+    }
 
+    private fun showDialogSettings() {
+        val dialog = DialogSettings()
+        dialog.setListener { isOk ->
+            if (isOk) {
+                openSettings()
+            } else {
+                dialog.dismiss()
+                Toast.makeText(
+                    this,
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                finish()
+
+            }
+
+        }
+        dialog.show(supportFragmentManager, "")
+
+    }
+
+    private fun openSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.data = Uri.parse("package:" + this.packageName)
+        startActivity(intent)
     }
 
 }
