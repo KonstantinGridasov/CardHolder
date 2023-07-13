@@ -14,7 +14,13 @@
     <string name="revert">Revert</string>
 
     <string name="cancel">Cancel</string>
+    <string name="repeat">Repeat</string>
+
     <string name="ok">Ok</string>
+    <string name="pr_continue">Continue</string>
+    <string name="preview">Preview</string>
+    <string name="check_data">Check scan data</string>
+
     <string name="dell">Dell</string>
 
     <string name="menu_home">Home</string>

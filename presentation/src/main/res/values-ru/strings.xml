@@ -7,10 +7,16 @@
     <string name="text_dialog_info_category">категорию</string>
     <string name="text_editor_toolbar">Редактор</string>
     <string name="save">Сохранить</string>
+    <string name="preview">Предпросмотр</string>
+
+    <string name="pr_continue">Продолжить</string>
+    <string name="check_data">Проверьте отсканирование данные</string>
+
     <string name="second_code">Второй код</string>
     <string name="category">Категория</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
+    <string name="repeat">Повторить</string>
     <string name="dell">Удалить</string>
     <string name="ok">Ok</string>
     <string name="back">Назад</string>
@@ -26,7 +32,7 @@
     <string name="change_theme_night"><u>Переключить на темную тему</u></string>
 
     <string name="about_app">О Приложении</string>
-    <string name="about_app_text">Приложении сохраняет данные  только на Вашем устройстве. После удаления приложения или очистки кэша (памяти) возможна потеря всей информации не зависящая от разработчика</string>
+    <string name="about_app_text">Приложении сохраняет данные только на Вашем устройстве. После удаления приложения или очистки кэша (памяти) возможна потеря всей информации не зависящая от разработчика</string>
     <string name="privacy_policy"><u>Политика конфиденциальности</u></string>
 
     <string name="cooperation">Сотрудничество</string>

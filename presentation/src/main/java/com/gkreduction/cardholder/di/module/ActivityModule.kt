@@ -7,7 +7,8 @@ import com.gkreduction.cardholder.di.scope.SplashScope
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.activity.splash.SplashScreenActivity
-import com.gkreduction.cardholder.ui.dialog.DialogInfo
+import com.gkreduction.cardholder.ui.dialog.remove.DialogRemove
+import com.gkreduction.cardholder.ui.dialog.preview.DialogPreview
 import com.gkreduction.data.db.DbServiceImpl
 import com.gkreduction.domain.usecase.GetAllCategoryUseCase
 import com.gkreduction.domain.usecase.GetCardByIdUseCase
@@ -35,7 +36,12 @@ abstract class ActivityModule {
 
     @DialogScope
     @ContributesAndroidInjector(modules = [DialogModule::class])
-    abstract fun contributeDialogInfo(): DialogInfo
+    abstract fun contributeDialogRemove(): DialogRemove
+
+
+    @DialogScope
+    @ContributesAndroidInjector(modules = [DialogModule::class])
+    abstract fun contributeDialogPreview(): DialogPreview
 
 
     companion object {

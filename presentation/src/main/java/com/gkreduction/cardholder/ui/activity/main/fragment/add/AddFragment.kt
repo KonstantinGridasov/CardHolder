@@ -7,7 +7,8 @@ import com.gkreduction.cardholder.databinding.FragmentAddBinding
 import com.gkreduction.cardholder.ui.activity.camera.CameraActivity
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.base.BaseFragment
-import com.gkreduction.cardholder.ui.dialog.DialogInfo
+import com.gkreduction.cardholder.ui.dialog.preview.DialogPreview
+import com.gkreduction.cardholder.ui.dialog.remove.DialogRemove
 import com.gkreduction.domain.entity.ScanCode
 
 class AddFragment : BaseFragment<AddViewModel>(
@@ -20,7 +21,6 @@ class AddFragment : BaseFragment<AddViewModel>(
     }
 
     private var mode: ModeEdit = ModeEdit.CREATE
-
 
     override fun onStart() {
         super.onStart()
@@ -39,7 +39,7 @@ class AddFragment : BaseFragment<AddViewModel>(
     }
 
     override fun onResult(scanCode: ScanCode, type: CameraActivity.TypeScan) {
-        viewModel?.setBarcode(scanCode, type)
+        showDialogPreview(scanCode, type)
     }
 
     override fun onClickBarcode(view: View?) {
@@ -89,10 +89,9 @@ class AddFragment : BaseFragment<AddViewModel>(
 
     private fun showDialogDelete() {
         val info = viewModel?.card?.get()?.cardName ?: ""
-
         if (activity is MainActivity)
             (activity as MainActivity).let {
-                val dialog = DialogInfo()
+                val dialog = DialogRemove()
                 dialog.setListener(info, true) { isDell ->
                     if (isDell) {
                         viewModel?.deleteCard()
@@ -102,6 +101,23 @@ class AddFragment : BaseFragment<AddViewModel>(
                 dialog.show(it.supportFragmentManager, "")
             }
 
+    }
+
+    private fun showDialogPreview(scanCode: ScanCode, type: CameraActivity.TypeScan) {
+        if (activity is MainActivity)
+            (activity as MainActivity).let {
+                val dialog = DialogPreview()
+                dialog.setListener(scanCode) { isOk ->
+                    if (isOk) {
+                        viewModel?.setBarcode(scanCode, type)
+                    } else {
+                        dialog.dismiss()
+                        navigateToCameraActivity(type)
+                    }
+
+                }
+                dialog.show(it.supportFragmentManager, "")
+            }
     }
 
     private fun navigateUp() {

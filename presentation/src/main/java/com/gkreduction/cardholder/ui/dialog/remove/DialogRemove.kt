@@ -1,11 +1,11 @@
-package com.gkreduction.cardholder.ui.dialog
+package com.gkreduction.cardholder.ui.dialog.remove
 
 import com.gkreduction.cardholder.R
-import com.gkreduction.cardholder.databinding.DialogInfoBinding
+import com.gkreduction.cardholder.databinding.DialogRemoveBinding
 import com.gkreduction.cardholder.ui.base.BaseDialogFragment
 
-class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
-    R.layout.dialog_info, DialogInfoViewModel::class.java
+class DialogRemove : BaseDialogFragment<DialogRemoveViewModel>(
+    R.layout.dialog_remove, DialogRemoveViewModel::class.java
 
 ) {
     private var listener: ((Boolean) -> Unit)? = null
@@ -20,7 +20,7 @@ class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
 
     override fun onResume() {
         super.onResume()
-        (binding as DialogInfoBinding).tvDialog.text = getText()
+        (binding as DialogRemoveBinding).tvDialog.text = getText()
     }
 
     fun setListener(info: String, isCard: Boolean, listener: (Boolean) -> Unit) {
@@ -31,11 +31,11 @@ class DialogInfo : BaseDialogFragment<DialogInfoViewModel>(
     }
 
     private fun initListener() {
-        (binding as DialogInfoBinding).ok.setOnClickListener {
+        (binding as DialogRemoveBinding).ok.setOnClickListener {
             listener?.invoke(true)
             dismiss()
         }
-        (binding as DialogInfoBinding).cancel.setOnClickListener {
+        (binding as DialogRemoveBinding).cancel.setOnClickListener {
             listener?.invoke(false)
             dismiss()
         }

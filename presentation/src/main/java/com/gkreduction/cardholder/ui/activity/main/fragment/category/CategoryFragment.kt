@@ -7,7 +7,7 @@ import com.gkreduction.cardholder.ui.activity.main.MainActivity
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.base.BaseFragment
-import com.gkreduction.cardholder.ui.dialog.DialogInfo
+import com.gkreduction.cardholder.ui.dialog.remove.DialogRemove
 import com.gkreduction.domain.entity.Category
 
 class CategoryFragment : BaseFragment<CategoryViewModel>(
@@ -58,7 +58,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
     override fun removeCategory(category: Category) {
         if (activity is MainActivity)
             (activity as MainActivity).let {
-                val dialog = DialogInfo()
+                val dialog = DialogRemove()
                 dialog.setListener(category.catName, false) { isDell ->
                     if (isDell)
                         viewModel?.removeCategory(category)

@@ -22,13 +22,14 @@ import com.gkreduction.domain.entity.ScanCode
 
 class MainActivity :
     BaseActivity<MainViewModel>(R.layout.activity_main, MainViewModel::class.java) {
+
     private lateinit var navController: NavController
+    private var listenerCam: CameraResultListener? = null
 
     interface CameraResultListener {
         fun onResult(scanCode: ScanCode, type: CameraActivity.TypeScan)
     }
 
-    private var listenerCam: CameraResultListener? = null
     private val startCameraForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {

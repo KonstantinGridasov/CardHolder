@@ -4,11 +4,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="viewModel"
-            type="com.gkreduction.cardholder.ui.dialog.DialogInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,9 +20,9 @@
 
 
         <LinearLayout
-            android:id="@+id/ll_text"
+            android:id="@+id/ll_barcode"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100gkdp"
+            android:layout_height="@dimen/_150gkdp"
             android:layout_marginStart="@dimen/_5gkdp"
             android:layout_marginEnd="@dimen/_5gkdp"
             android:layout_marginBottom="@dimen/_10gkdp"
@@ -40,44 +35,69 @@
                 android:id="@+id/tv_dialog"
                 style="@style/Style_Text_medium"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/_20gkdp"
+                android:layout_marginTop="@dimen/_5gkdp"
                 android:layout_marginStart="@dimen/_5gkdp"
                 android:layout_marginEnd="@dimen/_5gkdp"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/text_dialog_info"
+                android:text="@string/preview"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="@dimen/_13gkdp" />
+
+            <TextView
+                android:id="@+id/tv_dialog_info"
+                style="@style/Style_Text_medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10gkdp"
+                android:layout_marginStart="@dimen/_5gkdp"
+                android:layout_marginEnd="@dimen/_5gkdp"
+                android:text="@string/check_data"
+                android:textColor="?attr/colorOnPrimary"
+                android:textSize="@dimen/_12gkdp" />
+
+
+            <com.gkreduction.cardholder.ui.widjet.BarcodeView
+                android:id="@+id/barcode"
+                android:layout_width="@dimen/_110gkdp"
+                android:layout_height="@dimen/_60gkdp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="@dimen/_10gkdp"
+                android:layout_marginBottom="@dimen/_10gkdp"
+                android:padding="@dimen/_5gkdp" />
+
         </LinearLayout>
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ok"
             style="@style/Style_Text_medium"
-            android:layout_width="@dimen/_70gkdp"
+            android:layout_width="@dimen/_75gkdp"
             android:layout_height="@dimen/_30gkdp"
             android:layout_marginStart="@dimen/_15gkdp"
             android:layout_marginTop="@dimen/_5gkdp"
-            android:background="@drawable/background_button_dell"
-            android:text="@string/dell"
+            android:background="@drawable/background_button_corners"
+            android:text="@string/pr_continue"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/_9gkdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_text" />
+            app:layout_constraintTop_toBottomOf="@id/ll_barcode" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel"
             style="@style/Style_Text_medium"
-            android:layout_width="@dimen/_70gkdp"
+            android:layout_width="@dimen/_75gkdp"
             android:layout_height="@dimen/_30gkdp"
             android:layout_marginTop="@dimen/_5gkdp"
             android:layout_marginEnd="@dimen/_15gkdp"
             android:background="@drawable/background_button_corners"
-            android:text="@string/cancel"
+            android:text="@string/repeat"
             android:textAllCaps="false"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="@dimen/_9gkdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_text" />
+            app:layout_constraintTop_toBottomOf="@id/ll_barcode" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
