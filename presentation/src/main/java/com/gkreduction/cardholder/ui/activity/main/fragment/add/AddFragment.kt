@@ -59,6 +59,15 @@ class AddFragment : BaseFragment<AddViewModel>(
         (binding as FragmentAddBinding).listener = this
         (binding as FragmentAddBinding).picker.listener = { setColor(it) }
         (binding as FragmentAddBinding).tvCategory.setOnClickListener { navigateToCategory() }
+        (binding as FragmentAddBinding).tvCategoryName.setOnClickListener { navigateToCategory() }
+        (binding as FragmentAddBinding).headerCardBarcodeFirst.setOnClickListener {
+            navigateToCameraActivity(CameraActivity.TypeScan.BASE)
+        }
+        (binding as FragmentAddBinding).headerCardNameSecond.setOnClickListener {
+            navigateToCameraActivity(CameraActivity.TypeScan.SECONDARY)
+        }
+
+
         if (activity is MainActivity) {
             (activity as MainActivity).setListenerCamera(this)
         }

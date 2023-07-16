@@ -6,18 +6,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="itemListener"
-            type="com.gkreduction.cardholder.ui.activity.main.fragment.home.CardClickListener" />
-
-
-        <variable
-            name="viewModel"
-            type="com.gkreduction.cardholder.ui.activity.main.MainViewModel" />
-
-
     </data>
 
     <RelativeLayout

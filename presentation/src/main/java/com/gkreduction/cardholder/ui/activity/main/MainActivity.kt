@@ -2,6 +2,7 @@ package com.gkreduction.cardholder.ui.activity.main
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResult
@@ -43,7 +44,6 @@ class MainActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = this.findNavController(R.id.fcNavigation)
-        (binding as ActivityMainBinding).viewModel = viewModel
 
         initListener()
     }
@@ -99,5 +99,12 @@ class MainActivity :
         intent.putExtra(TYPE_SCAN, type)
         startCameraForResult.launch(intent)
     }
+
+    fun navigateToExternalBrowser(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+
 }
 
