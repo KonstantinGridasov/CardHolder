@@ -49,15 +49,28 @@ class AddViewModel(
 
 
     fun saveCard(card: Card) {
+        val cardChecked = checkCard(card)
         if (saveCardDis != null)
             removeDisposable(saveCardDis!!)
 
         saveCardDis = saveCardUseCase
-            .execute(card)
+            .execute(cardChecked)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { }
         addDisposable(saveCardDis!!)
+    }
+
+    private fun checkCard(card: Card): Card {
+        if (card.secondary != null && card.primary == null) {
+            card.primary = card.secondary
+            card.secondary = null
+        }
+        if (card.cardSecondInfo.isNotEmpty() && card.cardBaseInfo.isEmpty()) {
+            card.cardBaseInfo = card.cardSecondInfo
+            card.cardSecondInfo = ""
+        }
+        return card
     }
 
 

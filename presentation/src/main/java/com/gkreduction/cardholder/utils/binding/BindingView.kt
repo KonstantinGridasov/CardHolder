@@ -1,5 +1,7 @@
 package com.gkreduction.cardholder.utils.binding
 
+import android.view.KeyEvent
+import android.view.View
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -11,6 +13,7 @@ import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.Dra
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.widjet.BarcodeView
 import com.gkreduction.cardholder.utils.AppTextWatcher
+import com.gkreduction.cardholder.utils.hideKeyboard
 import com.gkreduction.domain.entity.Card
 import com.gkreduction.domain.entity.Category
 import com.gkreduction.domain.entity.ScanCode
@@ -55,6 +58,16 @@ object BindingView {
 
         view.addTextChangedListener(AppTextWatcher {
             it?.let { publishSubject.onNext(it.toString()) }
+        })
+
+        view.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    hideKeyboard(view)
+                    return true
+                }
+                return false
+            }
         })
     }
 
