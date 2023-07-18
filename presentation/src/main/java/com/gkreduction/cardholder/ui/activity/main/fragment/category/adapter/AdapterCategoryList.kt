@@ -6,8 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.ItemCategoryBinding
-import com.gkreduction.cardholder.utils.getDefaultCategoryName
-import com.gkreduction.cardholder.utils.showKeyboard
 import com.gkreduction.domain.entity.Category
 import java.util.*
 
@@ -51,8 +49,7 @@ class AdapterCategoryList(
             listener?.editCategory(items[position])
         }
 
-        holder.binding.isDefaultCat =
-            (items[position].catName == getDefaultCategoryName(holder.itemView.context))
+        holder.binding.isDefaultCat = items[position].position == 0
 
 
         holder.binding.clickItemView.setOnTouchListener { _, event ->
