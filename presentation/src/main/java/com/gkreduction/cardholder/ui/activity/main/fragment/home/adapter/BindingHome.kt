@@ -36,7 +36,8 @@ object BindingHome {
     ) {
         items?.let {
             val adapter = AdapterCategoryMain(listener)
-            adapter.updateItems(it)
+            if (it.size > 1)
+                adapter.updateItems(it)
             adapter.setActiveCategory(category)
             view.adapter = adapter
         }

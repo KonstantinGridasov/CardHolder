@@ -30,22 +30,12 @@ class HomeViewModel(
     private var getCardByCategoryDis: Disposable? = null
 
 
-    private var allCategories: List<Category> = ArrayList()
-    var sizeAll = ObservableField<Int>()
     var listCards = ObservableField<List<Card>>()
     var listCategories = ObservableField<List<Category>>()
     var choosesCategory = ObservableField<Category>()
 
 
-    fun updateByCategories() {
-        if (choosesCategory.get() != null)
-            updateCardByCategory(choosesCategory.get())
-        else
-            getAllCategories()
-    }
-
-
-    fun getAllCategories() {
+     fun getAllCategories() {
         if (getAllCategoryDis != null)
             removeDisposable(getAllCategoryDis!!)
 
@@ -55,9 +45,7 @@ class HomeViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.isNotEmpty()) {
-                    sizeAll.set(it.size)
-                    allCategories = it
-                    choosesCategory.set(allCategories[0])
+                    choosesCategory.set(it[0])
                     listCategories.set(it)
                     getAllCards()
 
@@ -94,7 +82,7 @@ class HomeViewModel(
 
     }
 
-    fun getCardByCategoryId(id: Long) {
+    private fun getCardByCategoryId(id: Long) {
         if (getCardByCategoryDis != null)
             removeDisposable(getCardByCategoryDis!!)
 

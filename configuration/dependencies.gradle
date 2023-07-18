@@ -38,11 +38,6 @@ ext {
     /*Design */
     constraintLayoutVersion = '2.1.4'
 
-    /*Image loader*/
-    glideVersion = '4.14.2'
-    picassoVersion = '2.8'
-
-
     camerax_version = '1.3.0-alpha05'
 
     // Presentation
@@ -72,9 +67,6 @@ ext {
             /*Room */
             "androidx.room:room-runtime:$room_version",
 
-            /*Image Loader*/
-            "com.github.bumptech.glide:glide:${glideVersion}",
-            "com.squareup.picasso:picasso:${picassoVersion}",
 
             /*Design */
             'androidx.appcompat:appcompat:1.6.1',
@@ -95,12 +87,9 @@ ext {
 
     ]
     presentationTestImplimentation = [
-            'junit:junit:4.13.2'
     ]
 
     presentationAndroidTestImplimentation = [
-            'androidx.test.ext:junit:1.1.5',
-            'androidx.test.espresso:espresso-core:3.5.1'
 
     ]
 
