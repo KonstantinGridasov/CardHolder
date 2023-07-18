@@ -28,6 +28,10 @@
     <string name="menu_add">Add</string>
     <string name="menu_category">Category</string>
 
+    <string name="rename_category">Rename category </string>
+    <string name="add_category">Add category</string>
+
+
     <string name="theme">Theme</string>
     <string name="change_theme_day"><u>Switch to light theme</u></string>
     <string name="change_theme_night"><u>Switch to dark theme</u></string>

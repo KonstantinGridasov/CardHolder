@@ -5,9 +5,7 @@ import com.gkreduction.domain.entity.Category
 interface CategoryAdapterClickListener {
     fun onChoose(category: Category?)
 
-    fun addCategory(string: String)
-
-    fun updateCategory(category: Category)
+    fun editCategory(category: Category)
 
     fun removeCategory(category: Category)
 

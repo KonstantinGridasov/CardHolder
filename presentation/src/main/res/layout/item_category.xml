@@ -37,16 +37,14 @@
             app:layout_constraintGuide_percent="0.9" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/et_category_name"
             style="@style/Style_Text_medium"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10gkdp"
             android:background="@android:color/transparent"
-            android:enabled="false"
             android:gravity="start|center_vertical"
-            android:hint="Start typing"
             android:maxLines="1"
             android:paddingStart="@dimen/_5gkdp"
             android:textColor="?attr/colorOnPrimary"
@@ -58,29 +56,28 @@
 
         <ImageView
             android:id="@+id/iv_edit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_12gkdp"
+            android:layout_height="@dimen/_12gkdp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/_4gkdp"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:src="@drawable/ic_pencil"
             android:visibility="@{(isDefaultCat || isModeEdit) ? View.INVISIBLE :View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/vertical90"
             app:layout_constraintStart_toStartOf="@id/vertical80"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/iv_trash"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.1"
+            android:layout_width="@dimen/_12gkdp"
+            android:layout_height="@dimen/_12gkdp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/app_name"
-            android:padding="@dimen/_4gkdp"
-            android:scaleType="fitCenter"
+            android:scaleType="center"
             android:src="@drawable/ic_trash"
             android:visibility="@{(isDefaultCat || isModeEdit) ? View.INVISIBLE :View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/vertical90"
             app:layout_constraintTop_toTopOf="parent" />

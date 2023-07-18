@@ -33,3 +33,11 @@ fun hideKeyboard(edit: EditText) {
             as InputMethodManager
     imm.hideSoftInputFromWindow(edit.windowToken, 0)
 }
+
+fun showKeyboard(edit: EditText) {
+    edit.isFocusableInTouchMode = true
+    edit.requestFocus()
+    val imm = edit.context?.getSystemService(Context.INPUT_METHOD_SERVICE)
+            as InputMethodManager
+    imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT)
+}

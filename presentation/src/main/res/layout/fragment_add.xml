@@ -58,7 +58,6 @@
         <EditText
             android:id="@+id/tv_shop_name"
             style="@style/StyleNameInput"
-            android:hint="@string/input_text"
             android:text="@{viewModel.card.cardName}"
             app:edit_listeners="@{(s)->viewModel.updateCardName(s)}"
             app:layout_constraintBottom_toBottomOf="@id/tv_shop"

@@ -4,9 +4,11 @@ import androidx.navigation.findNavController
 import com.gkreduction.cardholder.R
 import com.gkreduction.cardholder.databinding.FragmentCategoryBinding
 import com.gkreduction.cardholder.ui.activity.main.MainActivity
+import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.AdapterCategoryList
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.CategoryAdapterClickListener
 import com.gkreduction.cardholder.ui.activity.main.fragment.category.adapter.OnChangePositionItemListener
 import com.gkreduction.cardholder.ui.base.BaseFragment
+import com.gkreduction.cardholder.ui.dialog.edit.DialogEdit
 import com.gkreduction.cardholder.ui.dialog.remove.DialogRemove
 import com.gkreduction.domain.entity.Category
 
@@ -17,6 +19,12 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
 
     private var category: Category? = null
     private var list: List<Category>? = null
+    private var mode: ModeCategory = ModeCategory.CREATE
+
+    private enum class ModeCategory {
+        EDIT,
+        CREATE
+    }
 
     override fun onStart() {
         super.onStart()
@@ -25,34 +33,14 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
         initListeners()
     }
 
-    private fun initListeners() {
-        (binding as FragmentCategoryBinding).listenerClick = this
-        (binding as FragmentCategoryBinding).onChangeListener = this
-        if (activity is MainActivity) {
-            (activity as MainActivity).getToolbar()
-                .setOnImageClickListener { viewModel?.addNewCategory() }
-        }
-        if (activity is MainActivity) {
-            (activity as MainActivity).getButton().setOnClickListener {
-                list?.let { viewModel?.updatePosition(it) }
-                navigateToBack(category)
-            }
-        }
-    }
-
 
     override fun onChoose(category: Category?) {
         this.category = category
-//        navigateToBack(category)
     }
 
-    override fun addCategory(string: String) {
-        viewModel?.saveCategory(string)
-    }
-
-    override fun updateCategory(category: Category) {
-        viewModel?.updateCategory(category)
-
+    override fun editCategory(category: Category) {
+        mode = ModeCategory.EDIT
+        showDialogUpdateCategory(category)
     }
 
     override fun removeCategory(category: Category) {
@@ -65,15 +53,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
                 }
                 dialog.show(it.supportFragmentManager, "")
             }
-
-
     }
-
-    private fun navigateToBack(category: Category?) {
-        view?.findNavController()
-            ?.navigate(CategoryFragmentDirections.toAdd(category))
-    }
-
 
     override fun onChange(items: List<Category>?) {
         if (items != null) {
@@ -84,4 +64,47 @@ class CategoryFragment : BaseFragment<CategoryViewModel>(
         }
 
     }
+
+    private fun initListeners() {
+        (binding as FragmentCategoryBinding).listenerClick = this
+        (binding as FragmentCategoryBinding).onChangeListener = this
+        if (activity is MainActivity) {
+            (activity as MainActivity).getToolbar()
+                .setOnImageClickListener {
+                    mode = ModeCategory.CREATE
+                    showDialogUpdateCategory(null)
+                }
+        }
+        if (activity is MainActivity) {
+            (activity as MainActivity).getButton().setOnClickListener {
+                list?.let { viewModel?.updatePosition(it) }
+                navigateToBack(category)
+            }
+        }
+    }
+
+
+    private fun showDialogUpdateCategory(category: Category?) {
+        if (activity is MainActivity)
+            (activity as MainActivity).let {
+                val dialog = DialogEdit()
+                dialog.setListener(category) { category ->
+                    when (mode) {
+                        ModeCategory.CREATE -> viewModel?.createCategory(category.catName)
+                        ModeCategory.EDIT -> viewModel?.updateCategory(category)
+                    }
+
+                }
+                dialog.show(it.supportFragmentManager, "")
+
+            }
+    }
+
+
+    private fun navigateToBack(category: Category?) {
+        view?.findNavController()
+            ?.navigate(CategoryFragmentDirections.toAdd(category))
+    }
+
+
 }

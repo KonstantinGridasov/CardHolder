@@ -23,6 +23,8 @@
     <string name="ok">Ok</string>
     <string name="back">Назад</string>
     <string name="revert">Развернуть</string>
+    <string name="rename_category">Переименовать категорию </string>
+    <string name="add_category">Добавить категорию </string>
 
 
     <string name="menu_home">Домой</string>

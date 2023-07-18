@@ -31,12 +31,6 @@ class CategoryViewModel(
     var chooses = ObservableField<Category>()
 
 
-    fun addNewCategory() {
-        allCategories.add(Category())
-        list.set(allCategories)
-        list.notifyChange()
-    }
-
 
     fun getAllCategories() {
         if (getAllCategoryDis != null)
@@ -55,7 +49,7 @@ class CategoryViewModel(
 
     }
 
-    fun saveCategory(string: String) {
+    fun createCategory(string: String) {
         if (saveCategoryDis != null)
             removeDisposable(saveCategoryDis!!)
 

@@ -34,8 +34,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_flashlight_off" />
 
-
-
     </RelativeLayout>
 
 </layout>

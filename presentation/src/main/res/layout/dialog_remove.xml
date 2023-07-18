@@ -47,31 +47,19 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/ok"
-            style="@style/Style_Text_medium"
-            android:layout_width="@dimen/_75gkdp"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_marginStart="@dimen/_15gkdp"
-            android:layout_marginTop="@dimen/_5gkdp"
+            style="@style/StyleDialogButton"
             android:background="@drawable/background_button_dell"
             android:text="@string/dell"
-            android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_9gkdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_text" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel"
-            style="@style/Style_Text_medium"
-            android:layout_width="@dimen/_75gkdp"
-            android:layout_height="@dimen/_30gkdp"
-            android:layout_marginTop="@dimen/_5gkdp"
-            android:layout_marginEnd="@dimen/_15gkdp"
+            style="@style/StyleDialogButton"
             android:background="@drawable/background_button_corners"
             android:text="@string/cancel"
-            android:textAllCaps="false"
-            android:textSize="@dimen/_9gkdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>

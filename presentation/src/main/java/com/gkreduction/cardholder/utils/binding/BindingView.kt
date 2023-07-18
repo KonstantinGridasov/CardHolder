@@ -20,7 +20,6 @@ import com.gkreduction.domain.entity.ScanCode
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 
 object BindingView {
@@ -50,7 +49,6 @@ object BindingView {
         val publishSubject: PublishSubject<String> = PublishSubject.create()
         listener?.onText(
             publishSubject
-                .debounce(300, TimeUnit.MILLISECONDS)
                 .distinctUntilChanged()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,17 +80,19 @@ object BindingView {
     )
     fun setCategoriesList(
         view: RecyclerView, items: List<Category>?, category: Category?,
-        listener: CategoryAdapterClickListener?,
-        onChangePositionItemListener: OnChangePositionItemListener?
+        listenerCategory: CategoryAdapterClickListener?,
+        onChangePositionItemListener: OnChangePositionItemListener?,
     ) {
         items?.let {
 
-            val adapter = AdapterCategoryList(listener)
-            adapter.updateItems(it)
-            adapter.setActiveCategory(category)
+            val adapter = AdapterCategoryList(
+                listenerCategory, onChangePositionItemListener,
+                it
+            )
             view.adapter = adapter
-            val callback: ItemTouchHelper.Callback = DragItemTouchHelper(adapter)
+            adapter.setActiveCategory(category)
 
+            val callback: ItemTouchHelper.Callback = DragItemTouchHelper(adapter)
             val mItemTouchHelper = ItemTouchHelper(callback)
             mItemTouchHelper.attachToRecyclerView(view)
             adapter.setDragListener(object : AdapterCategoryList.OnStartDragListener {
@@ -102,7 +102,6 @@ object BindingView {
                     }
                 }
             })
-            adapter.setOnChangeListener(onChangePositionItemListener)
 
         }
 
