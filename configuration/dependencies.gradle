@@ -8,14 +8,14 @@ ext {
     android = [
             buildTools: '27.0.3',
             minSdk    : 26,
-            targetSdk : 32,
+            targetSdk : 33,
             compileSdk: 33
     ]
 
     application = [
             id                       : 'com.gkreduction.cardholder',
-            versionCode              : 1,
-            versionName              : "1.0",
+            versionCode              : 2,
+            versionName              : "1.0.2",
             testInstrumentationRunner: "android.support.test.runner.AndroidJUnitRunner"
     ]
 
